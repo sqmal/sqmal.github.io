@@ -48,7 +48,7 @@ function showDetail(id) {
       <li class="list-group-item"><i class="fa-solid fa-euro-sign me-2"></i>Daň: ${car.tax}</li>
       <li class="list-group-item"><i class="fa-solid fa-note-sticky me-2"></i>Poznámka: ${car.note || "Žádná"}</li>
     </ul>
-    <h5 class="mb-4 text-center fw-bold">Líbí se vozidlo? Objednejte si jej!</h5>
+    <h5 class="mb-4 text-center fw-bold">Chcete si prenajať toto vozidlo? Vyplňte formulár nižšie.</h5>
     <form id="order-form" class="border p-3 rounded bg-light">
       <input type="hidden" name="vozidlo" value="${car.name}">
 
