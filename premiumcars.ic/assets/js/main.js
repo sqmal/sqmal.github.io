@@ -154,7 +154,7 @@ function showDetail(id) {
       }]
     };
 
-    fetch("https://sqmal.eu/discord.php", {
+    fetch("https://sqmal.eu/artic/premiumcars.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
