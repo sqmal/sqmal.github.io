@@ -30,9 +30,12 @@ function renderCars(cars) {
 function showDetail(id) {
   const car = window.carData.find(c => c.id === id);
   if (!car) return;
+
+  document.getElementById("main-navbar").classList.add("d-none");
+  document.getElementById("main-content").classList.add("d-none");
+
   const section = document.getElementById("car-detail");
   section.classList.remove("d-none");
-  document.getElementById("main-content").classList.add("d-none");
   section.innerHTML = `
     <a href="#" onclick="backToList()" class="btn btn-primary mb-3"><i class="fa-solid fa-arrow-left"></i> Zpět na seznam</a>
     <h2 class="text-center">${car.name}</h2>
@@ -172,7 +175,10 @@ function showDetail(id) {
 }
 
 function backToList() {
+  document.getElementById("main-navbar").classList.remove("d-none");
   document.getElementById("main-content").classList.remove("d-none");
+  window.scrollTo(0, 0);
+
   const section = document.getElementById("car-detail");
   section.classList.add("d-none");
   section.innerHTML = "";

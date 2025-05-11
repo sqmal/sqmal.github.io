@@ -5,8 +5,88 @@ html, body {
   flex-direction: column;
 }
 
+.bg-gradient-premium {
+  background: linear-gradient(135deg, #0d0d0d, #1a1f2b);
+}
+
+.navbar {
+  user-select: none;
+}
+
+.navbar-brand {
+  font-size: 1.4rem;
+  letter-spacing: 0.5px;
+  color: #ffffff !important;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.navbar-icons i {
+  font-size: 1.2rem;
+  opacity: 0.05;
+  transition: opacity 0.3s ease;
+}
+
+.navbar-icons i:hover {
+  opacity: 0.1;
+}
+
+.navbar-background-icons {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.navbar-background-icons i {
+  position: absolute;
+  font-size: 2.5rem;
+  color: rgba(255, 255, 255, 0.04);
+  animation: float 12s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
+}
+
 main {
   flex: 1 0 auto;
+}
+
+.table td, .table th {
+  vertical-align: middle;
+  border-right: 1px solid #dee2e6 !important;
+}
+
+.table th:last-child, .table td:last-child {
+  border-right: none !important;
+}
+
+.icon-tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: default;
+}
+
+.icon-tooltip:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  background: #000;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 13px;
+  white-space: nowrap;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  font-family: Arial, sans-serif;
 }
 
 footer {
@@ -84,35 +164,4 @@ footer {
   position: absolute;
   font-size: 3rem;
   color: rgba(255, 255, 255, 0.05);
-}
-
-.table td, .table th {
-  vertical-align: middle;
-  border-right: 1px solid #dee2e6 !important;
-}
-
-.table th:last-child, .table td:last-child {
-  border-right: none !important;
-}
-
-.icon-tooltip {
-  position: relative;
-  display: inline-block;
-  cursor: default;
-}
-
-.icon-tooltip:hover::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  background: #000;
-  color: #fff;
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-size: 13px;
-  white-space: nowrap;
-  top: -30px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-  font-family: Arial, sans-serif;
 }
