@@ -176,7 +176,3 @@ function backToList() {
   section.classList.add("d-none");
   section.innerHTML = "";
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("year").textContent = new Date().getFullYear();
-});
