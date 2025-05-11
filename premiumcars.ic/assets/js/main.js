@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
       window.carData = data;
       renderCars(data);
     });
-
   document.getElementById("year").textContent = new Date().getFullYear();
 });
 
@@ -157,7 +156,9 @@ function showDetail(id) {
 
     fetch("https://sqmal.eu/discord.php", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify(embed)
     })
     .then(() => {
