@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
       window.carData = data;
       renderCars(data);
     });
+
+  document.getElementById("year").textContent = new Date().getFullYear();
 });
 
 function renderCars(cars) {
@@ -51,21 +53,18 @@ function showDetail(id) {
     <h5 class="mb-4 text-center fw-bold">Chcete si prenajať toto vozidlo? Vyplňte formulár nižšie.</h5>
     <form id="order-form" class="border p-3 rounded bg-light">
       <input type="hidden" name="vozidlo" value="${car.name}">
-
       <div class="row mb-2">
         <label class="col-sm-3 col-form-label">Vaše jméno</label>
         <div class="col-sm-9">
           <input type="text" name="jmeno" class="form-control" placeholder="Jméno Příjmení" required>
         </div>
       </div>
-
       <div class="row mb-2">
         <label class="col-sm-3 col-form-label">Telefonní číslo</label>
         <div class="col-sm-9">
           <input type="text" name="telefon" class="form-control" placeholder="123456" minlength="6" maxlength="6" pattern="\\d{6}" required>
         </div>
       </div>
-
       <div class="row mb-2">
         <label class="col-sm-3 col-form-label">Email</label>
         <div class="col-sm-9">
@@ -74,7 +73,6 @@ function showDetail(id) {
           </div>
         </div>
       </div>
-
       <div class="row mb-2">
         <label class="col-sm-3 col-form-label">Doba pronájmu</label>
         <div class="col-sm-9">
@@ -84,7 +82,6 @@ function showDetail(id) {
           </div>
         </div>
       </div>
-
       <div class="row mb-2">
         <label class="col-sm-3 col-form-label">Slevový kód</label>
         <div class="col-sm-9">
@@ -94,7 +91,6 @@ function showDetail(id) {
           </div>
         </div>
       </div>
-
       <div class="row mb-2">
         <label class="col-sm-3 col-form-label">Odkud nás znáte?</label>
         <div class="col-sm-9">
@@ -104,25 +100,22 @@ function showDetail(id) {
           </div>
         </div>
       </div>
-
       <div class="row mb-3">
         <div class="col-12 text-center small text-muted">
           Potvrzením této objednávky souhlasíte s podmínkami <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Premium Cars</a>.
         </div>
       </div>
-
       <div class="text-center">
         <button type="submit" class="btn btn-success">
           <i class="fa-solid fa-cart-shopping"></i> Objednat
         </button>
       </div>
     </form>
-        <div id="status" class="mt-3"></div>
+    <div id="status" class="mt-3"></div>
   `;
 
   document.getElementById("order-form").addEventListener("submit", e => {
     e.preventDefault();
-
     const form = e.target;
     const emailInput = form.querySelector('input[name="email"]');
     const email = emailInput.value.trim();
@@ -144,9 +137,7 @@ function showDetail(id) {
       embeds: [{
         title: "Nová objednávka vozidla",
         color: 0x002e6c,
-        thumbnail: {
-          url: "https://i.imgur.com/RL90ReM.png"
-        },
+        thumbnail: { url: "https://i.imgur.com/RL90ReM.png" },
         fields: [
           { name: "Jméno a Příjmení", value: d.jmeno, inline: true },
           { name: "Telefon", value: d.telefon, inline: true },
@@ -164,7 +155,7 @@ function showDetail(id) {
       }]
     };
 
-    fetch("https://discord.com/api/webhooks/1371171905876267177/1a2QsMczcDduKr5ASRqZQaaw5d7zjLkZNNGHIK80JVK_MZe_WcB2F3STXT3vMNGYObIT", {
+    fetch("https://sqmal.eu/discord.php", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(embed)
