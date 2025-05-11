@@ -1,0 +1,118 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+footer {
+  flex-shrink: 0;
+}
+
+.footer-premium {
+  background: linear-gradient(135deg, #0d0d0d, #1a1f2b);
+  font-family: 'Segoe UI', sans-serif;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.footer-heading {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 0.8rem;
+}
+
+.footer-text {
+  font-size: 0.9rem;
+  color: #cccccc;
+  line-height: 1.6;
+}
+
+.footer-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-list li {
+  font-size: 0.9rem;
+  color: #cccccc;
+  margin-bottom: 0.3rem;
+}
+
+.footer-link {
+  color: #66b2ff;
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}
+
+.footer-icons a {
+  color: #bbbbbb;
+  font-size: 1.2rem;
+  margin-right: 12px;
+  transition: color 0.3s ease;
+}
+
+.footer-icons a:hover {
+  color: #ffffff;
+}
+
+.footer-line {
+  color: #ffffff;
+}
+
+.footer-background-icons {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.footer-background-icons i {
+  position: absolute;
+  font-size: 3rem;
+  color: rgba(255, 255, 255, 0.05);
+}
+
+.table td, .table th {
+  vertical-align: middle;
+  border-right: 1px solid #dee2e6 !important;
+}
+
+.table th:last-child, .table td:last-child {
+  border-right: none !important;
+}
+
+.icon-tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: default;
+}
+
+.icon-tooltip:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  background: #000;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 13px;
+  white-space: nowrap;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  font-family: Arial, sans-serif;
+}

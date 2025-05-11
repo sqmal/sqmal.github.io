@@ -1,0 +1,147 @@
+<head>
+  <meta charset="UTF-8">
+  <title>Premium Cars</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/2ccee07ac6.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+<body>
+
+<header class="text-center py-4 bg-dark text-white" style="cursor: pointer;" onclick="backToList()">
+  <h1 class="fw-bold m-0">Premium Cars</h1>
+</header>
+
+<main class="container py-5" id="main-content">
+  <h2 class="mb-4 text-center">Dostupná vozidla</h2>
+  <div class="table-responsive shadow-sm rounded-3 overflow-hidden">
+    <table class="table table-hover align-middle text-center table-bordered bg-white mb-0">
+      <thead class="table-dark">
+        <tr>
+          <th>Vozidlo</th>
+          <th>Dostupnost</th>
+          <th>Tuning</th>
+          <th>Polep</th>
+          <th>Rychlost</th>
+          <th>Cena za den</th>
+          <th>Daň</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="cars-table-body"></tbody>
+    </table>
+  </div>
+</main>
+
+<section class="container py-5 d-none" id="car-detail"></section>
+
+<footer class="footer-premium text-white">
+<div class="footer-background-icons">
+  <i class="fa-solid fa-car" style="top: 5%; left: 10%;"></i>
+  <i class="fa-solid fa-car-side" style="top: 20%; left: 70%;"></i>
+  <i class="fa-solid fa-car-rear" style="top: 60%; left: 15%;"></i>
+  <i class="fa-solid fa-car-burst" style="top: 40%; left: 50%;"></i>
+  <i class="fa-solid fa-car-rear" style="top: 75%; left: 80%;"></i>
+  <i class="fa-solid fa-car-side" style="top: 10%; left: 90%;"></i>
+  <i class="fa-solid fa-car" style="top: 85%; left: 30%;"></i>
+</div>
+  <div class="container py-5">
+    <div class="row gy-4">
+      
+      <div class="col-md-3">
+        <h6 class="footer-heading">Premium Cars</h6>
+        <p class="footer-text">
+          Nabízíme spolehlivý a pohodlný pronájem osobních vozů na sjednanou dobu. Díky kvalitním službám a modernímu vozovému parku patříme mezi přední autopůjčovny s cílem budovat prestiž a důvěru.
+        </p>
+      </div>
+
+      <div class="col-md-3">
+        <h6 class="footer-heading">Provozovatel</h6>
+        <ul class="footer-list">
+          <li>Premium Cars</li>
+          <li>Soho Drive 5938, Rodeo, Los Santos</li>
+          <li>IČO: 404</li>
+          <li>Společnost je registrována v obchodním rejstříku jako akciová společnost.</li>
+        </ul>
+      </div>
+
+      <div class="col-md-3">
+        <h6 class="footer-heading">Kontaktní informace</h6>
+        <ul class="footer-list">
+          <li>706 008 - Alison Reyes</li>
+          <li>776 716 - Hoshiko Murakami</li>
+        </ul>
+      </div>
+
+      <div class="col-md-3">
+        <h6 class="footer-heading">Naše vize</h6>
+        <p class="footer-text">
+          Stát se první volbou pro každého, kdo hledá prémiový pronájem vozu – kde kvalita, důvěra a elegance nejsou benefitem, ale samozřejmostí.
+        </p>
+        <div class="footer-icons mt-3">
+          <a href="/iris.ic/premiumcars"><i class="fa-solid fa-i"></i></a>
+        </div>
+      </div>
+
+    </div>
+    <hr class="footer-line my-4">
+    <p class="text-center small opacity-75 mb-0">© <span id="year"></span> Premium Cars. Všechna práva vyhrazena.</p>
+  </div>
+</footer>
+
+<div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fw-bold" id="termsModalLabel">Obchodní podmínky – Premium Cars</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zavřít"></button>
+      </div>
+      <div class="modal-body">
+        <p>Společnost <strong>Premium Cars</strong> (dále jen „pronajímatel“) stanovuje tyto všeobecné obchodní podmínky pro nájem motorových vozidel:</p>
+        <ol>
+          <li><strong>Právo na ukončení nájmu</strong><br>
+          Pronajímatel si vyhrazuje právo jednostranně ukončit nájemní vztah bez nároku na vrácení peněz, pokud nájemce vědomě poruší tyto podmínky.</li>
+
+          <li><strong>Stav vozidla při převzetí a vrácení</strong><br>
+          Vozidlo je předáno po kompletním servisu a v provozuschopném stavu. Při zjištění škod po vrácení vozidla nese plnou odpovědnost za opravy nájemce.</li>
+
+          <li><strong>Úpravy vozidla</strong><br>
+          Jakékoliv zásahy do vozidla, technické nebo vizuální, jsou bez předchozího písemného souhlasu pronajímatele zakázány.</li>
+
+          <li><strong>Zákaz podnájmu</strong><br>
+          Nájemce nesmí přenechat vozidlo třetím osobám, a to ani bezplatně.</li>
+
+          <li><strong>Dodržení termínu vrácení</strong><br>
+          Vozidlo musí být vráceno ve sjednaný den a čas. Při porušení může být účtována smluvní pokuta.</li>
+
+          <li><strong>Zákaz nelegálního využití</strong><br>
+          Použití vozidla k nezákonné činnosti je důvodem pro okamžité ukončení nájmu bez náhrady a předání věci příslušným orgánům.</li>
+
+          <li><strong>Platební podmínky</strong><br>
+          Vozidlo je zákazníkovi předáno až po zaplacení celé částky za sjednanou dobu pronájmu.</li>
+
+          <li><strong>Slevové kódy</strong><br>
+          Každý slevový kód je nepřenosný a může být uplatněn pouze jednou.</li>
+
+          <li><strong>Blacklist</strong><br>
+          V případě závažného porušení těchto podmínek může být zákazník zařazen na interní seznam nepovolených klientů („Blacklist“), čímž mu bude znemožněn další pronájem.</li>
+
+          <li><strong>Povinné vybavení</strong><br>
+          Zákazník je povinen vrátit vozidlo s kompletním povinným vybavením. Při ztrátě výbavy (např. lékárnička, výstražný trojúhelník) je účtována finanční náhrada.</li>
+
+          <li><strong>Zásady ochrany osobních údajů</strong><br>
+          Osobní údaje zákazníků jsou zpracovávány v souladu s platnou legislativou (GDPR) a slouží výhradně k realizaci nájemního vztahu a internímu záznamu.</li>
+        </ol>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zavřít</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="./assets/js/main.js"></script>
+
+</body>
+</html>
