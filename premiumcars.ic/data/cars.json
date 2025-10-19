@@ -9,7 +9,6 @@
     "speed": "345 kmph",
     "note": "",
     "price": "100.000 Kč",
-    "tax": "5.300 Kč",
     "available": true
   },
   {
@@ -22,7 +21,6 @@
     "speed": "279 kmph",
     "note": "",
     "price": "60.000 Kč",
-    "tax": "5.150 Kč",
     "available": true
   },
   {
@@ -35,7 +33,6 @@
     "speed": "287 kmph",
     "note": "",
     "price": "30.000 Kč",
-    "tax": "5.010 Kč",
     "available": true
   },
   {
@@ -48,7 +45,6 @@
     "speed": "264 kmph",
     "note": "",
     "price": "50.000 Kč",
-    "tax": "4.080 Kč",
     "available": true
   },
   {
@@ -61,7 +57,6 @@
     "speed": "300 kmph",
     "note": "",
     "price": "60.000 Kč",
-    "tax": "4.600 Kč",
     "available": true
   },
   {
@@ -74,7 +69,6 @@
     "speed": "243 kmph",
     "note": "",
     "price": "20.000 Kč",
-    "tax": "3.500 Kč",
     "available": true
   },
   {
@@ -87,7 +81,6 @@
     "speed": "264 kmph",
     "note": "",
     "price": "40.000 Kč",
-    "tax": "4.250 Kč",
     "available": true
   },
   {
@@ -100,20 +93,6 @@
     "speed": "262 kmph",
     "note": "",
     "price": "20.000 Kč",
-    "tax": "4.350 Kč",
-    "available": true
-  },
-  {
-    "id": "12674",
-    "name": "2007 Mitsubishi Lancer Evo IX",
-    "image": "https://i.imgur.com/0bxJJHA.png",
-    "wrap": false,
-    "tuning": true,
-    "parts": "Odlehčená karosérie, Rays Volk Racing, Velmi široká pneu, Velmi široká pneu, Úprava ECU - výkon, Žádný omedzovač, Motor s twin-turbem, Zvýšený zámek otáčení +8, Samosvorný diferenciál 2-WAY, Závodní šestibodové pásy, Seřízení geometrie T2, Základní bezp. polo-rám (ocel)",
-    "speed": "262 kmph",
-    "note": "",
-    "price": "10.000 Kč",
-    "tax": "4.450 Kč",
     "available": true
   },
   {
@@ -126,7 +105,6 @@
     "speed": "217 kmph",
     "note": "",
     "price": "10.000 Kč",
-    "tax": "5.150 Kč",
     "available": true
   },
   {
@@ -139,7 +117,6 @@
     "speed": "92 kmph",
     "note": "",
     "price": "1.000 Kč",
-    "tax": "500 Kč",
     "available": true
   }
 ]
