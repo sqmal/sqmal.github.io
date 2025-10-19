@@ -1,185 +1,214 @@
-document.addEventListener("DOMContentLoaded", () => {
-  fetch("data/cars.json")
-    .then(res => res.json())
-    .then(data => {
-      window.carData = data;
-      renderCars(data);
-    });
-  document.getElementById("year").textContent = new Date().getFullYear();
-});
+(() => {
+  const grid = document.querySelector('#cars-grid');
+  const emptyState = document.querySelector('#emptyState');
+  const search = document.querySelector('#search');
+  const sortSel = document.querySelector('#sort');
+  const onlyAvail = document.querySelector('#onlyAvailable');
 
-function renderCars(cars) {
-  const tbody = document.getElementById("cars-table-body");
-  tbody.innerHTML = "";
-  cars.forEach(car => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-      <td>${car.name}</td>
-      <td><i class="fa-solid ${car.available ? 'fa-circle-check text-success' : 'fa-circle-xmark text-danger'} icon-tooltip" data-tooltip="${car.available ? 'Dostupné' : 'Nedostupné'}"></i></td>
-      <td><i class="fa-solid ${car.tuning ? 'fa-wrench text-success' : 'fa-xmark text-danger'} icon-tooltip" data-tooltip="${car.tuning ? 'Tuning' : 'Bez tuningu'}"></i></td>
-      <td><i class="fa-solid ${car.wrap ? 'fa-circle-check text-success' : 'fa-circle-xmark text-danger'} icon-tooltip" data-tooltip="${car.wrap ? 'S polepem' : 'Bez polepu'}"></i></td>
-      <td>${car.speed}</td>
-      <td>${car.price}</td>
-      <td>${car.tax}</td>
-      <td><button class="btn btn-primary btn-sm" onclick="showDetail('${car.id}')"><i class="fa-solid fa-eye me-1"></i>Zobrazit</button></td>
-    `;
-    tbody.appendChild(row);
+  const modal = new bootstrap.Modal(document.getElementById('carModal'));
+  const mImg = document.getElementById('carImage');
+  const mTitle = document.getElementById('carTitle');
+  const mFacts = document.getElementById('carFacts');
+  const mForm = document.getElementById('order-form');
+  const mStatus = document.getElementById('status');
+  const fVozidlo = document.getElementById('f-vozidlo');
+
+  // Pricing UI
+  const fOd = document.getElementById('f-od');
+  const fDo = document.getElementById('f-do');
+  const pricePerDayEl = document.getElementById('pricePerDay');
+  const priceTotalEl = document.getElementById('priceTotal');
+  const appliedDiscountEl = document.getElementById('appliedDiscount');
+
+  let cars = [];
+  let view = [];
+  let selected = null;
+
+  document.addEventListener('DOMContentLoaded', () => {
+    fetch('data/cars.json')
+      .then(r => r.json())
+      .then(d => { cars = d; view = [...cars]; render(); });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
   });
-}
 
-function showDetail(id) {
-  const car = window.carData.find(c => c.id === id);
-  if (!car) return;
+  [search, sortSel, onlyAvail].forEach(el => el.addEventListener('input', applyFilters));
 
-  document.getElementById("main-navbar").classList.add("d-none");
-  document.getElementById("main-content").classList.add("d-none");
+  function applyFilters(){
+    const q = (search.value || '').toLowerCase().trim();
+    view = cars.filter(c => {
+      const okAvail = !onlyAvail.checked || !!c.available;
+      const okQuery = !q || c.name.toLowerCase().includes(q);
+      return okAvail && okQuery;
+    });
+    sortView();
+    render();
+  }
 
-  const section = document.getElementById("car-detail");
-  section.classList.remove("d-none");
-  section.innerHTML = `
-    <a href="#" onclick="backToList()" class="btn btn-primary mb-3"><i class="fa-solid fa-arrow-left"></i> Zpět na seznam</a>
-    <h2 class="text-center">${car.name}</h2>
-    <div class="text-center mb-4">
-      <img src="${car.image}" class="img-fluid rounded shadow" style="max-height: 500px;">
-    </div>
-    <ul class="list-group mb-4">
-      <li class="list-group-item"><i class="fa-solid fa-circle-check me-2"></i>Dostupnost: ${car.available ? "Možné pronajmout" : "Není dostupné"}</li>
-      <li class="list-group-item"><i class="fa-solid fa-wrench me-2"></i>Úpravy: ${car.tuning ? "Je upravené" : "Žádné úpravy"}</li>
-      <li class="list-group-item"><i class="fa-solid fa-screwdriver-wrench me-2"></i> Seznam tuningových dílů: ${car.parts || "Neuvedeno"}</li>
-      <li class="list-group-item"><i class="fa-solid fa-paint-roller me-2"></i>Polep: ${car.wrap ? "S polepem" : "Bez polepu"} </li>
-      <li class="list-group-item"><i class="fa-solid fa-gauge-high me-2"></i>Nejvyšší naměřená rychlost: ${car.speed || "Neuvedeno"}</li>
-      <li class="list-group-item"><i class="fa-solid fa-euro-sign me-2"></i>Cena za den: ${car.price}</li>
-      <li class="list-group-item"><i class="fa-solid fa-euro-sign me-2"></i>Daň: ${car.tax}</li>
-      <li class="list-group-item"><i class="fa-solid fa-note-sticky me-2"></i>Poznámka: ${car.note || "Žádná"}</li>
-    </ul>
-    <h5 class="mb-4 text-center fw-bold">Chcete si prenajať toto vozidlo? Vyplňte formulár nižšie.</h5>
-    <form id="order-form" class="border p-3 rounded bg-light">
-      <input type="hidden" name="vozidlo" value="${car.name}">
-      <div class="row mb-2">
-        <label class="col-sm-3 col-form-label">Vaše jméno</label>
-        <div class="col-sm-9">
-          <input type="text" name="jmeno" class="form-control" placeholder="Jméno Příjmení" required>
-        </div>
-      </div>
-      <div class="row mb-2">
-        <label class="col-sm-3 col-form-label">Telefonní číslo</label>
-        <div class="col-sm-9">
-          <input type="text" name="telefon" class="form-control" placeholder="123456" minlength="6" maxlength="6" pattern="\\d{6}" required>
-        </div>
-      </div>
-      <div class="row mb-2">
-        <label class="col-sm-3 col-form-label">Email</label>
-        <div class="col-sm-9">
-          <div class="input-group">
-            <input type="email" name="email" class="form-control" placeholder="jmeno.prijmeni@post.ic" required>
-          </div>
-        </div>
-      </div>
-      <div class="row mb-2">
-        <label class="col-sm-3 col-form-label">Doba pronájmu</label>
-        <div class="col-sm-9">
-          <div class="input-group">
-            <input type="number" name="doba" class="form-control" placeholder="7" min="1" max="14" required>
-            <span class="input-group-text">Max 14 dní</span>
-          </div>
-        </div>
-      </div>
-      <div class="row mb-2">
-        <label class="col-sm-3 col-form-label">Slevový kód</label>
-        <div class="col-sm-9">
-          <div class="input-group">
-            <input type="text" name="kod" class="form-control">
-            <span class="input-group-text">Nepovinné</span>
-          </div>
-        </div>
-      </div>
-      <div class="row mb-2">
-        <label class="col-sm-3 col-form-label">Odkud nás znáte?</label>
-        <div class="col-sm-9">
-          <div class="input-group">
-            <input type="text" name="zdroj" class="form-control">
-            <span class="input-group-text">Nepovinné</span>
-          </div>
-        </div>
-      </div>
-      <div class="row mb-3">
-        <div class="col-12 text-center small text-muted">
-          Potvrzením této objednávky souhlasíte s podmínkami <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Premium Cars</a>.
-        </div>
-      </div>
-      <div class="text-center">
-        <button type="submit" class="btn btn-success">
-          <i class="fa-solid fa-cart-shopping"></i> Objednat
-        </button>
-      </div>
-    </form>
-    <div id="status" class="mt-3"></div>
-  `;
+  function parsePriceCZK(str){
+    return Number(String(str).replace(/[^0-9]/g,'') || 0);
+  }
+  function parseSpeed(str){
+    return Number(String(str).replace(/[^0-9]/g,'') || 0);
+  }
+  function formatCzk(n){
+    return new Intl.NumberFormat('cs-CZ').format(Math.max(0, Math.round(n))) + ' Kč';
+  }
+  function daysBetween(a, b){
+    const d1 = new Date(a), d2 = new Date(b);
+    const ms = d2 - d1;
+    return Math.max(1, Math.ceil(ms / 86400000));
+  }
+  function discountForDays(days){
+    if (days >= 7) return 20;
+    if (days >= 3) return 10;
+    return 0;
+  }
 
-  document.getElementById("order-form").addEventListener("submit", e => {
-    e.preventDefault();
-    const form = e.target;
-    const emailInput = form.querySelector('input[name="email"]');
-    const email = emailInput.value.trim();
+  function sortView(){
+    const v = sortSel.value;
+    if(v === 'priceAsc') view.sort((a,b)=> parsePriceCZK(a.price) - parsePriceCZK(b.price));
+    if(v === 'priceDesc') view.sort((a,b)=> parsePriceCZK(b.price) - parsePriceCZK(a.price));
+    if(v === 'speedDesc') view.sort((a,b)=> parseSpeed(b.speed) - parseSpeed(a.speed));
+    if(v === 'nameAsc') view.sort((a,b)=> a.name.localeCompare(b.name,'cs'));
+  }
 
-    if (!email.endsWith("@post.ic")) {
-      document.getElementById("status").innerHTML = '<div class="alert alert-danger">Email musí končit na <strong>@post.ic</strong>.</div>';
-      emailInput.classList.add("is-invalid");
+  function render(){
+    grid.innerHTML = '';
+    if(!view.length){
+      emptyState.classList.remove('d-none');
       return;
-    } else {
-      emailInput.classList.remove("is-invalid");
+    }
+    emptyState.classList.add('d-none');
+
+    const frag = document.createDocumentFragment();
+    view.forEach(car => frag.appendChild(renderCard(car)));
+    grid.appendChild(frag);
+  }
+
+  function renderCard(car){
+    const col = document.createElement('div');
+    col.className = 'col-12 col-sm-6 col-lg-4';
+    col.innerHTML = `
+      <div class="card h-100 car border-0 shadow-sm">
+        <div class="ratio ratio-16x9">
+          <img src="${car.image}" alt="${car.name}" class="rounded-top object-fit-cover" loading="lazy" referrerpolicy="no-referrer" />
+        </div>
+        <div class="card-body d-flex flex-column">
+          <div class="d-flex justify-content-between align-items-start">
+            <h3 class="h5 fw-semibold mb-1">${car.name}</h3>
+            <span class="badge ${car.available ? 'text-bg-success' : 'text-bg-danger'}">${car.available ? 'Dostupné' : 'Nedostupné'}</span>
+          </div>
+          <div class="d-flex flex-wrap gap-2 mt-1">
+            ${car.tuning ? '<span class="badge badge-soft"><i class="fa-solid fa-wrench me-1"></i>Tuning</span>' : ''}
+            ${car.wrap ? '<span class="badge badge-soft"><i class="fa-solid fa-swatchbook me-1"></i>Polep</span>' : ''}
+            <span class="badge badge-soft"><i class="fa-solid fa-gauge-high me-1"></i>${car.speed}</span>
+          </div>
+          <div class="mt-3 d-flex align-items-baseline gap-2">
+            <span class="fs-5 fw-bold">${car.price}</span>
+          </div>
+          <div class="mt-auto d-grid">
+            <button class="btn btn-primary" data-car-id="${car.id}"><i class="fa-solid fa-eye me-2"></i>Detail</button>
+          </div>
+        </div>
+      </div>`;
+
+    col.querySelector('button').addEventListener('click', () => openModal(car));
+    return col;
+  }
+
+  function initDates(){
+    const today = new Date();
+    const plus3 = new Date(today); plus3.setDate(today.getDate()+3);
+    fOd.value = today.toISOString().slice(0,10);
+    fDo.value = plus3.toISOString().slice(0,10);
+  }
+
+  function recalcTotal(){
+    if(!selected) return;
+    const perDay = parsePriceCZK(selected.price);
+    const days = daysBetween(fOd.value, fDo.value);
+    const disc = discountForDays(days);
+    let total = perDay * days * (1 - disc/100);
+
+    pricePerDayEl.textContent = formatCzk(perDay) + ' / den';
+    priceTotalEl.textContent = formatCzk(total);
+    appliedDiscountEl.textContent = disc ? `Uplatněná sleva ${disc}% (${days} dní)` : '';
+  }
+
+  [fOd, fDo].forEach(el => el && el.addEventListener('change', recalcTotal));
+
+  function openModal(car){
+    selected = car;
+    mImg.src = car.image; mImg.alt = car.name;
+    mTitle.textContent = car.name;
+    fVozidlo.value = car.name;
+
+    mFacts.innerHTML = `
+      <li class="list-group-item"><i class="fa-solid fa-circle-check me-2"></i>Dostupnost: ${car.available ? 'Možné pronajmout' : 'Není dostupné'}</li>
+      <li class="list-group-item"><i class="fa-solid fa-wrench me-2"></i>Úpravy: ${car.tuning ? 'Je upravené' : 'Žádné úpravy'}</li>
+      <li class="list-group-item"><i class="fa-solid fa-screwdriver-wrench me-2"></i>Tuningové díly: ${car.parts || 'Neuvedeno'}</li>
+      <li class="list-group-item"><i class="fa-solid fa-paint-roller me-2"></i>Polep: ${car.wrap ? 'S polepem' : 'Bez polepu'}</li>
+      <li class="list-group-item"><i class="fa-solid fa-gauge-high me-2"></i>Nejvyšší rychlost: ${car.speed || 'Neuvedeno'}</li>
+      <li class="list-group-item"><i class="fa-solid fa-euro-sign me-2"></i>Cena za den: ${car.price}</li>
+    `;
+
+    mStatus.innerHTML = '';
+    mForm.reset();
+    initDates();
+    recalcTotal();
+    modal.show();
+  }
+
+  mForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const fd = new FormData(mForm);
+    const d = Object.fromEntries(fd.entries());
+
+    const email = String(d.email || '').trim();
+    if(!email.endsWith('@post.ic')){
+      mStatus.innerHTML = '<div class="alert alert-danger">Email musí končit na <strong>@post.ic</strong>.</div>';
+      return;
     }
 
-    const data = new FormData(form);
-    const d = Object.fromEntries(data.entries());
+    const perDay = selected ? parsePriceCZK(selected.price) : 0;
+    const days = daysBetween(d.od, d.do);
+    const disc = discountForDays(days);
+    const total = perDay * days * (1 - disc/100);
 
     const embed = {
-      username: "Premium Cars",
-      avatar_url: "https://i.imgur.com/RL90ReM.png",
+      username: 'Premium Cars',
+      avatar_url: 'https://i.imgur.com/RL90ReM.png',
       embeds: [{
-        title: "Nová objednávka vozidla",
+        title: 'Nová objednávka vozidla',
         color: 0x002e6c,
-        thumbnail: { url: "https://i.imgur.com/RL90ReM.png" },
+        thumbnail: { url: 'https://i.imgur.com/RL90ReM.png' },
         fields: [
-          { name: "Jméno a Příjmení", value: d.jmeno, inline: true },
-          { name: "Telefon", value: d.telefon, inline: true },
-          { name: "Email", value: d.email, inline: true },
-          { name: "Vozidlo", value: d.vozidlo, inline: true },
-          { name: "Doba pronájmu", value: `${d.doba} dní`, inline: true },
-          { name: "Slevový kód", value: d.kod || "—", inline: true },
-          { name: "Odkud nás znáte", value: d.zdroj || "—", inline: false }
+          { name: 'Jméno a příjmení', value: d.jmeno, inline: true },
+          { name: 'Telefon', value: d.telefon, inline: true },
+          { name: 'Email', value: d.email, inline: true },
+          { name: 'Vozidlo', value: d.vozidlo, inline: true },
+          { name: 'Datum převzetí', value: d.od, inline: true },
+          { name: 'Datum vrácení', value: d.do, inline: true },
+          { name: 'Počet dní', value: String(days), inline: true },
+          { name: 'Cena za den', value: formatCzk(perDay), inline: true },
+          { name: 'Sleva', value: disc ? `${disc}%` : '—', inline: true },
+          { name: 'Cena celkem', value: formatCzk(total), inline: false }
         ],
-        footer: {
-          text: "Všechna práva vyhrazena Premium Cars",
-          icon_url: "https://i.imgur.com/RL90ReM.png"
-        },
+        footer: { text: 'Všechna práva vyhrazena Premium Cars', icon_url: 'https://i.imgur.com/RL90ReM.png' },
         timestamp: new Date().toISOString()
       }]
     };
 
-    fetch("https://sqmal.eu/artic/premiumcars.php", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(embed)
+    fetch('https://sqmal.eu/artic/premiumcars.php', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(embed)
     })
     .then(() => {
-      document.getElementById("status").innerHTML = '<div class="alert alert-success">Objednávka odeslána!</div>';
-      form.reset();
+      mStatus.innerHTML = '<div class="alert alert-success">Objednávka odeslána.</div>';
+      mForm.reset();
     })
     .catch(() => {
-      document.getElementById("status").innerHTML = '<div class="alert alert-danger">Chyba při odesílání.</div>';
+      mStatus.innerHTML = '<div class="alert alert-danger">Chyba při odesílání.</div>';
     });
   });
-}
-
-function backToList() {
-  document.getElementById("main-navbar").classList.remove("d-none");
-  document.getElementById("main-content").classList.remove("d-none");
-  window.scrollTo(0, 0);
-
-  const section = document.getElementById("car-detail");
-  section.classList.add("d-none");
-  section.innerHTML = "";
-}
+})();
