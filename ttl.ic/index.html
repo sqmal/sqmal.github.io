@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tactical Transport Logistics a.s.</title>
+  <meta name="description" content="TTL — pozice, pravidla, odměňování, vedení, vozový park a provozní eco zásady." />
+  <meta name="theme-color" content="#0b1220" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://kit.fontawesome.com" crossorigin>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+  <script src="https://kit.fontawesome.com/2ccee07ac6.js" crossorigin="anonymous" defer></script>
+  <link rel="stylesheet" href="./assets/css/styles.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="https://i.imgur.com/RL90ReM.png" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Přeskočit na obsah</a>
+
+  <nav class="navbar navbar-expand-lg navbar-dark ttl-nav shadow-sm sticky-top">
+    <div class="container-xxl">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="#" aria-label="TTL domů">
+        <span class="fw-bold">Tactical Transport Logistics a.s.</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Přepnout navigaci">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="#roles">Pozice</a></li>
+          <li class="nav-item"><a class="nav-link" href="#rules">Pravidla</a></li>
+          <li class="nav-item"><a class="nav-link" href="#fleet">Vozidla</a></li>
+          <li class="nav-item"><a class="nav-link" href="#eco">Eco</a></li>
+          <li class="nav-item"><a class="nav-link" href="#pay">Odměňování</a></li>
+          <li class="nav-item"><a class="nav-link" href="#company">Společnost</a></li>
+          <li class="nav-item ms-lg-3"><a class="btn btn-accent" href="#apply">Přihláška</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero container-xxl py-5" id="main">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-7">
+        <h1 class="display-6 fw-extrabold">TTL — práce, výkon, disciplína</h1>
+        <p class="lead text-secondary mt-2">Nábor pro: Řidič kamionu, Opravář elektrického vedení, Kapitán nákladní lodě, Kurýr/Strážce objektů.</p>
+        <div class="d-flex flex-wrap gap-2 mt-3">
+          <a href="#roles" class="btn btn-accent btn-lg"><i class="fa-solid fa-helmet-safety me-2"></i>Pozice</a>
+          <a href="#pay" class="btn btn-light btn-lg"><i class="fa-solid fa-money-bill-trend-up me-2"></i>Odměňování</a>
+          <button class="btn btn-light btn-lg" data-bs-toggle="modal" data-bs-target="#termsModal"><i class="fa-regular fa-file-lines me-2"></i>Podmínky</button>
+        </div>
+        <div class="mt-3 d-flex flex-wrap gap-2">
+          <span class="badge badge-soft"><i class="fa-solid fa-clock me-1"></i>Směnný režim</span>
+          <span class="badge badge-soft"><i class="fa-solid fa-location-dot me-1"></i>Město i mimo</span>
+          <span class="badge badge-eco"><i class="fa-solid fa-leaf me-1"></i>Provozní eco zásady</span>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="hero-card card border-0 shadow-lg">
+          <div class="card-body p-4">
+            <div class="d-flex align-items-start gap-3">
+              <i class="fa-solid fa-bolt fs-3 text-accent"></i>
+              <div>
+                <div class="fw-semibold">Zkušební období</div>
+                <div class="text-secondary small">Bez platu. Cíl čistého zisku dle pozice. Po splnění fixní plat a postup.</div>
+              </div>
+            </div>
+            <hr class="my-3">
+            <div class="d-flex align-items-start gap-3">
+              <i class="fa-solid fa-chart-line fs-3 text-accent"></i>
+              <div>
+                <div class="fw-semibold">Úrovně II–IV</div>
+                <div class="text-secondary small">Milníky čistého zisku spouštějí povýšení a změnu platu.</div>
+              </div>
+            </div>
+            <hr class="my-3">
+            <div class="d-flex align-items-start gap-3">
+              <i class="fa-solid fa-percent fs-3 text-accent"></i>
+              <div>
+                <div class="fw-semibold">Prémie</div>
+                <div class="text-secondary small">5–30&nbsp;% podle pásma dosaženého výdělku.</div>
+              </div>
+            </div>
+            <div class="mt-3 note-muted">
+              <i class="fa-solid fa-circle-info me-2"></i>Veškeré částky v Kč. Podrobnosti v sekci Odměňování.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="roles" class="container-xxl py-5">
+    <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
+      <h2 class="h3 fw-bold mb-0">Otevřené pozice</h2>
+      <div class="d-flex gap-2">
+        <button class="btn btn-outline-secondary btn-sm" data-filter="all">Vše</button>
+        <button class="btn btn-outline-secondary btn-sm" data-filter="A">Skupina A</button>
+        <button class="btn btn-outline-secondary btn-sm" data-filter="B">Skupina B</button>
+      </div>
+    </div>
+    <div class="row g-4" id="rolesGrid">
+      <div class="col-md-6 col-lg-3 role-card" data-group="A">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body d-flex flex-column">
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <i class="fa-solid fa-truck-moving text-accent"></i>
+              <h3 class="h5 fw-semibold mb-0">Řidič kamionu</h3>
+            </div>
+            <ul class="small text-secondary mb-3">
+              <li>Vnitrostátní i meziměstské trasy</li>
+              <li>Bezpečnost a termíny</li>
+              <li>Směny dle plánu</li>
+            </ul>
+            <div class="mt-auto d-grid">
+              <button class="btn btn-primary apply-btn" data-role="Řidič kamionu">Mám zájem</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 role-card" data-group="A">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body d-flex flex-column">
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <i class="fa-solid fa-tower-broadcast text-accent"></i>
+              <h3 class="h5 fw-semibold mb-0">Opravář elektrického vedení</h3>
+            </div>
+            <ul class="small text-secondary mb-3">
+              <li>Servis a opravy vedení</li>
+              <li>Práce v terénu</li>
+              <li>Koordinace s dispečinkem</li>
+            </ul>
+            <div class="mt-auto d-grid">
+              <button class="btn btn-primary apply-btn" data-role="Opravář elektrického vedení">Mám zájem</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 role-card" data-group="A">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body d-flex flex-column">
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <i class="fa-solid fa-ship text-accent"></i>
+              <h3 class="h5 fw-semibold mb-0">Kapitán nákladní lodě</h3>
+            </div>
+            <ul class="small text-secondary mb-3">
+              <li>Řízení lodě a posádky</li>
+              <li>Náklad a logistika</li>
+              <li>Bezpečnostní standardy</li>
+            </ul>
+            <div class="mt-auto d-grid">
+              <button class="btn btn-primary apply-btn" data-role="Kapitán nákladní lodě">Mám zájem</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 role-card" data-group="B">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body d-flex flex-column">
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <i class="fa-solid fa-shield-halved text-accent"></i>
+              <h3 class="h5 fw-semibold mb-0">Kurýr / Strážce objektů</h3>
+            </div>
+            <ul class="small text-secondary mb-3">
+              <li>Doručování zásilek</li>
+              <li>Ostraha a dohled</li>
+              <li>Směnný provoz</li>
+            </ul>
+            <div class="mt-auto d-grid">
+              <button class="btn btn-primary apply-btn" data-role="Kurýr/Strážce objektů">Mám zájem</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="rules" class="container-xxl py-5">
+    <h2 class="h3 fw-bold mb-3">Pravidla společnosti</h2>
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body">
+            <h3 class="h6 fw-semibold mb-2">Provoz a majetek</h3>
+            <ul class="small text-secondary mb-0 checklist">
+              <li><i class="fa-solid fa-circle-check me-2 text-accent"></i>Neškoďte jménu ani majetku firmy.</li>
+              <li><i class="fa-solid fa-circle-check me-2 text-accent"></i>Přebírejte jen přidělená vozidla.</li>
+              <li><i class="fa-solid fa-circle-check me-2 text-accent"></i>Vrácení vždy natankované a opravené.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body">
+            <h3 class="h6 fw-semibold mb-2">Právo a disciplína</h3>
+            <ul class="small text-secondary mb-0 checklist">
+              <li><i class="fa-solid fa-circle-check me-2 text-accent"></i>Dodržujte zákony a vyhlášky; porušení hlásíme PSA.</li>
+              <li><i class="fa-solid fa-circle-check me-2 text-accent"></i>Firemní vozidla nejsou pro nelegální činnost.</li>
+              <li><i class="fa-solid fa-circle-check me-2 text-accent"></i>Legitimace vždy v areálu a ve službě.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body">
+            <h3 class="h6 fw-semibold mb-2">Postupy a sankce</h3>
+            <ul class="small text-secondary mb-2 checklist">
+              <li><i class="fa-solid fa-circle-check me-2 text-accent"></i>Výpověď podávejte osobně nadřízenému.</li>
+              <li><i class="fa-solid fa-circle-check me-2 text-accent"></i>Porušení pravidel: možnost suspendace/ukončení.</li>
+            </ul>
+            <div class="timeline small">
+              <div><span>5 dní neaktivity</span><em>automatická dovolená</em></div>
+              <div><span>15 dní neaktivity</span><em>ukončení spolupráce</em></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="note-muted mt-3"><i class="fa-solid fa-circle-info me-2"></i>Detaily a výjimky řeší nadřízený.</div>
+  </section>
+
+  <section id="fleet" class="container-xxl py-5">
+    <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
+      <h2 class="h3 fw-bold mb-0">Vozový park</h2>
+      <div class="d-flex gap-2">
+        <input id="fleetSearch" class="form-control form-control-sm" style="max-width:260px" placeholder="Hledat model/rok" />
+        <select id="fleetSort" class="form-select form-select-sm" style="max-width:200px">
+          <option value="name">Název A–Z</option>
+          <option value="yearDesc">Rok ↓</option>
+          <option value="yearAsc">Rok ↑</option>
+        </select>
+      </div>
+    </div>
+    <div class="row g-4" id="fleetGrid"></div>
+    <div id="fleetEmpty" class="text-secondary small d-none mt-3">Žádné vozidlo neodpovídá filtru.</div>
+  </section>
+
+  <section id="eco" class="container-xxl py-5">
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <div class="card border-0 shadow-sm eco-card h-100">
+          <div class="card-body">
+            <h2 class="h5 fw-bold mb-3 d-flex align-items-center gap-2"><i class="fa-solid fa-leaf text-eco"></i>Eco zásady TTL</h2>
+            <ul class="small text-secondary mb-0">
+              <li>Preferujeme díly s delší životností a nízkým valivým odporem, kde je to vhodné.</li>
+              <li>Udržujeme správné tlaky v pneumatikách dle specifikace výrobce.</li>
+              <li>Plánujeme trasy a omezujeme zbytečné volnoběhy.</li>
+              <li>Provádíme průběžnou údržbu pro stabilně nižší spotřebu.</li>
+              <li>Školíme plynulou jízdu a šetrné rozjezdy.</li>
+              <li>Upřednostňujeme dodavatele s transparentní servisní kvalitou.</li>
+              <li>Digitalizujeme interní dokumenty pro nižší papírovou zátěž.</li>
+            </ul>
+            <div class="note-muted mt-3"><i class="fa-solid fa-circle-info me-2"></i>Označení „Eco doporučeno“ u vozidel je odhad podle roku výroby a obecné efektivity novějších modelů.</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body">
+            <h2 class="h6 fw-semibold mb-2">Technické volby</h2>
+            <div class="d-flex flex-wrap gap-2">
+              <span class="badge badge-eco">Delší výměnné intervaly dle norem</span>
+              <span class="badge badge-eco">Pneumatiky s nízkým odporem</span>
+              <span class="badge badge-eco">Průběžná diagnostika</span>
+              <span class="badge badge-eco">Optimalizace zatížení</span>
+            </div>
+            <hr>
+            <h3 class="h6 fw-semibold mb-2">Provozní praxe</h3>
+            <div class="d-flex flex-wrap gap-2">
+              <span class="badge badge-soft">Plynulé rozjezdy</span>
+              <span class="badge badge-soft">Plánování zastávek</span>
+              <span class="badge badge-soft">Kontrola tlaku</span>
+              <span class="badge badge-soft">Sledování spotřeby</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pay" class="container-xxl py-5">
+    <h2 class="h3 fw-bold mb-3">Odměňování a postup</h2>
+    <div class="row g-4">
+      <div class="col-xl-7">
+        <div class="row g-3">
+          <div class="col-sm-6">
+            <div class="card border-0 shadow-sm h-100">
+              <div class="card-body">
+                <h3 class="h6 fw-semibold mb-2">Skupina A</h3>
+                <ul class="small text-secondary mb-0">
+                  <li>Zkušební doba: bez platu, cíl 500 000 Kč</li>
+                  <li>II: 10 000 Kč po 500 000 Kč</li>
+                  <li>III: 15 000 Kč po 1 000 000 Kč</li>
+                  <li>IV: 20 000 Kč po 1 500 000 Kč</li>
+                  <li>Setrvání: 300 000 Kč</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="card border-0 shadow-sm h-100">
+              <div class="card-body">
+                <h3 class="h6 fw-semibold mb-2">Skupina B</h3>
+                <ul class="small text-secondary mb-0">
+                  <li>Zkušební doba: bez platu, cíl 125 000 Kč</li>
+                  <li>II: 1 000 Kč po 125 000 Kč</li>
+                  <li>III: 5 000 Kč po 300 000 Kč</li>
+                  <li>IV: 10 000 Kč po 500 000 Kč</li>
+                  <li>Setrvání: 100 000 Kč</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="card border-0 shadow-sm">
+              <div class="card-body">
+                <h3 class="h6 fw-semibold mb-2">Prémie</h3>
+                <div class="table-responsive">
+                  <table class="table table-sm align-middle mb-0">
+                    <thead><tr><th>Rozmezí čistého zisku</th><th>Prémie</th></tr></thead>
+                    <tbody>
+                      <tr><td>100 000 – 200 000 Kč</td><td>5 %</td></tr>
+                      <tr><td>200 000 – 300 000 Kč</td><td>10 %</td></tr>
+                      <tr><td>300 000 – 400 000 Kč</td><td>15 %</td></tr>
+                      <tr><td>400 000 – 500 000 Kč</td><td>20 %</td></tr>
+                      <tr><td>500 000 – 700 000 Kč</td><td>25 %</td></tr>
+                      <tr><td>700 000 – 1 000 000 Kč</td><td>30 %</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="text-secondary small mt-2">Prémie se vztahují na výdělek v dosaženém pásmu.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-5">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body">
+            <h3 class="h6 fw-semibold mb-3">Kalkulátor úrovně</h3>
+            <form class="vstack gap-3" id="calcForm" novalidate>
+              <div>
+                <label class="form-label">Skupina</label>
+                <select id="calcGroup" class="form-select">
+                  <option value="A" selected>Skupina A</option>
+                  <option value="B">Skupina B</option>
+                </select>
+              </div>
+              <div>
+                <label class="form-label">Dosažený čistý zisk (Kč)</label>
+                <input type="number" id="calcProfit" class="form-control" min="0" step="1000" value="0" inputmode="numeric" />
+              </div>
+              <div class="d-grid d-sm-flex gap-2">
+                <button type="button" id="calcBtn" class="btn btn-primary">Spočítat</button>
+                <button type="button" id="calcReset" class="btn btn-outline-secondary">Reset</button>
+              </div>
+            </form>
+            <div id="calcOut" class="mt-3 small text-secondary"></div>
+            <div id="calcProgress" class="mt-3 d-none">
+              <div class="d-flex justify-content-between small mb-1">
+                <span>Postup k dalšímu milníku</span><span id="calcMilestoneLabel">0 / 0 Kč</span>
+              </div>
+              <div class="progress">
+                <div id="calcBar" class="progress-bar" style="width:0%"></div>
+              </div>
+              <div class="band mt-2 small"><span class="me-1">Prém. pásmo:</span><span id="calcBand">—</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="company" class="container-xxl py-5">
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body">
+            <h2 class="h5 fw-bold mb-3">Základní informace</h2>
+            <dl class="row small text-secondary mb-0">
+              <dt class="col-sm-5">Název</dt><dd class="col-sm-7">Tactical Transport Logistics a.s. (TTL)</dd>
+              <dt class="col-sm-5">IČO</dt><dd class="col-sm-7">324</dd>
+              <dt class="col-sm-5">Zakladatel</dt><dd class="col-sm-7">Alison Reyes</dd>
+              <dt class="col-sm-5">Palivo do vozů</dt><dd class="col-sm-7">Proplácí firma</dd>
+              <dt class="col-sm-5">Provozní přístup</dt><dd class="col-sm-7">Eco zásady v údržbě a provozu</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body">
+            <h2 class="h5 fw-bold mb-3">Vedení společnosti</h2>
+            <div class="table-responsive">
+              <table class="table table-sm align-middle mb-0">
+                <thead><tr><th>Funkce</th><th>Jméno</th><th>Telefon</th></tr></thead>
+                <tbody class="small text-secondary">
+                  <tr><td>Jednatel</td><td>Alison Reyes</td><td>706-008</td></tr>
+                  <tr><td>Generální ředitel</td><td>Hiroshi Shirogane</td><td>635-763</td></tr>
+                  <tr><td>Výkonný ředitel</td><td>—</td><td>—</td></tr>
+                  <tr><td>Manažer</td><td>—</td><td>—</td></tr>
+                  <tr><td>Personalista</td><td>Leo Krejcir</td><td>622-334</td></tr>
+                  <tr><td>Personalista</td><td>Amir Corleone</td><td>732-097</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="apply" class="container-xxl py-5">
+    <div class="card border-0 shadow-sm">
+      <div class="card-body">
+        <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
+          <h2 class="h5 fw-bold mb-0">Přihláška</h2>
+          <div class="small text-secondary">Odesláním potvrzujete seznámení s podmínkami TTL.</div>
+        </div>
+        <form id="applyForm" class="row g-3" novalidate>
+          <div class="col-md-6">
+            <label class="form-label">Jméno a příjmení</label>
+            <input type="text" name="name" class="form-control" required autocomplete="name">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Email</label>
+            <input type="email" name="email" class="form-control" placeholder="jmeno@post.ic" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Telefon</label>
+            <input type="text" name="phone" class="form-control" placeholder="706-000" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Pozice</label>
+            <select name="role" id="applyRole" class="form-select" required>
+              <option value="" selected disabled>Vyberte pozici</option>
+              <option value="Řidič kamionu">Řidič kamionu</option>
+              <option value="Opravář elektrického vedení">Opravář elektrického vedení</option>
+              <option value="Kapitán nákladní lodě">Kapitán nákladní lodě</option>
+              <option value="Kurýr/Strážce objektů">Kurýr/Strážce objektů</option>
+            </select>
+          </div>
+          <div class="col-12">
+            <div class="form-check">
+              <input class="form-check-input" id="terms" type="checkbox" required>
+              <label class="form-check-label" for="terms">
+                Souhlasím s <button type="button" class="btn btn-link p-0 align-baseline" data-bs-toggle="modal" data-bs-target="#termsModal">Podmínkami TTL</button>.
+              </label>
+            </div>
+          </div>
+          <div class="col-12 d-grid d-sm-flex gap-2">
+            <button type="submit" class="btn btn-success"><i class="fa-solid fa-paper-plane me-2"></i>Odeslat</button>
+          </div>
+          <div class="col-12" id="applyStatus"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="ttl-footer text-white">
+    <div class="container-xxl py-4">
+      <div class="row g-3 align-items-center">
+        <div class="col-md">
+          <div class="opacity-75 small">© <span id="year"></span> Tactical Transport Logistics a.s.</div>
+        </div>
+        <div class="col-md-auto">
+          <a href="#main" class="btn btn-outline-light btn-sm"><i class="fa-solid fa-arrow-up me-1"></i>Nahoru</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold" id="termsModalLabel">Podmínky zaměstnání — TTL</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zavřít"></button>
+        </div>
+        <div class="modal-body">
+          <ol class="mb-0 small text-body">
+            <li><strong>Zkušební doba:</strong> bez platu. Cíl čistého zisku: Skupina A 500&nbsp;000&nbsp;Kč, Skupina B 125&nbsp;000&nbsp;Kč.</li>
+            <li><strong>Postup:</strong> po splnění zkušební doby úroveň II–IV podle milníků čistého zisku a odpovídajících fixních platů.</li>
+            <li><strong>Minimální požadavek:</strong> pro setrvání A: 300&nbsp;000&nbsp;Kč, B: 100&nbsp;000&nbsp;Kč (mimo zkušební období).</li>
+            <li><strong>Prémie:</strong> procenta z výdělku dle pásma viz sekce Odměňování.</li>
+            <li><strong>Organizace práce:</strong> směnný provoz; plnění úkolů dle pokynů nadřízených.</li>
+            <li><strong>Bezpečnost:</strong> dodržování dopravních a provozních předpisů; porušení se řeší dle interních pravidel a PSA.</li>
+            <li><strong>Odpovědnost:</strong> zaměstnanec odpovídá za škodu způsobenou porušením povinností.</li>
+            <li><strong>Ukončení:</strong> TTL může odmítnout nástup či ukončit spolupráci při porušení pravidel nebo dlouhodobé neaktivitě.</li>
+            <li><strong>Údaje:</strong> poskytnuté osobní údaje slouží pro nábor a provozní agendu.</li>
+            <li><strong>Změny:</strong> TTL může podmínky aktualizovat dle provozních potřeb. Aktuální znění je zveřejněno zde.</li>
+          </ol>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zavřít</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <template id="fleetTpl">
+    <div class="col-sm-6 col-lg-4">
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body">
+          <div class="d-flex align-items-start justify-content-between">
+            <h3 class="h6 fw-semibold mb-1 model"></h3>
+            <span class="badge badge-soft year"></span>
+          </div>
+          <div class="text-secondary small type mb-2"></div>
+          <div class="d-flex flex-wrap gap-2 badges"></div>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  <script src="./assets/js/main.js" defer></script>
+</body>
+</html>
