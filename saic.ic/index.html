@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="cs">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>San Andreas Investment Centre (SAIC)</title>
+  <meta name="description" content="Akciová společnost spravující kapitál, nakupující podíly v jiných společnostech a vyplácející dividendy dle zisku portfolia." />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <link href="assets/css/styles.css" rel="stylesheet" />
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg sticky-top border-bottom border-opacity-25 border-white">
+    <div class="container py-2">
+      <a class="navbar-brand fw-bold" href="#">SAIC</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="#about">O společnosti</a></li>
+          <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#saic-eco">SAIC Eco</a></li>
+          <li class="nav-item"><a class="nav-link" href="#simulator">Simulátor</a></li>
+          <li class="nav-item"><a class="nav-link" href="#ann">Oznámení</a></li>
+          <li class="nav-item"><a class="nav-link" href="#compliance">Soulad</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero py-5">
+    <div class="container">
+      <h1 class="display-5 fw-bold">San Andreas Investment Centre</h1>
+      <p class="lead muted mt-3">Akciová společnost spravující kapitál, nakupující podíly v jiných společnostech a vyplácející dividendy dle zisku portfolia.</p>
+      <div class="d-flex gap-2 mt-4 flex-wrap">
+        <a href="#portfolio" class="btn btn-primary btn-sm">Zobrazit portfolio</a>
+        <a href="#simulator" class="btn btn-outline-light btn-sm">Simulátor výnosu</a>
+        <a href="mailto:alison.reyes@post.ic" class="btn btn-outline-light btn-sm">Kontaktovat</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="kpis" class="py-5">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-12 col-lg-4"><div class="glass p-3 glass-hover"><div class="muted">Hotovost</div><div class="stat kpi" id="kpiCash">—</div></div></div>
+        <div class="col-12 col-lg-4"><div class="glass p-3 glass-hover"><div class="muted">Dluh vůči státu</div><div class="stat kpi" id="kpiDebt">—</div></div></div>
+        <div class="col-12 col-lg-4"><div class="glass p-3 glass-hover"><div class="muted">Vlastní akcie</div><div class="stat kpi" id="kpiOwn">—</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="pb-2">
+    <div class="container">
+      <div class="glass p-4">
+        <h2 class="h4 mb-3">O společnosti</h2>
+        <p class="mb-0">Nakupujeme podíly ve firmách s dlouhodobým potenciálem. Zisk portfolia distribuujeme akcionářům formou dividend s důrazem na transparentní reportování a řízení rizik.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="portfolio" class="py-5">
+    <div class="container">
+      <div class="d-flex flex-column flex-md-row gap-3 align-items-md-center justify-content-between mb-3">
+        <h2 class="h4 m-0">Portfolio</h2>
+        <div class="d-flex gap-2">
+          <input id="search" class="form-control form-control-sm" placeholder="Hledat podle názvu…" />
+          <select id="sort" class="form-select form-select-sm" aria-label="Řazení">
+            <option value="name">Řadit: název</option>
+            <option value="share">Řadit: podíl</option>
+            <option value="count">Řadit: počet</option>
+          </select>
+        </div>
+      </div>
+      <div class="info-box info-green mb-3"><span class="icon"><i class="fa-solid fa-leaf"></i></span><div><strong>Preferujeme Eco firmy.</strong> Upřednostňujeme společnosti se sníženou ekologickou zátěží. Položky označené <em>ECO</em> splňují naše standardy SAIC Eco.</div></div>
+      <div id="portfolioGrid" class="row g-3"></div>
+      <div class="mt-4 info-box info-red"><span class="icon">!</span><div><strong>Upozornění na riziko.</strong> Investování je rizikové a minulé výnosy nejsou zárukou budoucích výsledků.</div></div>
+    </div>
+  </section>
+
+  <section id="saic-eco" class="py-5">
+    <div class="container">
+      <div class="glass p-4">
+        <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2">
+          <h2 class="h4 m-0 d-flex align-items-center gap-2"><i class="fa-solid fa-recycle"></i>SAIC Eco</h2>
+          <span class="eco-badge"><i class="fa-solid fa-leaf me-1"></i>ECO</span>
+        </div>
+        <p class="muted mb-3">Program interní klasifikace firem s nižší ekologickou stopou. Označení <strong>ECO</strong> udělujeme, pokud firma dlouhodobě splňuje naše standardy SAIC Eco.</p>
+        <div class="row g-3">
+          <div class="col-md-6 col-lg-4"><div class="glass p-3 h-100"><div class="fw-bold">Emise a energie</div><div class="muted small">Plán snižování emisí, využití obnovitelných zdrojů, měření spotřeby.</div></div></div>
+          <div class="col-md-6 col-lg-4"><div class="glass p-3 h-100"><div class="fw-bold">Materiály a odpad</div><div class="muted small">Recyklace, minimalizace odpadu, balení s nízkou zátěží.</div></div></div>
+          <div class="col-md-6 col-lg-4"><div class="glass p-3 h-100"><div class="fw-bold">Řízení dodavatelů</div><div class="muted small">Požadavky na ESG u klíčových dodavatelů, auditní stopa.</div></div></div>
+          <div class="col-md-6 col-lg-4"><div class="glass p-3 h-100"><div class="fw-bold">Bezpečnost a právo</div><div class="muted small">Soulad s předpisy, školení, prevence incidentů.</div></div></div>
+          <div class="col-md-6 col-lg-4"><div class="glass p-3 h-100"><div class="fw-bold">Transparentnost</div><div class="muted small">Zveřejňování metrik, pravidelný reporting, kontrolovatelnost dat.</div></div></div>
+          <div class="col-md-6 col-lg-4"><div class="glass p-3 h-100"><div class="fw-bold">Správa a kontrola</div><div class="muted small">Odpovědnost vedení, cíle a revize, veřejná politika.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="simulator" class="py-5">
+    <div class="container">
+      <h2 class="h4 m-0 mb-3">Simulátor výnosu</h2>
+      <div class="row g-3 align-items-stretch" id="simCards">
+        <div class="col-12 col-md-6 col-lg-3 sim-calc">
+          <div class="glass p-4 h-100">
+            <label class="form-label">Investovaná částka (Kč)</label>
+            <input id="invAmount" type="number" class="form-control" value="100000" min="0" step="1000" />
+            <label class="form-label mt-3">Cena akcie SAIC (Kč)</label>
+            <input id="sharePrice" type="number" class="form-control" value="1000" min="0" step="1" />
+            <label class="form-label mt-3">Týdenní dividenda na akcii (Kč)</label>
+            <input id="weeklyDiv" type="number" class="form-control" value="50" min="0" step="1" />
+            <label class="form-label mt-3">Horizont</label>
+            <select id="horizon" class="form-select">
+              <option value="6">6 měsíců</option>
+              <option value="12" selected>12 měsíců</option>
+              <option value="24">24 měsíců</option>
+            </select>
+            <div class="mt-4 d-grid"><button id="calc" class="btn btn-primary">Přepočítat</button></div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-3 info-box info-green"><span class="icon">i</span><div><strong>Modelový výpočet.</strong> Slouží pouze k ilustraci a není investičním doporučením.</div></div>
+    </div>
+  </section>
+
+  <section id="ann" class="py-5">
+    <div class="container">
+      <div class="glass p-4">
+        <div class="d-flex justify-content-between align-items-center mb-3"><h2 class="h4 m-0">Oznámení pro akcionáře</h2></div>
+        <div class="mb-3 d-flex flex-wrap gap-2">
+          <span class="pill">3 dny zpětně · &gt; 1 mil. Kč</span>
+          <span class="pill">1 hodinu předem · &gt; 5 mil. Kč</span>
+          <span class="pill">1 den předem · pravidelný náklad</span>
+          <span class="pill">§6 · §6.1</span>
+        </div>
+        <div id="timeline" class="muted">Momentálně nejsou zveřejněna žádná oznámení.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="compliance" class="pb-5">
+    <div class="container">
+      <div class="glass p-4">
+        <h2 class="h4">Soulad se zákonem</h2>
+        <div class="muted">Novela č. 252/2025</div>
+        <div class="row g-3 mt-2">
+          <div class="col-12 col-md-6 col-lg-4"><div class="glass p-3 h-100"><div class="fw-bold">Registrace a 10 000 akcií</div><div class="muted">§1, §4</div></div></div>
+          <div class="col-12 col-md-6 col-lg-4"><div class="glass p-3 h-100"><div class="fw-bold">Transparentní zisk</div><div class="muted">§5</div></div></div>
+          <div class="col-12 col-md-6 col-lg-4"><div class="glass p-3 h-100"><div class="fw-bold">Oznamovací povinnost</div><div class="muted">§6, §6.1, §7</div></div></div>
+          <div class="col-12 col-md-6 col-lg-4"><div class="glass p-3 h-100"><div class="fw-bold">Dividendy</div><div class="muted">§12–§14.1</div></div></div>
+          <div class="col-12 col-md-6 col-lg-4"><div class="glass p-3 h-100"><div class="fw-bold">Zakázané praktiky a sankce</div><div class="muted">§15–§22</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="py-4 border-top border-opacity-25 border-white">
+    <div class="container d-flex flex-wrap justify-content-between align-items-center">
+      <div class="muted">© 2025 San Andreas Investment Centre</div>
+      <button id="toTop" class="btn btn-outline-light btn-sm" type="button"><i class="fa-solid fa-arrow-up me-1"></i>Nahoru</button>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const fmt = new Intl.NumberFormat('cs-CZ');
+    const czk = new Intl.NumberFormat('cs-CZ', { style: 'currency', currency: 'CZK', maximumFractionDigits: 0 });
+
+    const KPIS = { cash: 1900000, debt: 0, own: 6923 };
+    function setText(id, text){ const el = document.getElementById(id); if(el) el.textContent = text; }
+    setText('kpiCash', czk.format(KPIS.cash));
+    setText('kpiDebt', czk.format(KPIS.debt));
+    setText('kpiOwn', fmt.format(KPIS.own) + ' ks (69,23 %)');
+
+    const portfolio = [
+      { name:'Tactical Transport Logistics a.s.', count:2500, share:25.00, eco:true },
+      { name:'Premium Cars', count:2498, share:24.98, eco:true },
+      { name:'Piece of Peace', count:125, share:1.25, eco:false },
+      { name:'Nice Buns', count:100, share:1.00, eco:false },
+      { name:'Sprunk', count:100, share:1.00, eco:false },
+      { name:"Arthur’s BBQ", count:25, share:0.25, eco:false },
+      { name:'Canny Bus Group', count:25, share:0.25, eco:false },
+      { name:'Redwood Cigarettes', count:25, share:0.25, eco:false },
+      { name:'Ammu-Nation', count:10, share:0.10, eco:false }
+    ];
+
+    const grid = document.getElementById('portfolioGrid');
+    function renderPortfolio(items){
+      grid.innerHTML = '';
+      items.forEach(p => {
+        const col = document.createElement('div');
+        col.className = 'col-12 col-sm-6 col-lg-4';
+        col.innerHTML =
+          '<div class="glass p-3 h-100 glass-hover">' +
+            '<div class="d-flex justify-content-between align-items-start">' +
+              '<h3 class="h6 mb-2 d-flex align-items-center gap-2">' + p.name + (p.eco ? ' <span class="eco-badge"><i class="fa-solid fa-leaf me-1"></i>ECO</span>' : '') + '</h3>' +
+              '<span class="badge text-bg-dark border border-1">' + p.share.toFixed(2) + ' %</span>' +
+            '</div>' +
+            '<div class="muted">Počet: <strong>' + fmt.format(p.count) + '</strong> ks</div>' +
+          '</div>';
+        grid.appendChild(col);
+      });
+    }
+    function applyFilters(){
+      const q = (document.getElementById('search').value || '').toLowerCase().trim();
+      const sortBy = document.getElementById('sort').value;
+      let items = portfolio.filter(p => p.name.toLowerCase().includes(q));
+      if(sortBy === 'name') items.sort((a,b)=>a.name.localeCompare(b.name,'cs'));
+      if(sortBy === 'share') items.sort((a,b)=>b.share - a.share);
+      if(sortBy === 'count') items.sort((a,b)=>b.count - a.count);
+      renderPortfolio(items);
+    }
+    document.getElementById('search').addEventListener('input', applyFilters);
+    document.getElementById('sort').addEventListener('change', applyFilters);
+    renderPortfolio(portfolio);
+
+    function calcScenarios(){
+      const inv    = Number(document.getElementById('invAmount').value) || 0;
+      const price  = Number(document.getElementById('sharePrice').value) || 0;
+      const wDiv   = Number(document.getElementById('weeklyDiv').value) || 0;
+      const months = Number(document.getElementById('horizon').value) || 12;
+
+      const shares = price>0 ? inv / price : 0;
+      const period = months / 12;
+
+      const simRow = document.getElementById('simCards');
+      simRow.querySelectorAll('.scenario-col').forEach(n=>n.remove());
+
+      const scenarios = [
+        { key:'Pesimistický', dMul:0.70, pMul:0.90 },
+        { key:'Realistický',  dMul:1.10, pMul:1.05 },
+        { key:'Optimistický', dMul:1.20, pMul:1.10 }
+      ];
+
+      scenarios.forEach(s => {
+        const yearlyDividend = shares * wDiv * 52 * s.dMul * period;
+        const newPrice = price * s.pMul;
+        const priceGain = shares * (newPrice - price) * period;
+        const total = yearlyDividend + priceGain;
+
+        const col = document.createElement('div');
+        col.className = 'col-12 col-md-6 col-lg-3 scenario-col';
+        const monthsLabel = months + (months === 1 ? ' měsíc' : ' měsíců');
+
+        col.innerHTML =
+          '<div class="glass p-3 h-100 glass-hover scenario">' +
+            '<div class="d-flex justify-content-between align-items-center">' +
+              '<h3 class="h6 mb-0">' + s.key + '</h3>' +
+              '<span class="tag">' + monthsLabel + '</span>' +
+            '</div>' +
+            '<div class="mt-3"><div class="muted">Odhad roční dividendy</div><div class="fw-bold">' + czk.format(Math.round(yearlyDividend)) + '</div></div>' +
+            '<div class="mt-2"><div class="muted">Zisk/ztráta z ceny</div><div class="fw-bold">' + czk.format(Math.round(priceGain)) + '</div></div>' +
+            '<div class="divider my-2"></div>' +
+            '<div class="muted">Celkový výnos</div>' +
+            '<div class="fs-5 fw-bold">' + czk.format(Math.round(total)) + '</div>' +
+            '<div class="small muted mt-2">Modelový odhad – nejedná se o investiční doporučení.</div>' +
+          '</div>';
+
+        simRow.appendChild(col);
+      });
+    }
+    document.getElementById('calc').addEventListener('click', calcScenarios);
+    calcScenarios();
+
+    document.getElementById('toTop').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  </script>
+</body>
+</html>
