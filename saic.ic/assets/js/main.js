@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const KPIS = { cash: 0, debt: 0, own: 6923 };
 
   const portfolio = [
-    { name:'Tactical Transport Logistics a.s.', count:2500, share:25.00, ecoLevel:'eco', eco:true },
+    { name:'Tactical Transport Logistics a.s.', count:2500, share:25.00, ecoLevel:'eco-plus', eco:true },
     { name:'Premium Cars', count:2498, share:24.98, ecoLevel:'eco', eco:true },
     { name:'Piece of Peace', count:125, share:1.25, ecoLevel:null, eco:false },
     { name:'Nice Buns', count:100, share:1.00, ecoLevel:null, eco:false },
@@ -132,23 +132,38 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   setMetrics();
 
+  const MARKET = { maxPerIssuer: 10000, available: 10000 };
   const ASSUME = {
-    sharePrice: 22000,
+    sharePrice: 13953,
     dailyProfitPerShare: 5,
     hitRate: 0.6,
     moves: { pess:-0.10, real:0.05, opti:0.15 }
   };
 
+  function maxBuyable(inv){
+    const byCash = Math.floor(inv / Math.max(1, ASSUME.sharePrice));
+    return Math.max(0, Math.min(byCash, MARKET.available, MARKET.maxPerIssuer));
+  }
+
   function simulateSimple(inv, months, move){
     const days = Math.max(1, Math.round(months*30));
-    const shares = Math.max(0, Math.floor(inv / Math.max(1, ASSUME.sharePrice)));
+    const shares = maxBuyable(inv);
     const cash = inv - shares * ASSUME.sharePrice;
     const paidDays = Math.round(days * ASSUME.hitRate);
     const dividends = shares * ASSUME.dailyProfitPerShare * paidDays;
     const finalPrice = ASSUME.sharePrice * (1 + move);
     const valueEnd = shares * finalPrice + cash + dividends;
     const pl = valueEnd - inv;
-    return { days, shares, cash, dividends, finalPrice, valueEnd, pl };
+    return { shares, cash, dividends, finalPrice, valueEnd, pl };
+  }
+
+  function updateBuyBox(){
+    const inv = Number(document.getElementById('invAmount').value)||0;
+    const shares = maxBuyable(inv);
+    const cur = document.getElementById('curPriceBox');
+    const qty = document.getElementById('buyableShares');
+    if(cur) cur.textContent = czk.format(ASSUME.sharePrice);
+    if(qty) qty.textContent = fmt.format(shares);
   }
 
   function renderSimulator(){
@@ -175,6 +190,8 @@ document.addEventListener('DOMContentLoaded', () => {
             '<h3 class="h6 mb-0">' + s.key + '</h3>' +
             '<span class="tag">' + months + ' měsíců</span>' +
           '</div>' +
+          '<div class="mt-2 muted small">Aktuální cena akcie: <strong>' + czk.format(ASSUME.sharePrice) + '</strong></div>' +
+          '<div class="muted small">Za tuto investici: <strong>' + fmt.format(s.d.shares) + '</strong> ks</div>' +
           '<div class="mt-3"><div class="muted">Konečná cena</div><div class="fw-bold">' + czk.format(Math.round(s.d.finalPrice)) + '</div></div>' +
           '<div class="mt-2"><div class="muted">Vyplaceno celkem</div><div class="fw-bold">' + czk.format(Math.round(s.d.dividends)) + '</div></div>' +
           '<div class="divider my-2"></div>' +
@@ -185,6 +202,8 @@ document.addEventListener('DOMContentLoaded', () => {
         '</div>';
       simRow.appendChild(col);
     });
+
+    updateBuyBox();
   }
 
   const calcBtn = document.getElementById('calc');
