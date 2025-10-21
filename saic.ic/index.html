@@ -2,13 +2,13 @@
 <html lang="cs">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>San Andreas Investment Centre</title>
-  <meta name="description" content="Akciová společnost spravující kapitál, nakupující podíly v jiných společnostech a vyplácející dividendy dle zisku portfolia." />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
-  <link href="assets/css/styles.css" rel="stylesheet" />
+  <meta name="description" content="Akciová společnost spravující kapitál, nakupující podíly v jiných společnostech a vyplácející dividendy dle zisku portfolia.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link href="assets/css/styles.css" rel="stylesheet">
 </head>
 
 <body>
@@ -36,7 +36,6 @@
       <div class="d-flex gap-2 mt-4 flex-wrap">
         <a href="#portfolio" class="btn btn-primary btn-sm">Zobrazit portfolio</a>
         <a href="#simulator" class="btn btn-outline-light btn-sm">Simulátor výnosu</a>
-        <a href="mailto:alison.reyes@post.ic" class="btn btn-outline-light btn-sm">Kontaktovat</a>
       </div>
     </div>
   </header>
@@ -65,7 +64,7 @@
       <div class="d-flex flex-column flex-md-row gap-3 align-items-md-center justify-content-between mb-3">
         <h2 class="h4 m-0">Portfolio</h2>
         <div class="d-flex gap-2">
-          <input id="search" class="form-control form-control-sm" placeholder="Hledat podle názvu…" />
+          <input id="search" class="form-control form-control-sm" placeholder="Hledat podle názvu">
           <select id="sort" class="form-select form-select-sm" aria-label="Řazení">
             <option value="name">Řadit: název</option>
             <option value="share">Řadit: podíl</option>
@@ -73,8 +72,15 @@
           </select>
         </div>
       </div>
-      <div class="info-box info-green mb-3"><span class="icon"><i class="fa-solid fa-leaf"></i></span><div><strong>Preferujeme Eco firmy.</strong> Upřednostňujeme společnosti se sníženou ekologickou zátěží. Položky označené <em>ECO</em> splňují naše standardy SAIC Eco.</div></div>
+      <div class="info-box info-green mb-3"><span class="icon"><i class="fa-solid fa-leaf"></i></span><div><strong>Preferujeme Eco firmy.</strong> Položky označené <em>ECO</em> splňují rámec SAIC Eco popsaný níže.</div></div>
       <div id="portfolioGrid" class="row g-3"></div>
+      <div id="emptyState" class="d-none">
+        <div class="glass p-4 text-center">
+          <div class="mb-2"><i class="fa-regular fa-face-frown fa-2x"></i></div>
+          <div class="muted">Nic neodpovídá zadanému hledání</div>
+          <div class="mt-2"><button id="clearSearch" class="btn btn-outline-light btn-sm">Zrušit hledání</button></div>
+        </div>
+      </div>
       <div class="mt-4 info-box info-red"><span class="icon">!</span><div><strong>Upozornění na riziko.</strong> Investování je rizikové a minulé výnosy nejsou zárukou budoucích výsledků.</div></div>
     </div>
   </section>
@@ -82,19 +88,24 @@
   <section id="saic-eco" class="py-5">
     <div class="container">
       <div class="glass p-4">
-        <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2">
-          <h2 class="h4 m-0 d-flex align-items-center gap-2"><i class="fa-solid fa-recycle"></i>SAIC Eco</h2>
-          <span class="eco-badge"><i class="fa-solid fa-leaf me-1"></i>ECO</span>
+        <h2 class="h4 m-0 d-flex align-items-center gap-2"><i class="fa-solid fa-recycle"></i>SAIC Eco</h2>
+        <p class="muted mt-2">SAIC Eco je interní hodnoticí rámec SAIC. Slouží k orientačnímu posouzení nižší ekologické zátěže firem v našem portfoliu.</p>
+
+        <div class="row g-3 mt-1">
+          <div class="col-md-6 col-lg-4"><div class="glass p-3 h-100"><div class="fw-bold">Emise a energie</div><div class="muted small">Cíle snižování emisí, podíl OZE, evidence a řízení spotřeby, elektrifikace flotil.</div></div></div>
+          <div class="col-md-6 col-lg-4"><div class="glass p-3 h-100"><div class="fw-bold">Materiály a odpad</div><div class="muted small">Recyklace, oběhovost materiálů, náhrada jednorázů, obaly s nízkou zátěží.</div></div></div>
+          <div class="col-md-6 col-lg-4"><div class="glass p-3 h-100"><div class="fw-bold">Dodavatelé</div><div class="muted small">Požadavky ESG na klíčové dodavatele, audity, sledovatelnost a sankční mechanismy.</div></div></div>
+          <div class="col-md-6 col-lg-4"><div class="glass p-3 h-100"><div class="fw-bold">Bezpečnost a právo</div><div class="muted small">Soulad s předpisy, školení, prevence incidentů, evidence a náprava událostí.</div></div></div>
+          <div class="col-md-6 col-lg-4"><div class="glass p-3 h-100"><div class="fw-bold">Transparentnost</div><div class="muted small">Zveřejňování metrik, pravidelný a ověřitelný reporting, metodiky měření.</div></div></div>
+          <div class="col-md-6 col-lg-4"><div class="glass p-3 h-100"><div class="fw-bold">Správa a řízení</div><div class="muted small">Odpovědnost vedení, cíle a revize, veřejná politika a dohled.</div></div></div>
         </div>
-        <p class="muted mb-3">Program interní klasifikace firem s nižší ekologickou stopou. Označení <strong>ECO</strong> udělujeme, pokud firma dlouhodobě splňuje naše standardy SAIC Eco.</p>
-        <div class="row g-3">
-          <div class="col-md-6 col-lg-4"><div class="glass p-3 h-100"><div class="fw-bold">Emise a energie</div><div class="muted small">Plán snižování emisí, využití obnovitelných zdrojů, měření spotřeby.</div></div></div>
-          <div class="col-md-6 col-lg-4"><div class="glass p-3 h-100"><div class="fw-bold">Materiály a odpad</div><div class="muted small">Recyklace, minimalizace odpadu, balení s nízkou zátěží.</div></div></div>
-          <div class="col-md-6 col-lg-4"><div class="glass p-3 h-100"><div class="fw-bold">Řízení dodavatelů</div><div class="muted small">Požadavky na ESG u klíčových dodavatelů, auditní stopa.</div></div></div>
-          <div class="col-md-6 col-lg-4"><div class="glass p-3 h-100"><div class="fw-bold">Bezpečnost a právo</div><div class="muted small">Soulad s předpisy, školení, prevence incidentů.</div></div></div>
-          <div class="col-md-6 col-lg-4"><div class="glass p-3 h-100"><div class="fw-bold">Transparentnost</div><div class="muted small">Zveřejňování metrik, pravidelný reporting, kontrolovatelnost dat.</div></div></div>
-          <div class="col-md-6 col-lg-4"><div class="glass p-3 h-100"><div class="fw-bold">Správa a kontrola</div><div class="muted small">Odpovědnost vedení, cíle a revize, veřejná politika.</div></div></div>
+
+        <div class="row g-3 mt-1">
+          <div class="col-md-6"><div class="glass p-3 h-100"><div class="fw-bold">Z čeho vycházíme</div><div class="muted small">Veřejné zprávy a politiky firem, interní podklady poskytnuté firmou, rozhovory s vedením a naše provozní zkušenost. Pokud některé informace chybí, pracujeme s kvalifikovaným odhadem a konzervativním přístupem.</div></div></div>
+          <div class="col-md-6"><div class="glass p-3 h-100"><div class="fw-bold">Udělení štítku</div><div class="muted small">Úrovně: <span class="eco-badge" data-level="eco">ECO</span> · <span class="eco-badge" data-level="eco-plus">ECO+</span> (splněny pilíře a pozitivní trend ≥ 2 roky) · <span class="eco-badge" data-level="eco-asterisk">ECO*</span> (podmínečné – chybí důkazy, revize do 90 dnů).</div></div></div>
         </div>
+
+        <div class="info-box info-yellow mt-3"><span class="icon"><i class="fa-solid fa-scale-balanced"></i></span><div><strong>Právní upozornění.</strong> Hodnocení SAIC Eco je nezávislé interní posouzení společnosti SAIC. Závěry nejsou certifikací, auditem, právním stanoviskem ani investičním doporučením. Pokud nejsou k dispozici relevantní dokumenty, hodnotíme na základě sektorové praxe a interní analýzy. Informace podléhají změnám.</div></div>
       </div>
     </div>
   </section>
@@ -102,15 +113,18 @@
   <section id="simulator" class="py-5">
     <div class="container">
       <h2 class="h4 m-0 mb-3">Simulátor výnosu</h2>
+
+      <div class="row g-3 mb-2">
+        <div class="col-12 col-md-4 col-lg-4"><div class="glass p-3 h-100 text-center"><div class="muted">Dnešní zisk</div><div class="fs-5 fw-bold" id="mToday">—</div></div></div>
+        <div class="col-12 col-md-4 col-lg-4"><div class="glass p-3 h-100 text-center"><div class="muted">Průměrný denní zisk</div><div class="fs-5 fw-bold" id="mAvg">—</div></div></div>
+        <div class="col-12 col-md-4 col-lg-4"><div class="glass p-3 h-100 text-center"><div class="muted">Týdenní zisk na akcii</div><div class="fs-5 fw-bold" id="mWeek">—</div></div></div>
+      </div>
+
       <div class="row g-3 align-items-stretch" id="simCards">
-        <div class="col-12 col-md-6 col-lg-3 sim-calc">
+        <div class="col-12 col-md-6 col-lg-3">
           <div class="glass p-4 h-100">
-            <label class="form-label">Investovaná částka (Kč)</label>
-            <input id="invAmount" type="number" class="form-control" value="100000" min="0" step="1000" />
-            <label class="form-label mt-3">Cena akcie SAIC (Kč)</label>
-            <input id="sharePrice" type="number" class="form-control" value="1000" min="0" step="1" />
-            <label class="form-label mt-3">Týdenní dividenda na akcii (Kč)</label>
-            <input id="weeklyDiv" type="number" class="form-control" value="50" min="0" step="1" />
+            <label class="form-label">Kolik investovat (Kč)</label>
+            <input id="invAmount" type="number" class="form-control" value="100000" min="0" step="1000">
             <label class="form-label mt-3">Horizont</label>
             <select id="horizon" class="form-select">
               <option value="6">6 měsíců</option>
@@ -121,7 +135,17 @@
           </div>
         </div>
       </div>
-      <div class="mt-3 info-box info-green"><span class="icon">i</span><div><strong>Modelový výpočet.</strong> Slouží pouze k ilustraci a není investičním doporučením.</div></div>
+
+      <div class="mt-3 info-box info-green"><span class="icon">i</span><div><strong>Orientační výpočet.</strong> Jde o zjednodušený model, skutečný vývoj se může výrazně lišit.</div></div>
+      <div class="mt-3 glass p-3">
+        <div class="fw-bold mb-2">Vysvětlivky</div>
+        <ul class="m-0 ps-3 small muted">
+          <li><strong>Konečná cena</strong>: modelová cena akcie na konci zvoleného období.</li>
+          <li><strong>Vyplaceno celkem</strong>: součet modelových denních výplat za celé období.</li>
+          <li><strong>Hodnota portfolia</strong>: počet držených akcií × konečná cena + hotovost a výplaty.</li>
+          <li><strong>P/L</strong>: rozdíl mezi hodnotou portfolia na konci a investovanou částkou.</li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -164,153 +188,6 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    const fmt = new Intl.NumberFormat('cs-CZ');
-    const czk = new Intl.NumberFormat('cs-CZ', { style: 'currency', currency: 'CZK', maximumFractionDigits: 0 });
-
-    const KPIS = { cash: 0, debt: 0, own: 6923 };
-    function setText(id, text){ const el = document.getElementById(id); if(el) el.textContent = text; }
-    setText('kpiCash', czk.format(KPIS.cash));
-    setText('kpiDebt', czk.format(KPIS.debt));
-    setText('kpiOwn', fmt.format(KPIS.own) + ' ks (69,23 %)');
-
-    const portfolio = [
-      { name:'Tactical Transport Logistics a.s.', count:2500, share:25.00, eco:true },
-      { name:'Premium Cars', count:2498, share:24.98, eco:true },
-      { name:'Piece of Peace', count:125, share:1.25, eco:false },
-      { name:'Nice Buns', count:100, share:1.00, eco:false },
-      { name:'Sprunk', count:100, share:1.00, eco:false },
-      { name:"Arthur’s BBQ", count:25, share:0.25, eco:false },
-      { name:'Canny Bus Group', count:25, share:0.25, eco:false },
-      { name:'Redwood Cigarettes', count:25, share:0.25, eco:false },
-      { name:'Ammu-Nation', count:10, share:0.10, eco:false },
-      { name: 'Pay \'n\' Spray', count: 5, share: 0.05, eco: false }
-    ];
-
-    const grid = document.getElementById('portfolioGrid');
-    function renderPortfolio(items){
-      grid.innerHTML = '';
-      items.forEach(p => {
-        const col = document.createElement('div');
-        col.className = 'col-12 col-sm-6 col-lg-4';
-        col.innerHTML =
-          '<div class="glass p-3 h-100 glass-hover">' +
-            '<div class="d-flex justify-content-between align-items-start">' +
-              '<h3 class="h6 mb-2 d-flex align-items-center gap-2">' + p.name + (p.eco ? ' <span class="eco-badge"><i class="fa-solid fa-leaf me-1"></i>ECO</span>' : '') + '</h3>' +
-              '<span class="badge text-bg-dark border border-1">' + p.share.toFixed(2) + ' %</span>' +
-            '</div>' +
-            '<div class="muted">Počet: <strong>' + fmt.format(p.count) + '</strong> ks</div>' +
-          '</div>';
-        grid.appendChild(col);
-      });
-    }
-    function applyFilters(){
-      const q = (document.getElementById('search').value || '').toLowerCase().trim();
-      const sortBy = document.getElementById('sort').value;
-      let items = portfolio.filter(p => p.name.toLowerCase().includes(q));
-      if(sortBy === 'name') items.sort((a,b)=>a.name.localeCompare(b.name,'cs'));
-      if(sortBy === 'share') items.sort((a,b)=>b.share - a.share);
-      if(sortBy === 'count') items.sort((a,b)=>b.count - a.count);
-      renderPortfolio(items);
-    }
-    document.getElementById('search').addEventListener('input', applyFilters);
-    document.getElementById('sort').addEventListener('change', applyFilters);
-    renderPortfolio(portfolio);
-
-    function calcScenarios(){
-      const inv    = Number(document.getElementById('invAmount').value) || 0;
-      const price  = Number(document.getElementById('sharePrice').value) || 0;
-      const wDiv   = Number(document.getElementById('weeklyDiv').value) || 0;
-      const months = Number(document.getElementById('horizon').value) || 12;
-
-      const shares = price>0 ? inv / price : 0;
-      const period = months / 12;
-
-      const simRow = document.getElementById('simCards');
-      simRow.querySelectorAll('.scenario-col').forEach(n=>n.remove());
-
-      const scenarios = [
-        { key:'Pesimistický', dMul:0.70, pMul:0.90 },
-        { key:'Realistický',  dMul:1.10, pMul:1.05 },
-        { key:'Optimistický', dMul:1.20, pMul:1.10 }
-      ];
-
-      scenarios.forEach(s => {
-        const yearlyDividend = shares * wDiv * 52 * s.dMul * period;
-        const newPrice = price * s.pMul;
-        const priceGain = shares * (newPrice - price) * period;
-        const total = yearlyDividend + priceGain;
-
-        const col = document.createElement('div');
-        col.className = 'col-12 col-md-6 col-lg-3 scenario-col';
-        const monthsLabel = months + (months === 1 ? ' měsíc' : ' měsíců');
-
-        col.innerHTML =
-          '<div class="glass p-3 h-100 glass-hover scenario">' +
-            '<div class="d-flex justify-content-between align-items-center">' +
-              '<h3 class="h6 mb-0">' + s.key + '</h3>' +
-              '<span class="tag">' + monthsLabel + '</span>' +
-            '</div>' +
-            '<div class="mt-3"><div class="muted">Odhad roční dividendy</div><div class="fw-bold">' + czk.format(Math.round(yearlyDividend)) + '</div></div>' +
-            '<div class="mt-2"><div class="muted">Zisk/ztráta z ceny</div><div class="fw-bold">' + czk.format(Math.round(priceGain)) + '</div></div>' +
-            '<div class="divider my-2"></div>' +
-            '<div class="muted">Celkový výnos</div>' +
-            '<div class="fs-5 fw-bold">' + czk.format(Math.round(total)) + '</div>' +
-            '<div class="small muted mt-2">Modelový odhad – nejedná se o investiční doporučení.</div>' +
-          '</div>';
-
-        simRow.appendChild(col);
-      });
-    }
-    document.getElementById('calc').addEventListener('click', calcScenarios);
-    calcScenarios();
-
-    const announcements = [
-      {
-        datetime: '2025-10-21T02:02:00', // 21.10.2025 o 2:02
-        label: 'Záměr nákupu',
-        company: "Pay 'n' Spray",
-        counterparty: 'Sphere Corporation',
-        qty: 5,
-        unitPrice: 399000
-      }
-    ];
-
-    function renderAnnouncements(){
-      const host = document.getElementById('timeline');
-      if(!announcements.length){
-        host.textContent = 'Momentálně nejsou zveřejněna žádná oznámení.';
-        return;
-      }
-      host.innerHTML = '';
-      announcements.forEach(a => {
-        const total = a.qty * a.unitPrice;
-        const dt = new Date(a.datetime);
-        const ts = dt.toLocaleString('cs-CZ', {
-          day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit'
-        });
-
-        const item = document.createElement('div');
-        item.className = 'glass p-3 mb-2';
-        item.innerHTML = `
-          <div class="d-flex justify-content-between align-items-center">
-            <div class="fw-bold">${a.label}</div>
-            <span class="pill">${ts}</span>
-          </div>
-          <div class="mt-1">
-            ${a.company} – <strong>${fmt.format(a.qty)}</strong> ks
-          </div>
-          <div class="muted small">
-            Proti-strana: ${a.counterparty} · Jednotková cena: <strong>${czk.format(a.unitPrice)}</strong> ·
-            Odhadovaný objem: <strong>${czk.format(total)}</strong>
-          </div>
-        `;
-        host.appendChild(item);
-      });
-    }
-    renderAnnouncements();
-
-    document.getElementById('toTop').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-  </script>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
