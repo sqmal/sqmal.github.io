@@ -168,7 +168,7 @@
     const fmt = new Intl.NumberFormat('cs-CZ');
     const czk = new Intl.NumberFormat('cs-CZ', { style: 'currency', currency: 'CZK', maximumFractionDigits: 0 });
 
-    const KPIS = { cash: 1900000, debt: 0, own: 6923 };
+    const KPIS = { cash: 0, debt: 0, own: 6923 };
     function setText(id, text){ const el = document.getElementById(id); if(el) el.textContent = text; }
     setText('kpiCash', czk.format(KPIS.cash));
     setText('kpiDebt', czk.format(KPIS.debt));
@@ -183,7 +183,8 @@
       { name:"Arthur’s BBQ", count:25, share:0.25, eco:false },
       { name:'Canny Bus Group', count:25, share:0.25, eco:false },
       { name:'Redwood Cigarettes', count:25, share:0.25, eco:false },
-      { name:'Ammu-Nation', count:10, share:0.10, eco:false }
+      { name:'Ammu-Nation', count:10, share:0.10, eco:false },
+      { name: 'Pay \'n\' Spray', count: 5, share: 0.05, eco: false }
     ];
 
     const grid = document.getElementById('portfolioGrid');
