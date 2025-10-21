@@ -264,6 +264,51 @@
     document.getElementById('calc').addEventListener('click', calcScenarios);
     calcScenarios();
 
+    const announcements = [
+      {
+        datetime: '2025-10-21T02:02:00', // 21.10.2025 o 2:02
+        label: 'Záměr nákupu',
+        company: "Pay 'n' Spray",
+        counterparty: 'Sphere Corporation',
+        qty: 5,
+        unitPrice: 399000
+      }
+    ];
+
+    function renderAnnouncements(){
+      const host = document.getElementById('timeline');
+      if(!announcements.length){
+        host.textContent = 'Momentálně nejsou zveřejněna žádná oznámení.';
+        return;
+      }
+      host.innerHTML = '';
+      announcements.forEach(a => {
+        const total = a.qty * a.unitPrice;
+        const dt = new Date(a.datetime);
+        const ts = dt.toLocaleString('cs-CZ', {
+          day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit'
+        });
+
+        const item = document.createElement('div');
+        item.className = 'glass p-3 mb-2';
+        item.innerHTML = `
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="fw-bold">${a.label}</div>
+            <span class="pill">${ts}</span>
+          </div>
+          <div class="mt-1">
+            ${a.company} – <strong>${fmt.format(a.qty)}</strong> ks
+          </div>
+          <div class="muted small">
+            Proti-strana: ${a.counterparty} · Jednotková cena: <strong>${czk.format(a.unitPrice)}</strong> ·
+            Odhadovaný objem: <strong>${czk.format(total)}</strong>
+          </div>
+        `;
+        host.appendChild(item);
+      });
+    }
+    renderAnnouncements();
+
     document.getElementById('toTop').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
   </script>
 </body>
