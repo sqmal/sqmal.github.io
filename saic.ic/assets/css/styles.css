@@ -27,7 +27,7 @@ input:-webkit-autofill,select:-webkit-autofill{-webkit-text-fill-color:#e9edf1;b
 .info-red{background:rgba(255,107,107,.12);border-color:rgba(255,107,107,.45)}
 .info-red .icon{border-color:var(--danger);color:var(--danger)}
 .info-green{background:rgba(108,240,194,.12);border-color:rgba(108,240,194,.45)}
-.info-green . icon{border-color:var(--accent);color:var(--accent)}
+.info-green .icon{border-color:var(--accent);color:var(--accent)}
 .info-yellow{background:rgba(255,209,102,.14);border-color:rgba(255,209,102,.45)}
 .info-yellow .icon{border-color:var(--warning);color:var(--warning)}
 .eco-badge{display:inline-flex;align-items:center;gap:.25rem;font-size:.7rem;padding:.1rem .4rem;border:1px solid rgba(108,240,194,.45);border-radius:999px;background:rgba(108,240,194,.12);color:var(--text)}
