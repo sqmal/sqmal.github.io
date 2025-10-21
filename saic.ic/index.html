@@ -131,12 +131,19 @@
               <option value="12" selected>12 měsíců</option>
               <option value="24">24 měsíců</option>
             </select>
-            <div class="mt-4 d-grid"><button id="calc" class="btn btn-primary">Přepočítat</button></div>
+            <div class="mt-3 p-2 rounded-3 border border-opacity-25 border-white bg-opacity-10 bg-white">
+              <div class="small muted">Aktuální cena akcie</div>
+              <div class="fw-bold" id="curPriceBox">—</div>
+              <div class="small muted mt-2">Za tuto investici nakoupíte</div>
+              <div class="fw-bold"><span id="buyableShares">—</span> ks</div>
+            </div>
+            <div class="mt-3 d-grid"><button id="calc" class="btn btn-primary">Přepočítat</button></div>
           </div>
         </div>
       </div>
 
-      <div class="mt-3 info-box info-green"><span class="icon">i</span><div><strong>Orientační výpočet.</strong> Jde o zjednodušený model, skutečný vývoj se může výrazně lišit.</div></div>
+      <div class="mt-3 info-box info-green"><span class="icon">i</span><div><strong>Orientační výpočet.</strong> Slouží pouze k ilustraci a není investičním doporučením.</div></div>
+
       <div class="mt-3 glass p-3">
         <div class="fw-bold mb-2">Vysvětlivky</div>
         <ul class="m-0 ps-3 small muted">
