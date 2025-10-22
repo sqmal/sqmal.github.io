@@ -2,10 +2,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const fmt = new Intl.NumberFormat('cs-CZ');
   const czk = new Intl.NumberFormat('cs-CZ', { style: 'currency', currency: 'CZK', maximumFractionDigits: 0 });
 
-  const KPIS = { cash: 0, debt: 0, own: 6923 };
+  const KPIS = { cash: 12000, debt: 0, own: 6923 };
 
   const portfolio = [
-    { name:'Tactical Transport Logistics a.s.', count:2500, share:25.00, ecoLevel:'eco-plus', eco:true },
+    { name:'Tactical Transport Logistics a.s.', count:2500, share:25.00, ecoLevel:'eco', eco:true },
     { name:'Premium Cars', count:2498, share:24.98, ecoLevel:'eco', eco:true },
     { name:'Piece of Peace', count:125, share:1.25, ecoLevel:null, eco:false },
     { name:'Nice Buns', count:100, share:1.00, ecoLevel:null, eco:false },
@@ -117,8 +117,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   renderAnnouncements();
 
-  const mToday = -9400;
-  const mAvg = 50000;
+  const mToday = -1900000;
+  const mAvg = -17000;
   const mWeekPerShare = 50;
 
   function setMetrics(){
