@@ -214,6 +214,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if(invEl) invEl.addEventListener('input', renderSimulator);
   renderSimulator();
 
+  function renderAnnouncementsInit(){ renderAnnouncements(); }
+  renderAnnouncementsInit();
+
   const toTop = document.getElementById('toTop');
   if(toTop){ toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' })); }
 });
