@@ -117,8 +117,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   renderAnnouncements();
 
-  const mToday = -41000;
-  const mAvg = -14000;
+  const mToday = 33000;
+  const mAvg = -13000;
   const mWeekPerShare = 54;
 
   function setMetrics(){
