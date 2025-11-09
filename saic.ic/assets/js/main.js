@@ -53,24 +53,26 @@ document.addEventListener('DOMContentLoaded', () => {
     grid.innerHTML = '';
     if(!items.length){ emptyState.classList.remove('d-none'); return; }
     emptyState.classList.add('d-none');
+    const frag = document.createDocumentFragment();
     items.forEach(p => {
       const level = levelBadge(p.ecoLevel);
       const change = changeBadge(changeMap[p.name]);
       const col = document.createElement('div');
       col.className = 'col-12 col-sm-6 col-lg-4';
       col.innerHTML =
-        '<div class="glass p-3 h-100 glass-hover">' +
+        '<div class="glass p-3 h-100 card-hover">' +
           '<div class="d-flex justify-content-between align-items-start flex-wrap gap-2">' +
             '<h3 class="h6 mb-2 d-flex align-items-center gap-2">' + p.name + (p.eco?(' '+level):'') + '</h3>' +
             '<div class="d-flex align-items-center gap-2">' +
               change +
-              '<span class="badge text-bg-dark border border-1">' + p.share.toFixed(2) + ' %</span>' +
+              '<span class="badge text-bg-dark border-lite">' + p.share.toFixed(2) + ' %</span>' +
             '</div>' +
           '</div>' +
           '<div class="muted">Počet: <strong>' + fmt.format(p.count) + '</strong> ks</div>' +
         '</div>';
-      grid.appendChild(col);
+      frag.appendChild(col);
     });
+    grid.appendChild(frag);
   }
 
   function applyFilters(){
@@ -86,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchEl = document.getElementById('search');
   const sortEl = document.getElementById('sort');
   const clearSearch = document.getElementById('clearSearch');
-  if(searchEl) searchEl.addEventListener('input', applyFilters);
+  if(searchEl) searchEl.addEventListener('input', applyFilters, { passive: true });
   if(sortEl) sortEl.addEventListener('change', applyFilters);
   if(clearSearch) clearSearch.addEventListener('click', ()=>{ document.getElementById('search').value=''; applyFilters(); });
   renderPortfolio(portfolio);
@@ -99,6 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
     host.innerHTML = '';
+    const frag = document.createDocumentFragment();
     announcements.forEach(a => {
       const total = a.qty * a.unitPrice;
       const dt = new Date(a.datetime);
@@ -112,8 +115,9 @@ document.addEventListener('DOMContentLoaded', () => {
         '</div>' +
         '<div class="mt-1">' + a.company + ' – <strong>' + fmt.format(a.qty) + '</strong> ks</div>' +
         '<div class="muted small">Proti-strana: ' + a.counterparty + ' · Jednotková cena: <strong>' + czk.format(a.unitPrice) + '</strong> · Odhadovaný objem: <strong>' + czk.format(total) + '</strong></div>';
-      host.appendChild(item);
+      frag.appendChild(item);
     });
+    host.appendChild(frag);
   }
   renderAnnouncements();
 
@@ -177,6 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const s2 = simulateSimple(inv, months, ASSUME.moves.real);
     const s3 = simulateSimple(inv, months, ASSUME.moves.opti);
 
+    const frag = document.createDocumentFragment();
     [
       { key:'Pesimistický', d:s1 },
       { key:'Realistický', d:s2 },
@@ -185,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const col = document.createElement('div');
       col.className = 'col-12 col-md-6 col-lg-3 scenario-col';
       col.innerHTML =
-        '<div class="glass p-3 h-100 glass-hover scenario">' +
+        '<div class="glass p-3 h-100 scenario card-hover">' +
           '<div class="d-flex justify-content-between align-items-center">' +
             '<h3 class="h6 mb-0">' + s.key + '</h3>' +
             '<span class="tag">' + months + ' měsíců</span>' +
@@ -200,8 +205,9 @@ document.addEventListener('DOMContentLoaded', () => {
           '<div class="muted mt-1">P/L</div>' +
           '<div class="fw-bold">' + czk.format(Math.round(s.d.pl)) + '</div>' +
         '</div>';
-      simRow.appendChild(col);
+      frag.appendChild(col);
     });
+    simRow.appendChild(frag);
 
     updateBuyBox();
   }
@@ -213,9 +219,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if(horizonEl) horizonEl.addEventListener('change', renderSimulator);
   if(invEl) invEl.addEventListener('input', renderSimulator);
   renderSimulator();
-
-  function renderAnnouncementsInit(){ renderAnnouncements(); }
-  renderAnnouncementsInit();
 
   const toTop = document.getElementById('toTop');
   if(toTop){ toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' })); }
