@@ -4,17 +4,24 @@
   const applyRoleSel = document.getElementById('applyRole');
   const applyForm = document.getElementById('applyForm');
   const applyStatus = document.getElementById('applyStatus');
-
   const rolesFilterBtns = document.querySelectorAll('[data-filter]');
-
   const fleetGrid = document.getElementById('fleetGrid');
   const fleetTpl = document.getElementById('fleetTpl');
   const fleetSearch = document.getElementById('fleetSearch');
   const fleetSort = document.getElementById('fleetSort');
   const fleetEmpty = document.getElementById('fleetEmpty');
 
+  const BONUS_PAID_TOTAL_CZK = 1077864;
+
+  function formatCZK(n){
+    try { return Number(n).toLocaleString('cs-CZ',{style:'currency',currency:'CZK',maximumFractionDigits:0}); }
+    catch { return `${n} Kč`; }
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     if (yearEl) yearEl.textContent = new Date().getFullYear();
+    const bonusEl = document.getElementById('bonusPaid');
+    if (bonusEl) bonusEl.textContent = formatCZK(BONUS_PAID_TOTAL_CZK);
     renderFleet();
   });
 
