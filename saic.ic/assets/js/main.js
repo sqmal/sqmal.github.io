@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const fmt = new Intl.NumberFormat('cs-CZ');
   const czk = new Intl.NumberFormat('cs-CZ', { style: 'currency', currency: 'CZK', maximumFractionDigits: 0 });
 
-  const KPIS = { cash: 774000, debt: 0, own: 9895 };
+  const KPIS = { cash: 911000, debt: 0, own: 9892 };
 
   const portfolio = [
     { name:'Tactical Transport Logistics a.s.', count:2500, share:25.00, ecoLevel:'eco', eco:true },
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function setText(id, text){ const el = document.getElementById(id); if(el) el.textContent = text; }
   setText('kpiCash', czk.format(KPIS.cash));
   setText('kpiDebt', czk.format(KPIS.debt));
-  setText('kpiOwn', fmt.format(KPIS.own) + ' ks (98,95 %)');
+  setText('kpiOwn', fmt.format(KPIS.own) + ' ks (98,92 %)');
 
   function computeChangeMap(anns){
     const map = {};
@@ -121,9 +121,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   renderAnnouncements();
 
-  const mToday = 36000;
-  const mAvg = 24000;
-  const mWeekPerShare = 68;
+  const mToday = 60000;
+  const mAvg = 6700;
+  const mWeekPerShare = 55;
 
   function setMetrics(){
     const sign = v => v>=0 ? czk.format(v) : '-' + czk.format(Math.abs(v));
@@ -138,8 +138,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const MARKET = { maxPerIssuer: 10000, available: 10000 };
   const ASSUME = {
-    sharePrice: 13616,
-    dailyProfitPerShare: 68,
+    sharePrice: 16214,
+    dailyProfitPerShare: 55,
     hitRate: 0.6,
     moves: { pess:-0.10, real:0.05, opti:0.15 }
   };
