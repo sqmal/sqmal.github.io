@@ -4,6 +4,7 @@
   const applyRoleSel = document.getElementById('applyRole');
   const applyForm = document.getElementById('applyForm');
   const applyStatus = document.getElementById('applyStatus');
+
   const rolesFilterBtns = document.querySelectorAll('[data-filter]');
   const fleetGrid = document.getElementById('fleetGrid');
   const fleetTpl = document.getElementById('fleetTpl');
