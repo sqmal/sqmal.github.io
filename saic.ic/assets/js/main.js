@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const fmt = new Intl.NumberFormat('cs-CZ');
   const czk = new Intl.NumberFormat('cs-CZ', { style: 'currency', currency: 'CZK', maximumFractionDigits: 0 });
 
-  const KPIS = { cash: 911000, debt: 0, own: 9892 };
+  const KPIS = { cash: 1000000, debt: 0, own: 9892 };
 
   const portfolio = [
     { name:'Tactical Transport Logistics a.s.', count:2500, share:25.00, ecoLevel:'eco', eco:true },
@@ -121,9 +121,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   renderAnnouncements();
 
-  const mToday = 60000;
-  const mAvg = 6700;
-  const mWeekPerShare = 55;
+  const mToday = 21000;
+  const mAvg = -31000;
+  const mWeekPerShare = 27;
 
   function setMetrics(){
     const sign = v => v>=0 ? czk.format(v) : '-' + czk.format(Math.abs(v));
@@ -138,8 +138,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const MARKET = { maxPerIssuer: 10000, available: 10000 };
   const ASSUME = {
-    sharePrice: 16214,
-    dailyProfitPerShare: 55,
+    sharePrice: 16975,
+    dailyProfitPerShare: 27,
     hitRate: 0.6,
     moves: { pess:-0.10, real:0.05, opti:0.15 }
   };
