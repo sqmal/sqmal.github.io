@@ -12,7 +12,7 @@
   const fleetSort = document.getElementById('fleetSort');
   const fleetEmpty = document.getElementById('fleetEmpty');
 
-  const BONUS_PAID_TOTAL_CZK = 1077864;
+  const BONUS_PAID_TOTAL_CZK = 1215228;
 
   function formatCZK(n){
     try { return Number(n).toLocaleString('cs-CZ',{style:'currency',currency:'CZK',maximumFractionDigits:0}); }
