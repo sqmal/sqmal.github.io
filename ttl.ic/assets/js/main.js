@@ -81,13 +81,14 @@
   }
 
   const fleetData = [
+    { model: 'Toyota Prius', year: 2011, type: 'Hatchback', count: 1 },
+    { model: 'Chevrolet C-K Cheyenne', year: 1994, type: 'Pickup', count: 3 },
     { model: 'Suzuki Bandit', year: 2011, type: 'Motocykl', count: 3 },
     { model: 'BMW M135i', year: 2014, type: 'Hatchback', count: 3 },
-    { model: 'Chevrolet C-K Cheyenne', year: 1994, type: 'Pickup', count: 3 },
-    { model: 'Adjutor S/Y', year: 2002, type: 'Lodní jednotka', count: 1 },
+    { model: 'Mercedes-Benz Sprinter', year: 2019, type: 'Dodávka', count: 1 },
     { model: 'Freightliner THX8500', year: 1996, type: 'Tahač', count: 1 },
     { model: 'Scania R580 V8', year: 2011, type: 'Tahač', count: 2 },
-    { model: 'Mercedes-Benz Sprinter', year: 2019, type: 'Dodávka', count: 1 }
+    { model: 'Adjutor S/Y', year: 2002, type: 'Lodní jednotka', count: 1 }
   ];
 
   function ecoRecommended(year){
