@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const fmt = new Intl.NumberFormat('cs-CZ');
   const czk = new Intl.NumberFormat('cs-CZ', { style: 'currency', currency: 'CZK', maximumFractionDigits: 0 });
 
-  const KPIS = { cash: 2400000, debt: 0, own: 9877 };
+  const KPIS = { cash: 1300000, debt: 0, own: 9872 };
 
   const portfolio = [
     { name:'Tactical Transport Logistics a.s.', count:2500, share:25.00, ecoLevel:'eco', eco:true },
@@ -10,21 +10,21 @@ document.addEventListener('DOMContentLoaded', () => {
     { name:'Piece of Peace', count:125, share:1.25, ecoLevel:null, eco:false },
     { name:'Nice Buns', count:100, share:1.00, ecoLevel:null, eco:false },
     { name:'Sprunk', count:100, share:1.00, ecoLevel:null, eco:false },
-    { name:"Arthur’s BBQ", count:25, share:0.25, ecoLevel:null, eco:false },
-    { name:'Canny Bus Group', count:25, share:0.25, ecoLevel:'eco-plus', eco:true },
     { name:'Redwood Cigarettes', count:25, share:0.25, ecoLevel:null, eco:false },
-    { name:'Ammu-Nation', count:10, share:0.10, ecoLevel:null, eco:false },
+    { name:'Canny Bus Group', count:25, share:0.25, ecoLevel:'eco-plus', eco:true },
+    { name:'SanGas', count:5, share:0.05, ecoLevel:null, eco:false },
     { name:"Pay 'n' Spray", count:5, share:0.05, ecoLevel:null, eco:false }
   ];
 
   const announcements = [
-    { datetime:'2025-10-21T02:02:00', label:'Záměr nákupu', company:"Pay 'n' Spray", counterparty:'Sphere Corporation', qty:5, unitPrice:399000, change:'new' }
+    { datetime:'2025-10-21T02:02:00', label:'Záměr nákupu', company:"Pay 'n' Spray", counterparty:'Sphere Corporation', qty:5, unitPrice:399000, change:'new' },
+    { datetime:'2025-11-23T04:40:00', label:'Záměr nákupu', company:"SanGas", counterparty:'SanGas', qty:5, unitPrice:280000, change:'new' }
   ];
 
   function setText(id, text){ const el = document.getElementById(id); if(el) el.textContent = text; }
   setText('kpiCash', czk.format(KPIS.cash));
   setText('kpiDebt', czk.format(KPIS.debt));
-  setText('kpiOwn', fmt.format(KPIS.own) + ' ks (98,77 %)');
+  setText('kpiOwn', fmt.format(KPIS.own) + ' ks (98,72 %)');
 
   function computeChangeMap(anns){
     const map = {};
@@ -121,9 +121,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   renderAnnouncements();
 
-  const mToday = 102000;
-  const mAvg = 73000;
-  const mWeekPerShare = 52;
+  const mToday = 107000;
+  const mAvg = 84000;
+  const mWeekPerShare = 59;
 
   function setMetrics(){
     const sign = v => v>=0 ? czk.format(v) : '-' + czk.format(Math.abs(v));
@@ -138,8 +138,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const MARKET = { maxPerIssuer: 10000, available: 10000 };
   const ASSUME = {
-    sharePrice: 14415,
-    dailyProfitPerShare: 52,
+    sharePrice: 45000,
+    dailyProfitPerShare: 59,
     hitRate: 0.6,
     moves: { pess:-0.10, real:0.05, opti:0.15 }
   };
