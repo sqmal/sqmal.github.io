@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { name:'Nice Buns', count:100, share:1.00, ecoLevel:null, eco:false },
     { name:'Sprunk', count:100, share:1.00, ecoLevel:null, eco:false },
     { name:'Redwood Cigarettes', count:25, share:0.25, ecoLevel:null, eco:false },
-    { name:'Canny Bus Group', count:25, share:0.25, ecoLevel:'eco-plus', eco:true },
+    { name:'Canny Bus Group', count:25, share:0.25, ecoLevel:null, eco:false },
     { name:'SanGas', count:5, share:0.05, ecoLevel:null, eco:false },
     { name:"Pay 'n' Spray", count:5, share:0.05, ecoLevel:null, eco:false }
   ];
