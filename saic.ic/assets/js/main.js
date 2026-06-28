@@ -2,15 +2,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const fmt = new Intl.NumberFormat('cs-CZ');
   const czk = new Intl.NumberFormat('cs-CZ', { style: 'currency', currency: 'CZK', maximumFractionDigits: 0 });
 
-  const KPIS = { cash: 1300000, debt: 0, own: 9872 };
+  const KPIS = { cash: 219000, debt: 0, own: 9562 };
 
   const portfolio = [
     { name:'Tactical Transport Logistics a.s.', count:2500, share:25.00, ecoLevel:'eco', eco:true },
     { name:'Premium Cars', count:2498, share:24.98, ecoLevel:'eco', eco:true },
-    { name:'Piece of Peace', count:125, share:1.25, ecoLevel:null, eco:false },
-    { name:'Nice Buns', count:100, share:1.00, ecoLevel:null, eco:false },
-    { name:'Sprunk', count:100, share:1.00, ecoLevel:null, eco:false },
-    { name:'Redwood Cigarettes', count:25, share:0.25, ecoLevel:null, eco:false },
+    { name:'Sprunk', count:136, share:1.36, ecoLevel:null, eco:false },
+    { name:'Nice Buns', count:128, share:1.28, ecoLevel:null, eco:false },
+    { name:'Piece of Peace', count:126, share:1.26, ecoLevel:null, eco:false },
+    { name:'Redwood Cigarettes', count:33, share:0.33, ecoLevel:null, eco:false },
     { name:'Canny Bus Group', count:25, share:0.25, ecoLevel:null, eco:false },
     { name:'SanGas', count:5, share:0.05, ecoLevel:null, eco:false },
     { name:"Pay 'n' Spray", count:5, share:0.05, ecoLevel:null, eco:false }
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function setText(id, text){ const el = document.getElementById(id); if(el) el.textContent = text; }
   setText('kpiCash', czk.format(KPIS.cash));
   setText('kpiDebt', czk.format(KPIS.debt));
-  setText('kpiOwn', fmt.format(KPIS.own) + ' ks (98,72 %)');
+  setText('kpiOwn', fmt.format(KPIS.own) + ' ks (95,62 %)');
 
   function computeChangeMap(anns){
     const map = {};
@@ -121,9 +121,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   renderAnnouncements();
 
-  const mToday = 107000;
-  const mAvg = 84000;
-  const mWeekPerShare = 59;
+  const mToday = 392;
+  const mAvg = 481;
+  const mWeekPerShare = 0;
 
   function setMetrics(){
     const sign = v => v>=0 ? czk.format(v) : '-' + czk.format(Math.abs(v));
@@ -138,8 +138,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const MARKET = { maxPerIssuer: 10000, available: 10000 };
   const ASSUME = {
-    sharePrice: 45000,
-    dailyProfitPerShare: 59,
+    sharePrice: 6000,
+    dailyProfitPerShare: 392,
     hitRate: 0.6,
     moves: { pess:-0.10, real:0.05, opti:0.15 }
   };
