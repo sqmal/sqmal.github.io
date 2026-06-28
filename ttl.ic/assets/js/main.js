@@ -14,21 +14,36 @@
 
   const BONUS_PAID_TOTAL_CZK = 1215228;
 
+  const toast = window.Swal ? Swal.mixin({
+    toast:true,
+    position:'top-end',
+    showConfirmButton:false,
+    timer:2600,
+    timerProgressBar:true
+  }) : null;
+
   function formatCZK(n){
-    try { return Number(n).toLocaleString('cs-CZ',{style:'currency',currency:'CZK',maximumFractionDigits:0}); }
-    catch { return `${n} Kč`; }
+    try {
+      return Number(n).toLocaleString('cs-CZ',{style:'currency',currency:'CZK',maximumFractionDigits:0});
+    } catch {
+      return `${n} Kč`;
+    }
   }
 
   document.addEventListener('DOMContentLoaded', () => {
     if (yearEl) yearEl.textContent = new Date().getFullYear();
+
     const bonusEl = document.getElementById('bonusPaid');
     if (bonusEl) bonusEl.textContent = formatCZK(BONUS_PAID_TOTAL_CZK);
+
     renderFleet();
   });
 
   applyBtns.forEach(b => b.addEventListener('click', () => {
     const role = b.getAttribute('data-role') || '';
+
     if (applyRoleSel) applyRoleSel.value = role;
+
     const target = document.getElementById('apply');
     if (target) window.scrollTo({ top: target.offsetTop - 70, behavior: 'smooth' });
   }));
@@ -36,28 +51,65 @@
   rolesFilterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const group = btn.getAttribute('data-filter');
+
       document.querySelectorAll('.role-card').forEach(card => {
         card.classList.toggle('d-none', group !== 'all' && card.getAttribute('data-group') !== group);
       });
+
       rolesFilterBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
     });
   });
 
   if (applyForm) {
-    applyForm.addEventListener('submit', (e) => {
+    applyForm.addEventListener('submit', async (e) => {
       e.preventDefault();
+
       const fd = new FormData(applyForm);
       const d = Object.fromEntries(fd.entries());
-      if (!String(d.email).includes('@') || !d.role) {
-        applyStatus.innerHTML = '<div class="alert alert-danger">Zkontrolujte email a výběr pozice.</div>';
+      const terms = document.getElementById('terms');
+
+      if (!String(d.email || '').includes('@') || !d.role) {
+        showError('Zkontrolujte email a výběr pozice.');
         return;
       }
+
+      if (terms && !terms.checked) {
+        showError('Pro odeslání přihlášky musíte souhlasit s podmínkami TTL.');
+        return;
+      }
+
+      if (window.Swal) {
+        const confirm = await Swal.fire({
+          icon:'question',
+          title:'Odeslat přihlášku?',
+          html:`<div style="text-align:left">
+            <div><strong>Jméno:</strong> ${escapeHtml(d.name || '-')}</div>
+            <div><strong>Email:</strong> ${escapeHtml(d.email || '-')}</div>
+            <div><strong>Telefon:</strong> ${escapeHtml(d.phone || '-')}</div>
+            <div><strong>Pozice:</strong> ${escapeHtml(d.role || '-')}</div>
+          </div>`,
+          showCancelButton:true,
+          confirmButtonText:'Ano, odeslat',
+          cancelButtonText:'Zrušit'
+        });
+
+        if (!confirm.isConfirmed) return;
+
+        Swal.fire({
+          title:'Odesílám přihlášku',
+          text:'Prosím vyčkejte.',
+          allowOutsideClick:false,
+          allowEscapeKey:false,
+          didOpen:() => Swal.showLoading()
+        });
+      }
+
       const payload = {
         username: 'TTL – Tactical Transport Logistics',
         embeds: [{
           title: 'Nová přihláška',
-          color: 0x2b6cff,
+          color: 0x60a5fa,
           fields: [
             { name: 'Jméno', value: d.name || '-', inline: true },
             { name: 'Email', value: d.email || '-', inline: true },
@@ -67,16 +119,32 @@
           timestamp: new Date().toISOString()
         }]
       };
-      fetch('https://sqmal.eu/artic/premiumcars.php', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
-      })
-      .then(() => {
-        applyStatus.innerHTML = '<div class="alert alert-success">Přihláška odeslána.</div>';
+
+      try {
+        const res = await fetch('https://sqmal.eu/artic/premiumcars.php', {
+          method:'POST',
+          headers:{ 'Content-Type':'application/json' },
+          body:JSON.stringify(payload)
+        });
+
+        if (!res.ok) throw new Error();
+
         applyForm.reset();
-      })
-      .catch(() => {
-        applyStatus.innerHTML = '<div class="alert alert-danger">Chyba při odesílání.</div>';
-      });
+
+        if (window.Swal) {
+          await Swal.fire({
+            icon:'success',
+            title:'Přihláška odeslána',
+            text:'Vaše přihláška byla úspěšně odeslána.',
+            confirmButtonText:'Hotovo'
+          });
+        } else {
+          applyStatus.classList.remove('d-none');
+          applyStatus.innerHTML = '<div class="alert alert-success">Přihláška odeslána.</div>';
+        }
+      } catch {
+        showError('Přihlášku se nepodařilo odeslat. Zkuste to prosím znovu.');
+      }
     });
   }
 
@@ -97,8 +165,11 @@
 
   function renderFleet(){
     if (!fleetGrid || !fleetTpl) return;
+
     fleetGrid.innerHTML = '';
+
     const q = (fleetSearch?.value || '').toLowerCase().trim();
+
     const sorted = [...fleetData].sort((a,b) => {
       if (!fleetSort) return 0;
       if (fleetSort.value === 'yearDesc') return b.year - a.year;
@@ -113,29 +184,63 @@
       fleetEmpty?.classList.remove('d-none');
       return;
     }
+
     fleetEmpty?.classList.add('d-none');
 
     const frag = document.createDocumentFragment();
+
     sorted.forEach(item => {
       const node = fleetTpl.content.cloneNode(true);
+
       node.querySelector('.model').textContent = `${item.model} ×${item.count}`;
       node.querySelector('.year').textContent = item.year;
       node.querySelector('.type').textContent = item.type;
+
       const badges = node.querySelector('.badges');
       badges.innerHTML = '';
+
       const fuel = document.createElement('span');
       fuel.className = 'badge badge-soft';
       fuel.innerHTML = '<i class="fa-solid fa-gas-pump me-1"></i>Palivo: firemní';
       badges.appendChild(fuel);
+
       if (ecoRecommended(item.year)){
         const eco = document.createElement('span');
         eco.className = 'badge badge-eco';
         eco.innerHTML = '<i class="fa-solid fa-leaf me-1"></i>Eco doporučeno';
         badges.appendChild(eco);
       }
+
       frag.appendChild(node);
     });
+
     fleetGrid.appendChild(frag);
+  }
+
+  function showError(message){
+    if (window.Swal) {
+      Swal.fire({
+        icon:'warning',
+        title:'Nelze pokračovat',
+        text:message
+      });
+      return;
+    }
+
+    if (applyStatus) {
+      applyStatus.classList.remove('d-none');
+      applyStatus.innerHTML = `<div class="alert alert-danger">${escapeHtml(message)}</div>`;
+    }
+  }
+
+  function escapeHtml(value){
+    return String(value ?? '').replace(/[&<>"']/g, s => ({
+      '&':'&amp;',
+      '<':'&lt;',
+      '>':'&gt;',
+      '"':'&quot;',
+      "'":'&#039;'
+    }[s]));
   }
 
   fleetSearch?.addEventListener('input', renderFleet);
