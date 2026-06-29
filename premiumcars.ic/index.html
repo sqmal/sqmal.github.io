@@ -4,9 +4,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Premium Cars – Autopůjčovna</title>
-  <meta name="description" content="Prémiová autopůjčovna. Moderní vozy, rychlá rezervace, férové podmínky." />
-  <meta name="theme-color" content="#09090b" />
+  <title>Premium Cars – Pronájem vozidel</title>
+  <meta name="description" content="Premium Cars – moderní pronájem vozidel, rychlá rezervace a přehledné podmínky." />
+  <meta name="theme-color" content="#0b0c10" />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="preconnect" href="https://kit.fontawesome.com" crossorigin>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
@@ -15,23 +15,26 @@
   <link rel="stylesheet" href="./assets/css/styles.css" />
   <link rel="icon" type="image/png" sizes="32x32" href="https://i.imgur.com/RL90ReM.png" />
 </head>
-<body>
 
+<body>
   <nav class="navbar navbar-expand-lg app-nav sticky-top">
     <div class="container-xxl">
       <a class="navbar-brand d-flex align-items-center" href="#" aria-label="Premium Cars domů">
         <span class="nav-brand-text">Premium Cars</span>
       </a>
+
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Přepínač navigace">
         <span class="navbar-toggler-icon"></span>
       </button>
+
       <div class="collapse navbar-collapse" id="mainNav">
         <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
           <li class="nav-item"><a class="nav-link" href="#fleet">Vozidla</a></li>
           <li class="nav-item"><a class="nav-link" href="#about">O nás</a></li>
           <li class="nav-item"><a class="nav-link" href="#contacts">Kontakt</a></li>
+          <li class="nav-item"><a class="nav-link" href="#eco">Eco</a></li>
           <li class="nav-item ms-lg-3">
-            <a class="btn btn-primary" href="#fleet">Rezervovat</a>
+            <a class="btn btn-primary" href="#fleet">Vybrat vůz</a>
           </li>
         </ul>
       </div>
@@ -44,31 +47,39 @@
         <div class="col-lg-7">
           <h1 class="display-5 fw-bold lh-tight mb-3">Vyberte. Potvrďte. Jeďte</h1>
           <p class="lead text-muted-custom mb-4">Vyberte si vozidlo, nastavte termín a odešlete rezervaci během pár sekund. Jednoduché podmínky, jasné ceny a rychlé předání.</p>
+
           <div class="d-flex flex-column flex-sm-row gap-2">
             <a href="#fleet" class="btn btn-primary btn-lg">Zobrazit nabídku</a>
-            <button class="btn btn-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#termsModal"><i class="fa-regular fa-file-lines me-2"></i>Smluvní podmínky pronájmu</button>
+            <button class="btn btn-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#termsModal">
+              <i class="fa-regular fa-file-lines me-2"></i>Smluvní podmínky pronájmu
+            </button>
           </div>
         </div>
+
         <div class="col-lg-5">
           <div class="hero-card">
             <div class="feature-item">
-              <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+              <div class="feature-icon"><i class="fa-solid fa-car-side"></i></div>
               <div>
                 <div class="fw-semibold">Ověřené vozy</div>
                 <div class="text-muted-custom small">Kontrola před každým pronájmem</div>
               </div>
             </div>
+
             <div class="separator"></div>
+
             <div class="feature-item">
-              <div class="feature-icon"><i class="fa-solid fa-gauge-high"></i></div>
+              <div class="feature-icon"><i class="fa-solid fa-sliders"></i></div>
               <div>
                 <div class="fw-semibold">Výkon a výbava</div>
                 <div class="text-muted-custom small">Vybrané modely s tuningem</div>
               </div>
             </div>
+
             <div class="separator"></div>
+
             <div class="feature-item">
-              <div class="feature-icon"><i class="fa-solid fa-handshake"></i></div>
+              <div class="feature-icon"><i class="fa-solid fa-receipt"></i></div>
               <div>
                 <div class="fw-semibold">Férový přístup</div>
                 <div class="text-muted-custom small">Přehledná pravidla a konečné ceny</div>
@@ -81,62 +92,95 @@
   </header>
 
   <section id="fleet" class="container-xxl section-block">
-    <div class="section-head mb-4">
+    <div class="fleet-top mb-3">
       <div>
-        <h2 class="h3 fw-bold mb-1">Dostupná vozidla</h2>
-        <p class="text-muted-custom mb-0">Filtrujte podle názvu, ceny, rychlosti nebo dostupnosti.</p>
+        <h2 class="h3 fw-bold mb-1">Vozidla</h2>
+        <p class="text-muted-custom mb-0">Rychlý výběr podle ceny, výkonu a dostupnosti.</p>
       </div>
+      <div id="resultsCount" class="results-pill">Načítám</div>
     </div>
 
-    <div class="toolbar mb-4">
-      <div class="search-wrap">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input id="search" type="search" class="form-control" placeholder="Hledat podle názvu nebo značky" aria-label="Hledat vozidlo" autocomplete="off">
+    <div class="filter-panel mb-4">
+      <div class="toolbar">
+        <div class="search-wrap">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input id="search" type="search" class="form-control" placeholder="Hledat vůz" aria-label="Hledat vozidlo" autocomplete="off">
+        </div>
+
+        <select id="sort" class="form-select" aria-label="Třídění">
+          <option value="default" selected>Doporučené</option>
+          <option value="priceAsc">Nejlevnější</option>
+          <option value="priceDesc">Nejdražší</option>
+          <option value="speedDesc">Nejrychlejší</option>
+          <option value="nameAsc">Název A–Z</option>
+        </select>
+
+        <select id="priceFilter" class="form-select" aria-label="Cena">
+          <option value="all" selected>Cena</option>
+          <option value="20000">Do 20 000 Kč</option>
+          <option value="50000">Do 50 000 Kč</option>
+          <option value="100000">Do 100 000 Kč</option>
+        </select>
+
+        <select id="speedFilter" class="form-select" aria-label="Rychlost">
+          <option value="all" selected>Rychlost</option>
+          <option value="250">250+ kmph</option>
+          <option value="300">300+ kmph</option>
+          <option value="340">340+ kmph</option>
+        </select>
+
+        <label class="switch-line">
+          <input type="checkbox" id="onlyAvailable">
+          <span>Dostupné</span>
+        </label>
+
+        <label class="switch-line">
+          <input type="checkbox" id="onlyTuning">
+          <span>Tuning</span>
+        </label>
+
+        <label class="switch-line">
+          <input type="checkbox" id="onlyEco">
+          <span>Eco</span>
+        </label>
+
+        <button type="button" id="resetFilters" class="btn btn-secondary">
+          Reset
+        </button>
       </div>
-      <select id="sort" class="form-select" aria-label="Třídění">
-        <option value="default" selected>Doporučené</option>
-        <option value="priceAsc">Cena vzestupně</option>
-        <option value="priceDesc">Cena sestupně</option>
-        <option value="speedDesc">Rychlost sestupně</option>
-        <option value="nameAsc">Název A–Z</option>
-      </select>
-      <label class="switch-line">
-        <input type="checkbox" id="onlyAvailable">
-        <span>Jen dostupné</span>
-      </label>
-      <label class="switch-line">
-        <input type="checkbox" id="onlyEco">
-        <span>Jen eco</span>
-      </label>
     </div>
 
     <div id="cars-grid" class="row g-4" aria-live="polite"></div>
-    <div id="emptyState" class="empty-state d-none">Žádná vozidla neodpovídají filtru.</div>
+    <div id="emptyState" class="empty-state d-none">Žádná vozidla neodpovídají zvolenému filtru.</div>
   </section>
 
   <section id="about" class="container-xxl section-block">
     <div class="row g-4">
       <div class="col-lg-7">
         <div class="panel h-100">
-          <h2 class="h3 fw-bold mb-3">Premium Cars</h2>
-          <p class="text-muted-custom">Prémiové vozy pro řidiče, kteří očekávají víc. Každý model nabízí kombinaci prostoru, výkonu a nadstandardní výbavy. Elegantní design, moderní technologie a jistota bez kompromisů.</p>
+          <h2 class="h3 fw-bold mb-3">O Premium Cars</h2>
+          <p class="text-muted-custom">Premium Cars je autopůjčovna zaměřená na přehledný výběr a rychlou rezervaci. U každého vozu vidíte cenu, dostupnost, maximální rychlost, úpravy a souhrn ještě před odesláním objednávky.</p>
+
           <ul class="clean-list">
-            <li><i class="fa-solid fa-circle-check"></i>Každý vůz prochází kontrolou před předáním</li>
-            <li><i class="fa-solid fa-circle-check"></i>Možnost individuálních úprav na objednávku</li>
-            <li><i class="fa-solid fa-circle-check"></i>Vybrané modely jsou k dispozici ihned</li>
+            <li><i class="fa-solid fa-circle-check"></i>Transparentní cena za den</li>
+            <li><i class="fa-solid fa-circle-check"></i>Automatický výpočet slevy podle délky pronájmu</li>
+            <li><i class="fa-solid fa-circle-check"></i>Detailní přehled výbavy a úprav vozidla</li>
           </ul>
+
           <div class="notice mt-4">
             <i class="fa-solid fa-percent"></i>
-            <span><strong>Dlouhodobé pronájmy výhodněji.</strong> Sleva 10 % při pronájmu na 3 a více dní, 20 % při 7 a více dnech.</span>
+            <span><strong>Slevy při delším pronájmu.</strong> 10 % od 3 dní, 20 % od 7 dní.</span>
           </div>
         </div>
       </div>
+
       <div class="col-lg-5" id="contacts">
         <div class="panel h-100">
           <h3 class="h5 fw-semibold mb-3">Kontakt</h3>
           <ul class="contact-list">
             <li><i class="fa-solid fa-building"></i><span>Premium Cars</span></li>
-            <li><i class="fa-solid fa-user"></i><span>706 008 – Alison Reyes (alison.reyes@post.ic)</span></li>
+            <li><i class="fa-solid fa-user"></i><span>706 008 – Alison Reyes</span></li>
+            <li><i class="fa-solid fa-envelope"></i><span>alison.reyes@post.ic</span></li>
             <li><i class="fa-solid fa-location-dot"></i><span>Soho Drive 5938, Rodeo, Los Santos</span></li>
             <li><i class="fa-solid fa-id-card"></i><span>IČO: 404</span></li>
           </ul>
@@ -146,56 +190,32 @@
   </section>
 
   <section id="eco" class="container-xxl section-block">
-    <div class="row g-4">
-      <div class="col-lg-6">
-        <div class="panel h-100">
-          <h2 class="h3 fw-bold mb-3"><i class="fa-solid fa-seedling me-2 text-success-custom"></i>Úsporný provoz</h2>
-          <ul class="clean-list success">
-            <li><i class="fa-solid fa-circle-check"></i>Používáme díly s dlouhou životností, kde je to vhodné.</li>
-            <li><i class="fa-solid fa-circle-check"></i>Udržujeme správný tlak v pneumatikách.</li>
-            <li><i class="fa-solid fa-circle-check"></i>Volíme provozní kapaliny podle doporučených norem.</li>
-            <li><i class="fa-solid fa-circle-check"></i>Doporučujeme plynulou jízdu a klidný rozjezd.</li>
-          </ul>
-          <div class="notice success mt-4">
-            <i class="fa-solid fa-leaf"></i>
-            <span>Označení „Eco doporučeno“ vychází z roku výroby a efektivity novějších modelů.</span>
+    <div class="panel eco-panel">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-6">
+          <div class="section-label mb-3">
+            <i class="fa-solid fa-seedling me-2"></i>Eco doporučení
           </div>
+          <h2 class="h3 fw-bold mb-3">Jednoduché označení pro rozumnější výběr</h2>
+          <p class="text-muted-custom mb-0">Eco doporučení pomáhá rychle najít novější modely vhodné pro klidnější a úspornější provoz. Není to kalkulačka, ale praktický orientační filtr.</p>
         </div>
-      </div>
-      <div class="col-lg-6">
-        <div class="panel h-100">
-          <h3 class="h5 fw-semibold mb-3">Odhad spotřeby a CO₂</h3>
-          <form id="ecoForm" class="vstack gap-3">
-            <div class="row g-3">
-              <div class="col-sm-4">
-                <label class="form-label">Trasa (km)</label>
-                <input type="number" id="ecoKm" class="form-control" min="1" step="1" value="100">
-              </div>
-              <div class="col-sm-4">
-                <label class="form-label">Spotřeba (l/100 km)</label>
-                <input type="number" id="ecoL100" class="form-control" min="3" step="0.1" value="8.0">
-              </div>
-              <div class="col-sm-4">
-                <label class="form-label">Palivo</label>
-                <select id="ecoFuel" class="form-select">
-                  <option value="gasoline" selected>Benzín</option>
-                  <option value="diesel">Nafta</option>
-                </select>
-              </div>
-            </div>
-            <button type="button" id="ecoCalcBtn" class="btn btn-success w-100">
-              <i class="fa-solid fa-calculator me-2"></i>Spočítat
-            </button>
-          </form>
-          <div id="ecoResult" class="mt-3 small text-muted-custom"></div>
+
+        <div class="col-lg-6">
+          <ul class="clean-list success">
+            <li><i class="fa-solid fa-circle-check"></i>Pravidelná kontrola vozidel před předáním</li>
+            <li><i class="fa-solid fa-circle-check"></i>Důraz na správné pneumatiky a provozní kapaliny</li>
+            <li><i class="fa-solid fa-circle-check"></i>Doporučení plynulé jízdy bez zbytečného zatížení</li>
+            <li><i class="fa-solid fa-circle-check"></i>Rychlý filtr pro novější doporučené vozy</li>
+          </ul>
         </div>
       </div>
     </div>
   </section>
 
   <footer class="app-footer mt-auto">
-    <div class="container-xxl py-4">
+    <div class="container-xxl py-4 d-flex flex-column flex-sm-row justify-content-between gap-2">
       <div class="small">© <span id="year"></span> Premium Cars</div>
+      <div class="small">Pronájem prémiových vozidel</div>
     </div>
   </footer>
 
@@ -203,60 +223,107 @@
     <div class="modal-dialog modal-dialog-centered modal-xl">
       <div class="modal-content custom-modal">
         <div class="modal-header">
-          <h5 class="modal-title" id="carModalLabel">Detail vozidla</h5>
+          <div>
+            <h5 class="modal-title" id="carModalLabel">Detail vozidla</h5>
+            <div class="modal-subtitle" id="carModalSubtitle">Přehled vozu a rezervace</div>
+          </div>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zavřít"></button>
         </div>
+
         <div class="modal-body p-0">
-          <div class="row g-0">
-            <div class="col-lg-6 p-3">
-              <img id="carImage" class="img-fluid rounded-4 w-100 h-100 object-fit-cover modal-car-img" alt="Foto vozidla" loading="lazy" />
+          <div class="car-detail-layout">
+            <div class="car-detail-left">
+              <div class="modal-image-wrap">
+                <img id="carImage" class="img-fluid w-100 h-100 object-fit-cover modal-car-img" alt="Foto vozidla" loading="lazy" />
+              </div>
+
+              <div class="modal-car-summary">
+                <div>
+                  <span>Cena za den</span>
+                  <strong id="modalDailyPrice">—</strong>
+                </div>
+                <div>
+                  <span>Max. rychlost</span>
+                  <strong id="modalSpeed">—</strong>
+                </div>
+              </div>
+
+              <div class="parts-box">
+                <div class="parts-title">Výbava a úpravy</div>
+                <div id="carParts" class="parts-list"></div>
+              </div>
             </div>
-            <div class="col-lg-6 p-3 p-lg-4">
-              <h3 id="carTitle" class="h4 fw-bold mb-3"></h3>
-              <ul id="carFacts" class="facts-list mb-4"></ul>
-              <h5 class="fw-semibold mb-3">Rezervace</h5>
-              <form id="order-form" class="vstack gap-3">
-                <input type="hidden" name="vozidlo" id="f-vozidlo" />
-                <div class="row g-3">
-                  <div class="col-12">
-                    <label class="form-label">Jméno a příjmení</label>
-                    <input type="text" name="jmeno" class="form-control" placeholder="Jméno Příjmení" required>
+
+            <div class="car-detail-right">
+              <div class="car-detail-head">
+                <h3 id="carTitle" class="h4 fw-bold mb-0"></h3>
+                <div id="carHighlights" class="highlight-grid"></div>
+              </div>
+
+              <div class="reservation-card">
+                <h5 class="fw-semibold mb-3">Rezervace</h5>
+
+                <form id="order-form" class="vstack gap-3">
+                  <input type="hidden" name="vozidlo" id="f-vozidlo" />
+
+                  <div class="booking-grid">
+                    <div>
+                      <label class="form-label">Převzetí</label>
+                      <input type="date" name="od" id="f-od" class="form-control" required>
+                    </div>
+
+                    <div>
+                      <label class="form-label">Vrácení</label>
+                      <input type="date" name="do" id="f-do" class="form-control" required>
+                    </div>
+
+                    <div class="booking-full">
+                      <label class="form-label">Jméno a příjmení</label>
+                      <input type="text" name="jmeno" class="form-control" placeholder="Jméno Příjmení" required>
+                    </div>
+
+                    <div>
+                      <label class="form-label">Telefon</label>
+                      <input type="text" name="telefon" class="form-control" placeholder="123456" minlength="6" maxlength="6" pattern="[0-9]{6}" required>
+                    </div>
+
+                    <div>
+                      <label class="form-label">Email</label>
+                      <input type="email" name="email" class="form-control" placeholder="jmeno.prijmeni@post.ic" required>
+                    </div>
                   </div>
-                  <div class="col-sm-6">
-                    <label class="form-label">Telefon</label>
-                    <input type="text" name="telefon" class="form-control" placeholder="123456" minlength="6" maxlength="6" pattern="[0-9]{6}" required>
+
+                  <div class="price-summary">
+                    <div>
+                      <span>Cena za den</span>
+                      <strong id="pricePerDay">—</strong>
+                    </div>
+                    <div>
+                      <span>Počet dní</span>
+                      <strong id="rentalDays">—</strong>
+                    </div>
+                    <div>
+                      <span>Sleva</span>
+                      <strong id="appliedDiscount">—</strong>
+                    </div>
+                    <div class="total-row">
+                      <span>Celkem</span>
+                      <strong id="priceTotal">—</strong>
+                    </div>
                   </div>
-                  <div class="col-sm-6">
-                    <label class="form-label">Email</label>
-                    <input type="email" name="email" class="form-control" placeholder="jmeno.prijmeni@post.ic" required>
-                  </div>
-                  <div class="col-sm-6">
-                    <label class="form-label">Datum převzetí</label>
-                    <input type="date" name="od" id="f-od" class="form-control" required>
-                  </div>
-                  <div class="col-sm-6">
-                    <label class="form-label">Datum vrácení</label>
-                    <input type="date" name="do" id="f-do" class="form-control" required>
-                  </div>
-                </div>
-                <div class="price-box">
-                  <div>
-                    <div class="small text-muted-custom">Cena za den</div>
-                    <div class="fw-semibold" id="pricePerDay">—</div>
-                  </div>
-                  <div class="text-end">
-                    <div class="small text-muted-custom">Celkem</div>
-                    <div class="fs-5 fw-bold" id="priceTotal">—</div>
-                    <div class="small text-muted-custom" id="appliedDiscount"></div>
-                  </div>
-                </div>
-                <label class="check-line">
-                  <input type="checkbox" id="consent" required>
-                  <span>Souhlasím s <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">podmínkami Premium Cars</a>.</span>
-                </label>
-                <button type="submit" class="btn btn-success w-100"><i class="fa-solid fa-cart-shopping me-2"></i>Odeslat objednávku</button>
-                <div id="status" class="d-none"></div>
-              </form>
+
+                  <label class="check-line">
+                    <input type="checkbox" id="consent" required>
+                    <span>Souhlasím s <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">podmínkami Premium Cars</a>.</span>
+                  </label>
+
+                  <button type="submit" class="btn btn-success w-100">
+                    <i class="fa-solid fa-paper-plane me-2"></i>Odeslat rezervaci
+                  </button>
+
+                  <div id="status" class="d-none"></div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
@@ -266,28 +333,49 @@
 
   <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
-      <div class="modal-content custom-modal">
+      <div class="modal-content custom-modal terms-modal">
         <div class="modal-header">
-          <h5 class="modal-title fw-bold" id="termsModalLabel">Obchodní podmínky – Premium Cars</h5>
+          <div>
+            <h5 class="modal-title fw-bold" id="termsModalLabel">Podmínky pronájmu</h5>
+            <div class="modal-subtitle">Stručně rozdělené podle průběhu pronájmu</div>
+          </div>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zavřít"></button>
         </div>
+
         <div class="modal-body">
-          <ol class="terms-list">
-            <li><strong>Řidič:</strong> minimální věk 18 let a platný doklad totožnosti.</li>
-            <li><strong>Předání vozidla:</strong> vždy po servisu, s plnou nádrží a čistým interiérem.</li>
-            <li><strong>Vrácení:</strong> probíhá v předem dohodnutý den a čas.</li>
-            <li><strong>Třetí osoby:</strong> bez souhlasu nesmí vůz řídit jiná osoba než nájemce.</li>
-            <li><strong>Použití:</strong> zakázáno pro závody, off-road, nadměrný náklad či nelegální činnost.</li>
-            <li><strong>Úpravy:</strong> povoleny pouze po předchozí dohodě.</li>
-            <li><strong>Odpovědnost:</strong> nájemce odpovídá za škody vzniklé během pronájmu.</li>
-            <li><strong>Platby:</strong> převzetí vozu je možné až po úhradě celé částky.</li>
-            <li><strong>Slevy:</strong> uplatňují se automaticky podle délky pronájmu.</li>
-            <li><strong>Ochrana údajů:</strong> osobní údaje jsou zpracovávány pouze pro účely nájemní smlouvy.</li>
-            <li><strong>Odmítnutí nájmu:</strong> Premium Cars si vyhrazuje právo odmítnout nebo ukončit pronájem.</li>
-            <li><strong>Black list:</strong> opakované porušení podmínek může vést k zablokování dalšího pronájmu.</li>
-            <li><strong>Uvedené ceny:</strong> jsou konečné a zahrnují veškeré poplatky.</li>
-          </ol>
+          <div class="terms-grid">
+            <div class="terms-section">
+              <h6>Před převzetím</h6>
+              <ul>
+                <li>Řidič musí mít minimálně 18 let.</li>
+                <li>Je potřeba platný doklad totožnosti.</li>
+                <li>Vozidlo se předává až po uhrazení celé částky.</li>
+                <li>Ceny jsou konečné a zahrnují běžné poplatky.</li>
+              </ul>
+            </div>
+
+            <div class="terms-section">
+              <h6>Během pronájmu</h6>
+              <ul>
+                <li>Vozidlo smí řídit pouze nájemce.</li>
+                <li>Vůz nesmí být použit pro závody, off-road nebo nelegální činnost.</li>
+                <li>Úpravy vozidla jsou možné jen po předchozí dohodě.</li>
+                <li>Nájemce odpovídá za škody vzniklé během pronájmu.</li>
+              </ul>
+            </div>
+
+            <div class="terms-section">
+              <h6>Vrácení a pravidla</h6>
+              <ul>
+                <li>Vrácení probíhá v předem dohodnutý den a čas.</li>
+                <li>Slevy se počítají automaticky podle délky pronájmu.</li>
+                <li>Osobní údaje slouží pouze pro účely objednávky.</li>
+                <li>Opakované porušení pravidel může vést k blacklistu.</li>
+              </ul>
+            </div>
+          </div>
         </div>
+
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zavřít</button>
         </div>
@@ -299,4 +387,5 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="./assets/js/main.js" defer></script>
 </body>
+
 </html>

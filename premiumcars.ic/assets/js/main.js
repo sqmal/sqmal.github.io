@@ -3,13 +3,22 @@
   const emptyState = document.querySelector('#emptyState');
   const search = document.querySelector('#search');
   const sortSel = document.querySelector('#sort');
+  const priceFilter = document.querySelector('#priceFilter');
+  const speedFilter = document.querySelector('#speedFilter');
   const onlyAvail = document.querySelector('#onlyAvailable');
+  const onlyTuning = document.querySelector('#onlyTuning');
   const onlyEco = document.querySelector('#onlyEco');
+  const resetFilters = document.querySelector('#resetFilters');
+  const resultsCount = document.querySelector('#resultsCount');
 
   const modal = new bootstrap.Modal(document.getElementById('carModal'));
   const mImg = document.getElementById('carImage');
   const mTitle = document.getElementById('carTitle');
-  const mFacts = document.getElementById('carFacts');
+  const mSubtitle = document.getElementById('carModalSubtitle');
+  const mHighlights = document.getElementById('carHighlights');
+  const mParts = document.getElementById('carParts');
+  const modalDailyPrice = document.getElementById('modalDailyPrice');
+  const modalSpeed = document.getElementById('modalSpeed');
   const mForm = document.getElementById('order-form');
   const fVozidlo = document.getElementById('f-vozidlo');
 
@@ -17,25 +26,12 @@
   const fDo = document.getElementById('f-do');
   const pricePerDayEl = document.getElementById('pricePerDay');
   const priceTotalEl = document.getElementById('priceTotal');
+  const rentalDaysEl = document.getElementById('rentalDays');
   const appliedDiscountEl = document.getElementById('appliedDiscount');
-
-  const ecoKm = document.getElementById('ecoKm');
-  const ecoL100 = document.getElementById('ecoL100');
-  const ecoFuel = document.getElementById('ecoFuel');
-  const ecoCalcBtn = document.getElementById('ecoCalcBtn');
-  const ecoResult = document.getElementById('ecoResult');
 
   let cars = [];
   let view = [];
   let selected = null;
-
-  const toast = Swal.mixin({
-    toast:true,
-    position:'top-end',
-    showConfirmButton:false,
-    timer:2600,
-    timerProgressBar:true
-  });
 
   document.addEventListener('DOMContentLoaded', () => {
     fetch('data/cars.json')
@@ -46,7 +42,7 @@
       .then(d => {
         cars = Array.isArray(d) ? d : [];
         view = [...cars];
-        render();
+        applyFilters();
       })
       .catch(() => {
         Swal.fire({
@@ -60,8 +56,21 @@
     if (year) year.textContent = new Date().getFullYear();
   });
 
-  [search, sortSel, onlyAvail, onlyEco].forEach(el => el && el.addEventListener('input', applyFilters));
+  [search, sortSel, priceFilter, speedFilter, onlyAvail, onlyTuning, onlyEco].forEach(el => el && el.addEventListener('input', applyFilters));
   [fOd, fDo].forEach(el => el && el.addEventListener('change', recalcTotal));
+
+  if (resetFilters) {
+    resetFilters.addEventListener('click', () => {
+      search.value = '';
+      sortSel.value = 'default';
+      priceFilter.value = 'all';
+      speedFilter.value = 'all';
+      onlyAvail.checked = false;
+      onlyTuning.checked = false;
+      onlyEco.checked = false;
+      applyFilters();
+    });
+  }
 
   function modelYearFromName(name){
     const m = String(name || '').match(/^(\d{4})/);
@@ -72,20 +81,6 @@
     if (typeof car.eco === 'boolean') return car.eco;
     const y = modelYearFromName(car.name);
     return y && y >= 2015;
-  }
-
-  function applyFilters(){
-    const q = (search.value || '').toLowerCase().trim();
-
-    view = cars.filter(c => {
-      const okAvail = !onlyAvail?.checked || !!c.available;
-      const okQuery = !q || String(c.name || '').toLowerCase().includes(q);
-      const okEco = !onlyEco?.checked || isEcoRecommended(c);
-      return okAvail && okQuery && okEco;
-    });
-
-    sortView();
-    render();
   }
 
   function parsePriceCZK(str){
@@ -114,6 +109,26 @@
     return 0;
   }
 
+  function applyFilters(){
+    const q = (search.value || '').toLowerCase().trim();
+    const maxPrice = priceFilter.value === 'all' ? Infinity : Number(priceFilter.value);
+    const minSpeed = speedFilter.value === 'all' ? 0 : Number(speedFilter.value);
+
+    view = cars.filter(c => {
+      const okAvail = !onlyAvail?.checked || !!c.available;
+      const okTuning = !onlyTuning?.checked || !!c.tuning;
+      const okEco = !onlyEco?.checked || isEcoRecommended(c);
+      const okQuery = !q || String(c.name || '').toLowerCase().includes(q);
+      const okPrice = parsePriceCZK(c.price) <= maxPrice;
+      const okSpeed = parseSpeed(c.speed) >= minSpeed;
+      return okAvail && okTuning && okEco && okQuery && okPrice && okSpeed;
+    });
+
+    sortView();
+    render();
+    updateResults();
+  }
+
   function sortView(){
     const v = sortSel.value;
 
@@ -121,6 +136,11 @@
     if(v === 'priceDesc') view.sort((a,b)=> parsePriceCZK(b.price) - parsePriceCZK(a.price));
     if(v === 'speedDesc') view.sort((a,b)=> parseSpeed(b.speed) - parseSpeed(a.speed));
     if(v === 'nameAsc') view.sort((a,b)=> String(a.name || '').localeCompare(String(b.name || ''),'cs'));
+  }
+
+  function updateResults(){
+    if (!resultsCount) return;
+    resultsCount.textContent = view.length === 1 ? '1 vůz' : `${view.length} vozů`;
   }
 
   function render(){
@@ -153,10 +173,9 @@
     col.className = 'col-12 col-sm-6 col-lg-4';
 
     const badges = [
-      car.tuning ? '<span class="badge badge-soft"><i class="fa-solid fa-wrench me-1"></i>Tuning</span>' : '',
+      car.tuning ? '<span class="badge badge-soft"><i class="fa-solid fa-wrench me-1"></i>Upravené</span>' : '',
       car.wrap ? '<span class="badge badge-soft"><i class="fa-solid fa-swatchbook me-1"></i>Polep</span>' : '',
-      `<span class="badge badge-soft"><i class="fa-solid fa-gauge-high me-1"></i>${escapeHtml(car.speed)}</span>`,
-      isEcoRecommended(car) ? '<span class="badge badge-eco"><i class="fa-solid fa-leaf me-1"></i>Eco doporučeno</span>' : ''
+      isEcoRecommended(car) ? '<span class="badge badge-eco"><i class="fa-solid fa-leaf me-1"></i>Eco</span>' : ''
     ].join('');
 
     col.innerHTML = `
@@ -164,18 +183,29 @@
         <div class="ratio ratio-16x9 overflow-hidden">
           <img src="${escapeHtml(car.image)}" alt="${escapeHtml(car.name)}" class="w-100 h-100 object-fit-cover" loading="lazy" decoding="async" referrerpolicy="no-referrer" />
         </div>
-        <div class="card-body d-flex flex-column p-4">
+        <div class="card-body d-flex flex-column">
           <div class="d-flex justify-content-between align-items-start gap-3">
             <h3 class="h5 fw-semibold mb-1">${escapeHtml(car.name)}</h3>
             <span class="badge-status ${car.available ? 'badge-available' : 'badge-unavailable'}">${car.available ? 'Dostupné' : 'Nedostupné'}</span>
           </div>
-          <div class="d-flex flex-wrap gap-2 mt-2">${badges}</div>
-          <div class="mt-4">
-            <div class="small text-muted-custom">Cena za den</div>
-            <span class="fs-5 fw-bold">${escapeHtml(car.price)}</span>
+
+          <div class="d-flex flex-wrap gap-2 mt-3">${badges}</div>
+
+          <div class="card-meta-grid">
+            <div class="card-meta">
+              <span>Cena</span>
+              <strong>${escapeHtml(car.price)}</strong>
+            </div>
+            <div class="card-meta">
+              <span>Rychlost</span>
+              <strong>${escapeHtml(car.speed)}</strong>
+            </div>
           </div>
+
           <div class="mt-auto pt-4 d-grid">
-            <button class="btn btn-primary" data-car-id="${escapeHtml(car.id)}"><i class="fa-solid fa-eye me-2"></i>Zobrazit detail</button>
+            <button class="btn btn-primary" data-car-id="${escapeHtml(car.id)}">
+              <i class="fa-solid fa-eye me-2"></i>Detail
+            </button>
           </div>
         </div>
       </div>`;
@@ -207,11 +237,32 @@
     const perDay = parsePriceCZK(selected.price);
     const days = daysBetween(fOd.value, fDo.value);
     const disc = discountForDays(days);
-    const total = perDay * days * (1 - disc/100);
+    const originalTotal = perDay * days;
+    const total = originalTotal * (1 - disc/100);
 
-    pricePerDayEl.textContent = formatCzk(perDay) + ' / den';
-    priceTotalEl.textContent = formatCzk(total);
-    appliedDiscountEl.textContent = disc ? `Uplatněná sleva ${disc} % (${days} dní)` : `${days} dní bez slevy`;
+    pricePerDayEl.textContent = formatCzk(perDay);
+    rentalDaysEl.textContent = `${days} ${days === 1 ? 'den' : 'dní'}`;
+    appliedDiscountEl.textContent = disc ? `${disc} %` : 'Bez slevy';
+
+    if (disc) {
+      priceTotalEl.innerHTML = `
+        <span class="price-total-box">
+          <span class="price-old">${formatCzk(originalTotal)}</span>
+          <span class="price-new">${formatCzk(total)}</span>
+        </span>
+      `;
+    } else {
+      priceTotalEl.innerHTML = `<span class="price-new">${formatCzk(total)}</span>`;
+    }
+  }
+
+  function highlight(label, value){
+    return `
+      <div class="highlight-item">
+        <span>${escapeHtml(label)}</span>
+        <strong>${escapeHtml(value)}</strong>
+      </div>
+    `;
   }
 
   function openModal(car){
@@ -222,16 +273,22 @@
     mImg.decoding = 'async';
     fVozidlo.value = car.name;
     mTitle.textContent = car.name;
+    mSubtitle.textContent = car.available ? 'Vozidlo je dostupné k rezervaci' : 'Vozidlo je momentálně nedostupné';
+    modalDailyPrice.textContent = car.price || '—';
+    modalSpeed.textContent = car.speed || '—';
 
-    mFacts.innerHTML = `
-      <li><i class="fa-solid fa-circle-check"></i><span>Dostupnost: ${car.available ? 'Možné pronajmout' : 'Momentálně nedostupné'}</span></li>
-      <li><i class="fa-solid fa-wrench"></i><span>Úpravy: ${car.tuning ? 'Vozidlo je upravené' : 'Bez úprav'}</span></li>
-      <li><i class="fa-solid fa-screwdriver-wrench"></i><span>Tuningové díly: ${escapeHtml(car.parts || 'Neuvedeno')}</span></li>
-      <li><i class="fa-solid fa-paint-roller"></i><span>Polep: ${car.wrap ? 'S polepem' : 'Bez polepu'}</span></li>
-      <li><i class="fa-solid fa-gauge-high"></i><span>Nejvyšší rychlost: ${escapeHtml(car.speed || 'Neuvedeno')}</span></li>
-      <li><i class="fa-solid fa-coins"></i><span>Cena za den: ${escapeHtml(car.price)}</span></li>
-      <li><i class="fa-solid fa-leaf"></i><span>Eco doporučení: ${isEcoRecommended(car) ? 'Ano, novější model' : 'Ne, starší model'}</span></li>
-    `;
+    mHighlights.innerHTML = [
+      highlight('Dostupnost', car.available ? 'Dostupné' : 'Nedostupné'),
+      highlight('Úpravy', car.tuning ? 'Tuning' : 'Bez úprav'),
+      highlight('Polep', car.wrap ? 'Ano' : 'Ne'),
+      highlight('Eco', isEcoRecommended(car) ? 'Ano' : 'Ne')
+    ].join('');
+
+    const parts = String(car.parts || '').split(',').map(p => p.trim()).filter(Boolean);
+
+    mParts.innerHTML = parts.length
+      ? parts.map(part => `<span class="part-pill">${escapeHtml(part)}</span>`).join('')
+      : '<span class="part-pill">Výbava není uvedena</span>';
 
     mForm.reset();
     initDates();
@@ -268,7 +325,7 @@
       Swal.fire({
         icon:'warning',
         title:'Chybí souhlas',
-        text:'Pro odeslání objednávky musíte souhlasit s podmínkami Premium Cars.'
+        text:'Pro odeslání rezervace musíte souhlasit s podmínkami Premium Cars.'
       });
       return;
     }
@@ -276,15 +333,18 @@
     const perDay = parsePriceCZK(selected.price);
     const days = daysBetween(d.od, d.do);
     const disc = discountForDays(days);
-    const total = perDay * days * (1 - disc/100);
+    const originalTotal = perDay * days;
+    const total = originalTotal * (1 - disc/100);
 
     const confirm = await Swal.fire({
       icon:'question',
-      title:'Odeslat objednávku?',
+      title:'Odeslat rezervaci?',
       html:`<div style="text-align:left">
         <div><strong>Vozidlo:</strong> ${escapeHtml(d.vozidlo)}</div>
         <div><strong>Termín:</strong> ${escapeHtml(d.od)} až ${escapeHtml(d.do)}</div>
         <div><strong>Počet dní:</strong> ${days}</div>
+        <div><strong>Sleva:</strong> ${disc ? `${disc} %` : 'bez slevy'}</div>
+        ${disc ? `<div><strong>Původní cena:</strong> ${formatCzk(originalTotal)}</div>` : ''}
         <div><strong>Celkem:</strong> ${formatCzk(total)}</div>
       </div>`,
       showCancelButton:true,
@@ -298,8 +358,8 @@
       username: 'Premium Cars',
       avatar_url: 'https://i.imgur.com/RL90ReM.png',
       embeds: [{
-        title: 'Nová objednávka vozidla',
-        color: 0x09090b,
+        title: 'Nová rezervace vozidla',
+        color: 0x111217,
         thumbnail: { url: selected.image || 'https://i.imgur.com/RL90ReM.png' },
         fields: [
           { name: 'Jméno a příjmení', value: d.jmeno || 'Neuvedeno', inline: true },
@@ -311,6 +371,7 @@
           { name: 'Počet dní', value: String(days), inline: true },
           { name: 'Cena za den', value: formatCzk(perDay), inline: true },
           { name: 'Sleva', value: disc ? `${disc} %` : '—', inline: true },
+          { name: 'Původní cena', value: formatCzk(originalTotal), inline: true },
           { name: 'Cena celkem', value: formatCzk(total), inline: false }
         ],
         footer: { text: 'Premium Cars', icon_url: 'https://i.imgur.com/RL90ReM.png' },
@@ -319,7 +380,7 @@
     };
 
     Swal.fire({
-      title:'Odesílám objednávku',
+      title:'Odesílám rezervaci',
       text:'Prosím vyčkejte.',
       allowOutsideClick:false,
       allowEscapeKey:false,
@@ -337,7 +398,7 @@
 
       await Swal.fire({
         icon:'success',
-        title:'Objednávka odeslána',
+        title:'Rezervace odeslána',
         text:'Vaše rezervace byla úspěšně odeslána.',
         confirmButtonText:'Hotovo'
       });
@@ -348,45 +409,8 @@
       Swal.fire({
         icon:'error',
         title:'Chyba při odesílání',
-        text:'Objednávku se nepodařilo odeslat. Zkuste to prosím znovu.'
+        text:'Rezervaci se nepodařilo odeslat. Zkuste to prosím znovu.'
       });
     }
   });
-
-  if (ecoCalcBtn) {
-    ecoCalcBtn.addEventListener('click', () => {
-      const km = Math.max(0, Number(ecoKm.value || 0));
-      const l100 = Math.max(0, Number(ecoL100.value || 0));
-
-      if (!km || !l100) {
-        Swal.fire({
-          icon:'warning',
-          title:'Chybí údaje',
-          text:'Vyplňte trasu a spotřebu.'
-        });
-        return;
-      }
-
-      const liters = (km * l100) / 100;
-      const factor = ecoFuel.value === 'diesel' ? 2.62 : 2.31;
-      const co2kg = liters * factor;
-      const fuelName = ecoFuel.value === 'diesel' ? 'nafta' : 'benzín';
-
-      ecoResult.innerHTML = `
-        <div class="notice success">
-          <i class="fa-solid fa-leaf"></i>
-          <span>
-            <strong>Odhad spotřeby:</strong> ${liters.toFixed(1)} l<br>
-            <strong>Odhad CO₂:</strong> ${co2kg.toFixed(1)} kg<br>
-            <span class="text-muted-custom">Výpočet je orientační. Palivo: ${fuelName}.</span>
-          </span>
-        </div>
-      `;
-
-      toast.fire({
-        icon:'success',
-        title:'Výpočet hotový'
-      });
-    });
-  }
 })();
