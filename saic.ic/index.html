@@ -1,33 +1,36 @@
 <!doctype html>
 <html lang="cs">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>San Andreas Investment Centre</title>
-  <meta name="description" content="Akciová společnost spravující kapitál, nakupující podíly v jiných společnostech a vyplácející dividendy dle zisku portfolia.">
-  <meta name="theme-color" content="#09090b">
+  <meta name="description" content="San Andreas Investment Centre je investiční společnost, která soustřeďuje kapitál a investuje do podílů v jiných firmách.">
+  <meta name="theme-color" content="#0b0c10">
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <link href="assets/css/styles.css" rel="stylesheet">
 </head>
+
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark sticky-top nav-surface">
-    <div class="container-xxl py-2">
-      <a class="navbar-brand" href="#">SAIC</a>
+  <nav class="navbar navbar-expand-lg sticky-top app-nav">
+    <div class="container-xxl">
+      <a class="navbar-brand" href="#">San Andreas Investment Centre</a>
+
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Přepínač navigace">
         <span class="navbar-toggler-icon"></span>
       </button>
+
       <div class="collapse navbar-collapse" id="nav">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center gap-lg-1">
-          <li class="nav-item"><a class="nav-link" href="#about">O společnosti</a></li>
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+          <li class="nav-item"><a class="nav-link" href="#model">Model</a></li>
           <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
-          <li class="nav-item"><a class="nav-link" href="#why">Proč právě my</a></li>
-          <li class="nav-item"><a class="nav-link" href="#saic-eco">SAIC Eco</a></li>
-          <li class="nav-item"><a class="nav-link" href="#simulator">Simulátor</a></li>
+          <li class="nav-item"><a class="nav-link" href="#why">Proč nás</a></li>
           <li class="nav-item"><a class="nav-link" href="#ann">Oznámení</a></li>
-          <li class="nav-item"><a class="nav-link" href="#compliance">Soulad</a></li>
+          <li class="nav-item"><a class="nav-link" href="#compliance">Legislativa</a></li>
+          <li class="nav-item ms-lg-3"><a class="btn btn-primary" href="#portfolio">Zobrazit portfolio</a></li>
         </ul>
       </div>
     </div>
@@ -35,293 +38,277 @@
 
   <header class="hero">
     <div class="container-xxl">
-      <div class="hero-shell">
-        <div class="row align-items-center g-4">
-          <div class="col-lg-7">
-            <div class="hero-label mb-3">
-              <i class="fa-solid fa-building-columns"></i>
-              Investiční centrum San Andreas
-            </div>
-            <h1 class="display-5 fw-bold lh-tight mb-3">San Andreas Investment Centre</h1>
-            <p class="lead muted mb-4">Akciová společnost spravující kapitál, nakupující podíly v jiných společnostech a vyplácející dividendy dle zisku portfolia.</p>
-            <div class="d-flex gap-2 flex-wrap">
-              <a href="#portfolio" class="btn btn-primary"><i class="fa-solid fa-chart-pie me-2"></i>Zobrazit portfolio</a>
-              <a href="#simulator" class="btn btn-outline-light"><i class="fa-solid fa-calculator me-2"></i>Simulátor výnosu</a>
-            </div>
+      <div class="hero-layout">
+        <div class="hero-main">
+          <h1>Investiční společnost postavená na portfoliu firem</h1>
+          <p>San Andreas Investment Centre není běžná provozní firma s jedním produktem. Akcionář kupuje podíl ve společnosti, která soustřeďuje kapitál a investuje ho do jiných firem. Hodnota pro akcionáře stojí na výkonu celého portfolia.</p>
+
+          <div class="hero-actions">
+            <a href="#model" class="btn btn-primary btn-lg">
+              <i class="fa-solid fa-layer-group me-2"></i>Jak fungujeme
+            </a>
+            <a href="#portfolio" class="btn btn-secondary btn-lg">
+              <i class="fa-solid fa-chart-pie me-2"></i>Portfolio
+            </a>
           </div>
-          <div class="col-lg-5">
-            <div class="hero-card">
-              <div class="feature-row">
-                <div class="feature-icon"><i class="fa-solid fa-chart-line"></i></div>
-                <div>
-                  <div class="fw-bold">Výnos podle výkonu</div>
-                  <div class="muted small">Dividendy vychází ze skutečného zisku portfolia</div>
-                </div>
-              </div>
-              <div class="soft-line"></div>
-              <div class="feature-row">
-                <div class="feature-icon"><i class="fa-solid fa-scale-balanced"></i></div>
-                <div>
-                  <div class="fw-bold">Transparentní pravidla</div>
-                  <div class="muted small">Zveřejňujeme portfolio, oznámení i metodiku</div>
-                </div>
-              </div>
-              <div class="soft-line"></div>
-              <div class="feature-row">
-                <div class="feature-icon"><i class="fa-solid fa-leaf"></i></div>
-                <div>
-                  <div class="fw-bold">SAIC Eco</div>
-                  <div class="muted small">Preferujeme firmy s nižší ekologickou zátěží</div>
-                </div>
-              </div>
-            </div>
+        </div>
+
+        <div class="capital-summary">
+          <div class="capital-head">
+            <span>Kapitálový přehled</span>
+            <strong>SAIC</strong>
+          </div>
+
+          <div class="capital-line">
+            <span>Volné prostředky</span>
+            <strong id="kpiCash">—</strong>
+          </div>
+
+          <div class="capital-line">
+            <span>Vlastní akcie</span>
+            <strong id="kpiOwn">—</strong>
+          </div>
+
+          <div class="capital-line">
+            <span>Dluh vůči státu</span>
+            <strong id="kpiDebt">—</strong>
           </div>
         </div>
       </div>
     </div>
   </header>
 
-  <section id="kpis" class="section-pad">
-    <div class="container-xxl">
-      <div class="row g-3">
-        <div class="col-12 col-lg-4">
-          <div class="glass p-4 card-hover">
-            <div class="muted small">Hotovost</div>
-            <div class="stat kpi" id="kpiCash">—</div>
-          </div>
+  <main>
+    <section id="model" class="section-block">
+      <div class="container-xxl">
+        <div class="section-title">
+          <span>Model SAIC</span>
+          <h2>Jedna investiční firma, více podkladových podílů</h2>
+          <p>SAIC funguje jako investiční vrstva mezi akcionářem a firmami v portfoliu. Akcionář nekupuje akcie jedné výrobní nebo provozní firmy, ale podíl ve společnosti, která investuje do více firem najednou.</p>
         </div>
-        <div class="col-12 col-lg-4">
-          <div class="glass p-4 card-hover">
-            <div class="muted small">Dluh vůči státu</div>
-            <div class="stat kpi" id="kpiDebt">—</div>
-          </div>
-        </div>
-        <div class="col-12 col-lg-4">
-          <div class="glass p-4 card-hover">
-            <div class="muted small">Vlastní akcie</div>
-            <div class="stat kpi" id="kpiOwn">—</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <section id="about" class="section-pad pt-0">
-    <div class="container-xxl">
-      <div class="glass p-4">
-        <h2 class="h4 mb-3">O společnosti</h2>
-        <p class="mb-0 muted">Nakupujeme podíly ve firmách s dlouhodobým potenciálem. Zisk portfolia distribuujeme akcionářům formou dividend s důrazem na transparentní reportování a řízení rizik.</p>
-      </div>
-    </div>
-  </section>
+        <div class="model-row">
+          <div class="model-item">
+            <div class="model-number">01</div>
+            <h3>Akcionář drží SAIC</h3>
+            <p>Kupuje podíl ve firmě, která spravuje investiční portfolio a kapitál akcionářů.</p>
+          </div>
 
-  <section id="portfolio" class="section-pad">
-    <div class="container-xxl">
-      <div class="d-flex flex-column flex-md-row gap-3 align-items-md-center justify-content-between mb-3">
-        <div>
-          <h2 class="h4 m-0">Portfolio</h2>
-          <div class="muted small mt-1">Aktuální přehled podílů ve společnostech.</div>
-        </div>
-        <div class="portfolio-tools">
-          <input id="search" class="form-control form-control-sm" placeholder="Hledat podle názvu">
-          <select id="sort" class="form-select form-select-sm" aria-label="Řazení">
-            <option value="name">Řadit: název</option>
-            <option value="share">Řadit: podíl</option>
-            <option value="count">Řadit: počet</option>
-          </select>
-        </div>
-      </div>
+          <div class="model-item">
+            <div class="model-number">02</div>
+            <h3>SAIC drží firmy</h3>
+            <p>Kapitál je rozdělen mezi konkrétní společnosti podle aktuálních investičních pozic.</p>
+          </div>
 
-      <div class="info-box info-green mb-3">
-        <span class="icon"><i class="fa-solid fa-leaf"></i></span>
-        <div><strong>Preferujeme Eco firmy.</strong> Položky označené <em>ECO</em> splňují rámec SAIC Eco popsaný níže.</div>
-      </div>
-
-      <div id="portfolioGrid" class="row g-3"></div>
-
-      <div id="emptyState" class="d-none">
-        <div class="glass p-4 text-center">
-          <div class="mb-2"><i class="fa-regular fa-face-frown fa-2x"></i></div>
-          <div class="muted">Nic neodpovídá zadanému hledání</div>
-          <div class="mt-2"><button id="clearSearch" class="btn btn-outline-light btn-sm">Zrušit hledání</button></div>
-        </div>
-      </div>
-
-      <div class="mt-4 info-box info-red">
-        <span class="icon">!</span>
-        <div><strong>Upozornění na riziko.</strong> Investování je rizikové a minulé výnosy nejsou zárukou budoucích výsledků.</div>
-      </div>
-    </div>
-  </section>
-
-  <section id="why" class="section-pad">
-    <div class="container-xxl">
-      <h2 class="h4 mb-4">Proč právě SAIC</h2>
-      <div class="row g-4">
-        <div class="col-md-6 col-lg-4">
-          <div class="circle-box glass p-4 text-center h-100 card-hover">
-            <div class="circle-icon mb-3"><i class="fa-solid fa-building-columns"></i></div>
-            <h3 class="h6">První aktivní účastník burzy</h3>
-            <p class="muted small mb-0">Bezprostředně po zpřístupnění burzy pro veřejnost jsme jako první začali aktivně obchodovat. Nakupujeme podíly v jiných firmách a dividendy vyplácíme ze skutečného zisku portfolia.</p>
+          <div class="model-item">
+            <div class="model-number">03</div>
+            <h3>Portfolio tvoří hodnotu</h3>
+            <p>Výkon firem v portfoliu se promítá do hodnoty celé investiční společnosti.</p>
           </div>
         </div>
-        <div class="col-md-6 col-lg-4">
-          <div class="circle-box glass p-4 text-center h-100 card-hover">
-            <div class="circle-icon mb-3"><i class="fa-solid fa-user-shield"></i></div>
-            <h3 class="h6">Spravedlivé rozložení vlastnictví</h3>
-            <p class="muted small mb-0">Správce Alison Reyes nedrží nepřiměřený podíl. Vyhýbáme se modelu, kdy si správce připisuje desítky procent akcií. Většina podílu náleží veřejným akcionářům.</p>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4">
-          <div class="circle-box glass p-4 text-center h-100 card-hover">
-            <div class="circle-icon mb-3"><i class="fa-solid fa-scale-balanced"></i></div>
-            <h3 class="h6">Transparentnost a dohledatelnost</h3>
-            <p class="muted small mb-0">Zveřejňujeme stav portfolia, klíčové metriky i rozhodnutí vedení. Vše dohledáte na této stránce včetně historie oznámení a metodik.</p>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4">
-          <div class="circle-box glass p-4 text-center h-100 card-hover">
-            <div class="circle-icon mb-3"><i class="fa-solid fa-hand-holding-dollar"></i></div>
-            <h3 class="h6">Výplaty z reálného výkonu</h3>
-            <p class="muted small mb-0">Dividendy vyplácíme podle reálně dosaženého zisku, nikoli na dluh. Výpočty jsou popsány a kontrolovatelné.</p>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4">
-          <div class="circle-box glass p-4 text-center h-100 card-hover">
-            <div class="circle-icon mb-3"><i class="fa-solid fa-leaf"></i></div>
-            <h3 class="h6">Důraz na udržitelnost</h3>
-            <p class="muted small mb-0">Preferujeme podniky splňující rámec SAIC Eco. Označení ECO znamená nižší ekologickou zátěž dle námi zveřejněných pilířů.</p>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4">
-          <div class="circle-box glass p-4 text-center h-100 card-hover">
-            <div class="circle-icon mb-3"><i class="fa-solid fa-chart-line"></i></div>
-            <h3 class="h6">Konzervativní řízení rizik</h3>
-            <p class="muted small mb-0">Diverzifikujeme podíly a udržujeme konzervativní řízení rizik, abychom zvládali i volatilní období trhu.</p>
+
+        <div class="exclusive-strip">
+          <div>
+            <strong>Exkluzivní přístup k vybraným firmám</strong>
+            <span>U některých společností může mít SAIC exkluzivní právo prodávat nebo zprostředkovat jejich akcie. To znamená, že do těchto firem se veřejnost nemusí dostat přímým nákupem a investice je dostupná pouze přes akcie SAIC.</span>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="saic-eco" class="section-pad">
-    <div class="container-xxl">
-      <div class="glass p-4">
-        <h2 class="h4 m-0 d-flex align-items-center gap-2"><i class="fa-solid fa-recycle"></i>SAIC Eco</h2>
-        <p class="muted mt-2">SAIC Eco je interní hodnoticí rámec SAIC. Slouží k orientačnímu posouzení nižší ekologické zátěže firem v našem portfoliu.</p>
-
-        <div class="row g-3 mt-1">
-          <div class="col-md-6 col-lg-4"><div class="glass inner-card p-3 h-100"><div class="fw-bold">Emise a energie</div><div class="muted small">Cíle snižování emisí, podíl OZE, evidence a řízení spotřeby, elektrifikace flotil.</div></div></div>
-          <div class="col-md-6 col-lg-4"><div class="glass inner-card p-3 h-100"><div class="fw-bold">Materiály a odpad</div><div class="muted small">Recyklace, oběhovost materiálů, náhrada jednorázů, obaly s nízkou zátěží.</div></div></div>
-          <div class="col-md-6 col-lg-4"><div class="glass inner-card p-3 h-100"><div class="fw-bold">Dodavatelé</div><div class="muted small">Požadavky ESG na klíčové dodavatele, audity, sledovatelnost a sankční mechanismy.</div></div></div>
-          <div class="col-md-6 col-lg-4"><div class="glass inner-card p-3 h-100"><div class="fw-bold">Bezpečnost a právo</div><div class="muted small">Soulad s předpisy, školení, prevence incidentů, evidence a náprava událostí.</div></div></div>
-          <div class="col-md-6 col-lg-4"><div class="glass inner-card p-3 h-100"><div class="fw-bold">Transparentnost</div><div class="muted small">Zveřejňování metrik, pravidelný a ověřitelný reporting, metodiky měření.</div></div></div>
-          <div class="col-md-6 col-lg-4"><div class="glass inner-card p-3 h-100"><div class="fw-bold">Správa a řízení</div><div class="muted small">Odpovědnost vedení, cíle a revize, veřejná politika a dohled.</div></div></div>
+    <section id="portfolio" class="section-block">
+      <div class="container-xxl">
+        <div class="section-title section-title-row">
+          <div>
+            <span>Portfolio</span>
+            <h2>Aktuální podíly SAIC</h2>
+            <p>Koláč ukazuje rozložení firem v portfoliu podle aktuálně držených procent. Nezobrazuje volný trh ani cizí podíly.</p>
+          </div>
+          <div id="portfolioCount" class="results-pill">Načítám</div>
         </div>
 
-        <div class="row g-3 mt-1">
-          <div class="col-md-6"><div class="glass inner-card p-3 h-100"><div class="fw-bold">Z čeho vycházíme</div><div class="muted small">Veřejné zprávy a politiky firem, interní podklady poskytnuté firmou, rozhovory s vedením a naše provozní zkušenost. Pokud některé informace chybí, pracujeme s kvalifikovaným odhadem a konzervativním přístupem.</div></div></div>
-          <div class="col-md-6"><div class="glass inner-card p-3 h-100"><div class="fw-bold">Udělení štítku</div><div class="muted small">Úrovně: <span class="eco-badge" data-level="eco">ECO</span> · <span class="eco-badge" data-level="eco-plus">ECO+</span> · <span class="eco-badge" data-level="eco-asterisk">ECO*</span></div></div></div>
-        </div>
-
-        <div class="info-box info-yellow mt-3">
-          <span class="icon"><i class="fa-solid fa-scale-balanced"></i></span>
-          <div><strong>Právní upozornění.</strong> Hodnocení SAIC Eco je nezávislé interní posouzení společnosti SAIC. Závěry nejsou certifikací, auditem, právním stanoviskem ani investičním doporučením. Informace podléhají změnám.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="simulator" class="section-pad">
-    <div class="container-xxl">
-      <h2 class="h4 m-0 mb-3">Simulátor výnosu</h2>
-
-      <div class="row g-3 mb-3">
-        <div class="col-12 col-md-4"><div class="glass p-3 h-100 text-center"><div class="muted">Dnešní zisk</div><div class="fs-5 fw-bold" id="mToday">—</div></div></div>
-        <div class="col-12 col-md-4"><div class="glass p-3 h-100 text-center"><div class="muted">Průměrný denní zisk</div><div class="fs-5 fw-bold" id="mAvg">—</div></div></div>
-        <div class="col-12 col-md-4"><div class="glass p-3 h-100 text-center"><div class="muted">Týdenní zisk na akcii</div><div class="fs-5 fw-bold" id="mWeek">—</div></div></div>
-      </div>
-
-      <div class="row g-3 align-items-stretch" id="simCards">
-        <div class="col-12 col-md-6 col-lg-3">
-          <div class="glass p-4 h-100">
-            <label class="form-label">Kolik investovat (Kč)</label>
-            <input id="invAmount" type="number" class="form-control" value="100000" min="0" step="1000">
-            <label class="form-label mt-3">Horizont</label>
-            <select id="horizon" class="form-select">
-              <option value="6">6 měsíců</option>
-              <option value="12" selected>12 měsíců</option>
-              <option value="24">24 měsíců</option>
-            </select>
-            <div class="mt-3 p-3 rounded-3 border-lite">
-              <div class="small muted">Aktuální cena akcie</div>
-              <div class="fw-bold" id="curPriceBox">—</div>
-              <div class="small muted mt-2">Za tuto investici nakoupíte</div>
-              <div class="fw-bold"><span id="buyableShares">—</span> ks</div>
+        <div class="portfolio-board">
+          <div class="pie-zone">
+            <div class="pie-wrap">
+              <div id="ownershipPie" class="pie-chart"></div>
+              <div class="pie-center">
+                <span>Součet</span>
+                <strong id="pieTotal">—</strong>
+              </div>
             </div>
-            <div class="mt-3 d-grid"><button id="calc" class="btn btn-primary">Přepočítat</button></div>
+          </div>
+
+          <div class="portfolio-info">
+            <div class="info-line">
+              <span>Součet držených podílů</span>
+              <strong id="ownedTotal">—</strong>
+            </div>
+            <div class="info-line">
+              <span>Největší pozice</span>
+              <strong id="largestHolding">—</strong>
+            </div>
+            <div class="info-line">
+              <span>Volná hotovost</span>
+              <strong id="freeCash">—</strong>
+            </div>
+          </div>
+
+          <div class="legend-zone">
+            <div id="pieLegend" class="pie-legend"></div>
+          </div>
+        </div>
+
+        <div class="filter-panel">
+          <div class="toolbar">
+            <div class="search-wrap">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input id="search" class="form-control" placeholder="Hledat firmu" autocomplete="off">
+            </div>
+
+            <select id="sort" class="form-select" aria-label="Řazení">
+              <option value="share">Největší podíl</option>
+              <option value="name">Název</option>
+              <option value="count">Nejvíce akcií</option>
+            </select>
+
+            <label class="switch-line">
+              <input type="checkbox" id="onlyEco">
+              <span>Eco</span>
+            </label>
+
+            <label class="switch-line">
+              <input type="checkbox" id="onlyNew">
+              <span>Nové</span>
+            </label>
+
+            <button id="resetFilters" type="button" class="btn btn-secondary">Reset</button>
+          </div>
+        </div>
+
+        <div id="portfolioGrid" class="portfolio-list"></div>
+
+        <div id="emptyState" class="empty-state d-none">
+          <i class="fa-regular fa-face-frown"></i>
+          <span>Nic neodpovídá zadanému filtru.</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="why" class="section-block">
+      <div class="container-xxl">
+        <div class="why-layout">
+          <div class="section-title why-title">
+            <span>Proč nás</span>
+            <h2>Investice do portfolia, ne do jedné firmy</h2>
+            <p>SAIC je pro akcionáře, kteří chtějí přehlednou investiční společnost s jasně viditelným portfoliem, pravidly a oznámeními.</p>
+          </div>
+
+          <div class="why-list">
+            <div>
+              <strong>Diverzifikace přes jednu akcii</strong>
+              <span>Akcie SAIC představují účast na společnosti, která investuje do více firem.</span>
+            </div>
+            <div>
+              <strong>Přístup k vybraným firmám</strong>
+              <span>U některých firem může být investice dostupná pouze prostřednictvím SAIC, pokud má společnost exkluzivní právo jejich akcie prodávat nebo zprostředkovat.</span>
+            </div>
+            <div>
+              <strong>Transparentní držení</strong>
+              <span>U každé firmy je vidět počet akcií i procentuální podíl, který SAIC drží.</span>
+            </div>
+            <div>
+              <strong>Oznámení změn</strong>
+              <span>Nákupy a významné změny jsou zveřejňované tak, aby akcionáři měli přehled o vývoji portfolia.</span>
+            </div>
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="mt-3 info-box info-green">
-        <span class="icon">i</span>
-        <div><strong>Orientační výpočet.</strong> Slouží pouze k ilustraci a není investičním doporučením.</div>
-      </div>
+    <section id="ann" class="section-block">
+      <div class="container-xxl">
+        <div class="ann-layout">
+          <div>
+            <div class="section-title compact">
+              <span>Oznámení</span>
+              <h2>Změny pro akcionáře</h2>
+              <p>Přehled nákupních záměrů a významných změn v portfoliu.</p>
+            </div>
 
-      <div class="mt-3 glass p-3">
-        <div class="fw-bold mb-2">Vysvětlivky</div>
-        <ul class="m-0 ps-3 small muted">
-          <li><strong>Konečná cena</strong>: modelová cena akcie na konci zvoleného období.</li>
-          <li><strong>Vyplaceno celkem</strong>: součet modelových denních výplat za celé období.</li>
-          <li><strong>Hodnota portfolia</strong>: počet držených akcií × konečná cena + hotovost a výplaty.</li>
-          <li><strong>P/L</strong>: rozdíl mezi hodnotou portfolia na konci a investovanou částkou.</li>
-        </ul>
-      </div>
-    </div>
-  </section>
+            <div id="timeline" class="timeline">Momentálně nejsou zveřejněna žádná oznámení.</div>
+          </div>
 
-  <section id="ann" class="section-pad">
-    <div class="container-xxl">
-      <div class="glass p-4">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <h2 class="h4 m-0">Oznámení pro akcionáře</h2>
-        </div>
-        <div class="mb-3 d-flex flex-wrap gap-2">
-          <span class="pill">3 dny zpětně · &gt; 1 mil. Kč</span>
-          <span class="pill">1 hodinu předem · &gt; 5 mil. Kč</span>
-          <span class="pill">1 den předem · pravidelný náklad</span>
-          <span class="pill">§6 · §6.1</span>
-        </div>
-        <div id="timeline" class="muted">Momentálně nejsou zveřejněna žádná oznámení.</div>
-      </div>
-    </div>
-  </section>
-
-  <section id="compliance" class="section-pad pt-0">
-    <div class="container-xxl">
-      <div class="glass p-4">
-        <h2 class="h4">Soulad se zákonem</h2>
-        <div class="muted">Novela č. 252/2025</div>
-        <div class="row g-3 mt-2">
-          <div class="col-12 col-md-6 col-lg-4"><div class="glass inner-card p-3 h-100"><div class="fw-bold">Registrace a 10 000 akcií</div><div class="muted">§1, §4</div></div></div>
-          <div class="col-12 col-md-6 col-lg-4"><div class="glass inner-card p-3 h-100"><div class="fw-bold">Transparentní zisk</div><div class="muted">§5</div></div></div>
-          <div class="col-12 col-md-6 col-lg-4"><div class="glass inner-card p-3 h-100"><div class="fw-bold">Oznamovací povinnost</div><div class="muted">§6, §6.1, §7</div></div></div>
-          <div class="col-12 col-md-6 col-lg-4"><div class="glass inner-card p-3 h-100"><div class="fw-bold">Dividendy</div><div class="muted">§12–§14.1</div></div></div>
-          <div class="col-12 col-md-6 col-lg-4"><div class="glass inner-card p-3 h-100"><div class="fw-bold">Zakázané praktiky a sankce</div><div class="muted">§15–§22</div></div></div>
+          <aside class="rules-panel">
+            <h3>Pravidla oznámení</h3>
+            <div class="rules-list">
+              <div>
+                <strong>Nad 1 mil. Kč</strong>
+                <span>Oznámení 3 dny zpětně.</span>
+              </div>
+              <div>
+                <strong>Nad 5 mil. Kč</strong>
+                <span>Oznámení 1 hodinu předem.</span>
+              </div>
+              <div>
+                <strong>Pravidelný náklad</strong>
+                <span>Oznámení 1 den předem.</span>
+              </div>
+            </div>
+          </aside>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <footer class="py-4 footer-surface">
-    <div class="container-xxl d-flex flex-wrap gap-3 justify-content-between align-items-center">
-      <div class="muted">© 2025 San Andreas Investment Centre</div>
-      <button id="toTop" class="btn btn-outline-light btn-sm" type="button"><i class="fa-solid fa-arrow-up me-1"></i>Nahoru</button>
+    <section id="compliance" class="section-block">
+      <div class="container-xxl">
+        <div class="section-title">
+          <span>Legislativa</span>
+          <h2>Soulad a základní pravidla</h2>
+          <p>Přehled hlavních oblastí podle novely č. 252/2025.</p>
+        </div>
+
+        <div class="compliance-list">
+          <div>
+            <strong>Registrace a 10 000 akcií</strong>
+            <span>§1, §4</span>
+          </div>
+          <div>
+            <strong>Transparentní zisk</strong>
+            <span>§5</span>
+          </div>
+          <div>
+            <strong>Oznamovací povinnost</strong>
+            <span>§6, §6.1, §7</span>
+          </div>
+          <div>
+            <strong>Dividendy</strong>
+            <span>§12–§14.1</span>
+          </div>
+          <div>
+            <strong>Zakázané praktiky a sankce</strong>
+            <span>§15–§22</span>
+          </div>
+        </div>
+
+        <div class="risk-note">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <span>Investování je rizikové. Hodnota SAIC závisí na výkonu firem v portfoliu a na správě kapitálu.</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <div class="container-xxl footer-inner">
+      <div class="small text-muted-custom">© 2025 San Andreas Investment Centre</div>
+      <button id="toTop" class="btn btn-secondary btn-sm" type="button">
+        <i class="fa-solid fa-arrow-up me-1"></i>Nahoru
+      </button>
     </div>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
+
 </html>
