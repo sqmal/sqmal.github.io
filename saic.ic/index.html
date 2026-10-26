@@ -19,6 +19,8 @@
           <a href="#model">Společnost</a>
           <a href="#portfolio">Portfolio</a>
           <a href="#why">Investoři</a>
+          <a href="#team">Vedení</a>
+          <a href="#calc">Kalkulačka</a>
           <a href="#ann">Oznámení</a>
           <a href="#faq">FAQ</a>
         </nav>
@@ -33,6 +35,9 @@
       <a href="#model">Společnost</a>
       <a href="#portfolio">Portfolio</a>
       <a href="#why">Investoři</a>
+      <a href="#history">Historie</a>
+      <a href="#team">Vedení</a>
+      <a href="#calc">Kalkulačka</a>
       <a href="#ann">Oznámení</a>
       <a href="#compliance">Legislativa</a>
       <a href="#faq">FAQ</a>
@@ -50,17 +55,6 @@
         <a href="#portfolio" class="btn btn-dark btn-lg">Zobrazit portfolio</a>
         <a href="#model" class="btn btn-light btn-lg">Jak fungujeme</a>
       </div>
-
-      <div class="window">
-        <div class="window-bar">
-          <span class="dot red"></span><span class="dot amber"></span><span class="dot green"></span>
-          <span class="window-title">SAIC · Přehled akcionáře</span>
-        </div>
-        <div class="window-body">
-          <ul class="window-list" id="windowList"></ul>
-          <dl class="kpis" id="kpis"></dl>
-        </div>
-      </div>
     </section>
 
     <section id="model" class="section">
@@ -76,15 +70,16 @@
           </ol>
           <blockquote>U některých společností má SAIC exkluzivní právo prodávat nebo zprostředkovat jejich akcie. Investovat do nich lze pouze přes akcie SAIC.</blockquote>
           <h3 class="info-title">Základní informace</h3>
+          <p class="updated"><span>Aktualizováno</span><time datetime="2026-10-26">26. 10. 2026</time></p>
           <dl class="info">
             <div><dt>Jednatel společnosti</dt><dd class="num">Alison Reyes</dd></div>
             <div><dt>Počet zaměstnanců</dt><dd class="num">1</dd></div>
-            <div><dt>Finanční prostředky</dt><dd class="num">2,4 mil. Kč</dd></div>
+            <div><dt>Finanční prostředky</dt><dd class="num count">2,4 mil. Kč</dd></div>
             <div><dt>Dluh vůči státu</dt><dd class="num">0 Kč</dd></div>
-            <div><dt>Vlastní akcie</dt><dd class="num">7 861 (78,61 %)</dd></div>
+            <div><dt>Vlastní akcie</dt><dd class="num count">7 861 (78,61 %)</dd></div>
             <div><dt>Dnešní zisk</dt><dd class="num neg">−38 tis. Kč</dd></div>
-            <div><dt>Průměrný denní zisk</dt><dd class="num">21 tis. Kč</dd></div>
-            <div><dt>Týdenní zisk na akcii</dt><dd class="num">49 Kč</dd></div>
+            <div><dt>Průměrný denní zisk</dt><dd class="num count">21 tis. Kč</dd></div>
+            <div><dt>Týdenní zisk na akcii</dt><dd class="num count">49 Kč</dd></div>
           </dl>
         </div>
       </div>
@@ -95,6 +90,7 @@
         <div class="eyebrow">02 — Portfolio</div>
         <div>
           <h2>Aktuální podíly SAIC</h2>
+          <p class="updated"><span>Aktualizováno</span><time datetime="2026-10-26">26. 10. 2026</time></p>
           <p class="lead-l">Rozložení firem podle procent, která SAIC aktuálně drží. Nezobrazuje volný trh ani podíly jiných vlastníků.</p>
           <div class="chart-row">
             <div class="donut-wrap">
@@ -119,6 +115,7 @@
             </div>
             <button class="chip" data-filter="eco">Eco</button>
             <button class="chip" data-filter="new">Nové</button>
+            <button class="chip" data-filter="exclusive">Exkluzivně přes SAIC</button>
           </div>
           <table class="table">
             <thead><tr><th>Společnost</th><th class="r">Akcie</th><th class="hide-sm">Podíl</th></tr></thead>
@@ -144,9 +141,81 @@
       </div>
     </section>
 
+    <section id="history" class="section">
+      <div class="wrap section-grid">
+        <div class="eyebrow">04 — Historie</div>
+        <div>
+          <h2>Jak SAIC rostl</h2>
+          <p class="lead-l">Hlavní milníky společnosti od založení po současnost.</p>
+          <ol class="timeline">
+            <li><span class="tl-date num">2025</span><div><h3>Založení SAIC</h3><p>Registrace společnosti a vydání 10 000 akcií podle §1 a §4 novely č. 252/2025.</p></div></li>
+            <li><span class="tl-date num">2025</span><div><h3>První velké podíly</h3><p>SAIC získává 25 % v Tactical Transport Logistics a téměř 25 % v Premium Cars.</p></div></li>
+            <li><span class="tl-date num">2025</span><div><h3>Portfolio dvanácti firem</h3><p>Kapitál je rozložený mezi dvanáct společností napříč San Andreas.</p></div></li>
+            <li><span class="tl-date num">21. 10. 2025</span><div><h3>Záměr nákupu Pay 'n' Spray</h3><p>Oznámení nákupu 5 akcií od Sphere Corporation.</p></div></li>
+            <li><span class="tl-date num">23. 11. 2025</span><div><h3>Záměr nákupu SanGas</h3><p>Oznámení nákupu 5 akcií SanGas.</p></div></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section id="team" class="section">
+      <div class="wrap section-grid">
+        <div class="eyebrow">05 — Vedení</div>
+        <div>
+          <h2>Kdo stojí za SAIC</h2>
+          <div class="person">
+            <div class="person-photo"><img src="https://i.imgur.com/tLC6HeR.png" alt="Alison Reyes" loading="lazy" width="120" height="120" /></div>
+            <div>
+              <h3>Alison Reyes</h3>
+              <p class="person-role">Jednatelka společnosti</p>
+              <p class="person-bio">Řídí SAIC od založení. Vybírá firmy do portfolia, vyjednává nákupy podílů a dohlíží na to, aby akcionáři měli o každé změně včas přehled.</p>
+              <div class="person-links">
+                <a href="https://artic.leosight.cz/iris.ic/alison.php" target="_blank" rel="noopener noreferrer" class="iris" aria-label="Profil Alison Reyes na sociální síti Iris (otevře se v novém okně)">
+                  <span class="iris-logo"><img src="./assets/img/iris.png" alt="Iris" width="64" height="32" /></span>
+                  <span class="iris-text"><span class="iris-label">Profil na Iris</span><span class="iris-sub">@alison</span></span>
+                  <span class="iris-arrow">↗</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="calc" class="section">
+      <div class="wrap section-grid">
+        <div class="eyebrow">06 — Kalkulačka</div>
+        <div>
+          <h2>Kolik vyděláte za týden</h2>
+          <p class="updated"><span>Zisk na akcii aktualizován</span><time datetime="2026-10-26">26. 10. 2026</time></p>
+          <p class="lead-l">Zadejte počet akcií SAIC a uvidíte odhad zisku podle aktuálního týdenního zisku 49 Kč na akcii.</p>
+          <div class="calc">
+            <div class="calc-in">
+              <label for="calcShares" class="eyebrow">Počet akcií</label>
+              <input id="calcShares" type="number" inputmode="numeric" min="0" max="10000" step="1" value="100" />
+              <input id="calcRange" type="range" min="0" max="2139" step="1" value="100" aria-label="Počet akcií" />
+              <div class="calc-quick">
+                <button type="button" class="chip" data-v="10">10</button>
+                <button type="button" class="chip" data-v="50">50</button>
+                <button type="button" class="chip" data-v="100">100</button>
+                <button type="button" class="chip" data-v="500">500</button>
+                <button type="button" class="chip" data-v="1000">1 000</button>
+              </div>
+            </div>
+            <dl class="calc-out">
+              <div><dt>Za týden</dt><dd class="num" id="calcWeek">0 Kč</dd></div>
+              <div><dt>Za měsíc</dt><dd class="num" id="calcMonth">0 Kč</dd></div>
+              <div><dt>Za rok</dt><dd class="num" id="calcYear">0 Kč</dd></div>
+            </dl>
+          </div>
+          <div class="warn" role="note"><span class="warn-icon">!</span><p><strong>Investování je spojené s rizikem.</strong> Kalkulačka ukazuje pouze orientační výpočet podle současného zisku 49 Kč na akcii. Nejde o slib ani záruku výdělku – skutečný výnos může být nižší, vyšší, nebo i záporný.</p></div>
+        </div>
+      </div>
+    </section>
+
     <section id="ann" class="section">
       <div class="wrap section-grid">
-        <div class="eyebrow">04 — Oznámení</div>
+        <div class="eyebrow">07 — Oznámení</div>
         <div>
           <h2>Změny pro akcionáře</h2>
           <div class="ann-grid">
@@ -166,7 +235,7 @@
 
     <section id="compliance" class="section">
       <div class="wrap section-grid">
-        <div class="eyebrow">05 — Legislativa</div>
+        <div class="eyebrow">08 — Legislativa</div>
         <div>
           <h2>Soulad a základní pravidla</h2>
           <p class="lead-l">Hlavní oblasti podle novely č. 252/2025.</p>
@@ -184,7 +253,7 @@
 
     <section id="faq" class="section">
       <div class="wrap section-grid">
-        <div class="eyebrow">06 — FAQ</div>
+        <div class="eyebrow">09 — FAQ</div>
         <div>
           <h2>Časté dotazy</h2>
           <p class="lead-l">Nenašli jste odpověď? Napište nám a rádi poradíme.</p>
