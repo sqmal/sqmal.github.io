@@ -1,4 +1,4 @@
-const KPIS = { cash: 2400000, debt: 0, own: 7861 };
+const KPIS = { cash: 2500000, debt: 0, own: 7856 };
 
 const portfolio = [
   { name: "Tactical Transport Logistics a.s.", count: 2500, share: 25.0, eco: true, exclusive: true },
@@ -157,7 +157,7 @@ document.querySelectorAll(".faq-item").forEach((item) => {
 });
 
 (function calc() {
-  const PER = 49;
+  const PER = 45;
   const num = document.getElementById("calcShares");
   const range = document.getElementById("calcRange");
   if (!num || !range) return;
