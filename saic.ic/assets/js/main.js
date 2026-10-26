@@ -56,19 +56,22 @@ mobileNav.querySelectorAll("a").forEach((a) =>
   const r = 70, c = 2 * Math.PI * r;
   const top = portfolio.slice(0, 4);
   const rest = portfolio.slice(4).reduce((s, p) => s + p.share, 0);
-  const segs = [...top.map((p) => p.share), rest];
+  const invested = portfolio.reduce((s, p) => s + p.share, 0);
+  const cash = Math.max(0, 100 - invested);
+  const segs = [...top.map((p) => p.share), rest, cash];
+  const segColors = [...colors, "var(--cash)"];
   let off = 0;
   let svg = `<circle cx="90" cy="90" r="${r}" fill="none" stroke="var(--soft)" stroke-width="18"/>`;
   segs.forEach((v, i) => {
     const len = (v / 100) * c;
-    svg += `<circle cx="90" cy="90" r="${r}" fill="none" stroke="${colors[i]}" stroke-width="18" stroke-dasharray="${len} ${c - len}" stroke-dashoffset="${-off}"/>`;
+    svg += `<circle cx="90" cy="90" r="${r}" fill="none" stroke="${segColors[i]}" stroke-width="18" stroke-dasharray="${len} ${c - len}" stroke-dashoffset="${-off}"/>`;
     off += len;
   });
   $("#donut").innerHTML = svg;
-  $("#total").textContent = portfolio.reduce((s, p) => s + p.share, 0).toFixed(2) + " %";
-  const legend = [...top, { name: `Ostatní (${portfolio.length - 4} firem)`, share: rest }];
+  $("#total").textContent = invested.toFixed(2) + " %";
+  const legend = [...top, { name: `Ostatní (${portfolio.length - 4} firem)`, share: rest }, { name: "Hotovost (neinvestováno)", share: cash, cash: true }];
   $("#legend").innerHTML = legend.map((p, i) => `
-    <li><span class="sw" style="background:${colors[i]}"></span><span class="nm">${esc(p.name)}</span><span class="num muted">${p.share.toFixed(2)} %</span></li>`).join("");
+    <li${p.cash ? ' class="cash"' : ""}><span class="sw" style="background:${segColors[i]}"></span><span class="nm">${esc(p.name)}</span><span class="num muted">${p.share.toFixed(2)} %</span></li>`).join("");
 })();
 
 const state = { q: "", sort: "share", eco: false, new: false, exclusive: false };
