@@ -82,6 +82,7 @@ blockquote { margin-top: 40px; border-left: 2px solid var(--accent); padding-lef
 .info dt { color: var(--muted); }
 .info dd { text-align: right; }
 .info .neg { color: var(--red); }
+.info .pos { color: var(--green); }
 @media (max-width: 600px) { .info { grid-template-columns: 1fr; } }
 .chart-row { margin-top: 48px; display: grid; grid-template-columns: 240px 1fr; gap: 40px; align-items: center; }
 .donut-wrap { position: relative; width: 240px; max-width: 100%; margin: 0 auto; }
