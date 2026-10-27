@@ -53,31 +53,6 @@ const announcements = [
   }
 ];
 
-const announcements = [
-  {
-    datetime: "2026-10-27T22:30:06",
-    label: "Strategická investice",
-    company: "West Andreas Invest",
-    description: "SAIC realizovalo strategickou investici ve výši 2 000 000 Kč do společnosti West Andreas Invest výměnou za exkluzivní akcie. V souvislosti s transakcí byla bankou dodatečně stržena daň z příjmů právnických osob ve výši 400 000 Kč. Celkový odliv finančních prostředků činil 2 400 000 Kč."
-  },
-  {
-    datetime: "2025-11-23T04:40:00",
-    label: "Záměr nákupu",
-    company: "SanGas",
-    counterparty: "SanGas",
-    qty: 5,
-    unitPrice: 280000
-  },
-  {
-    datetime: "2025-10-21T02:02:00",
-    label: "Záměr nákupu",
-    company: "Pay 'n' Spray",
-    counterparty: "Sphere Corporation",
-    qty: 5,
-    unitPrice: 399000
-  }
-];
-
 const faq = [
   ["Co je SAIC?", "San Andreas Investment Centre je investiční společnost. Peníze akcionářů neinvestuje do jedné firmy, ale skupuje podíly ve více společnostech. Kdo vlastní akcii SAIC, vlastní tak nepřímo kousek celého portfolia."],
   ["Jak se stanu akcionářem?", "Akcie SAIC koupíte přímo od společnosti nebo od jiného akcionáře. Pro nákup kontaktujte vedení SAIC – domluví s vámi počet akcií a cenu."],
