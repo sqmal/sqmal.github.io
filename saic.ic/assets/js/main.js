@@ -1,3 +1,4 @@
+
 const KPIS = { cash: 2500000, debt: 0, own: 7856 };
 
 const portfolio = [
@@ -15,9 +16,30 @@ const portfolio = [
   { name: "SanGas", count: 6, share: 0.06, eco: false },
 ];
 
+
 const announcements = [
-  { datetime: "2025-11-23T04:40:00", label: "Záměr nákupu", company: "SanGas", counterparty: "SanGas", qty: 5, unitPrice: 280000 },
-  { datetime: "2025-10-21T02:02:00", label: "Záměr nákupu", company: "Pay 'n' Spray", counterparty: "Sphere Corporation", qty: 5, unitPrice: 399000 },
+  {
+    datetime: "2026-10-27T22:30:06",
+    label: "Strategická investice",
+    company: "West Andreas Invest",
+    description: "SAIC realizovalo strategickou investici ve výši 2 000 000 Kč do společnosti West Andreas Invest výměnou za exkluzivní akcie. V souvislosti s transakcí byla bankou dodatečně stržena daň z příjmů právnických osob ve výši 400 000 Kč. Celkový odliv finančních prostředků činil 2 400 000 Kč."
+  },
+  {
+    datetime: "2025-11-23T04:40:00",
+    label: "Záměr nákupu",
+    company: "SanGas",
+    counterparty: "SanGas",
+    qty: 5,
+    unitPrice: 280000
+  },
+  {
+    datetime: "2025-10-21T02:02:00",
+    label: "Záměr nákupu",
+    company: "Pay 'n' Spray",
+    counterparty: "Sphere Corporation",
+    qty: 5,
+    unitPrice: 399000
+  }
 ];
 
 const faq = [
@@ -32,19 +54,37 @@ const faq = [
 ];
 
 const fmt = new Intl.NumberFormat("cs-CZ");
-const czk = new Intl.NumberFormat("cs-CZ", { style: "currency", currency: "CZK", maximumFractionDigits: 0 });
-const colors = ["var(--c1)", "var(--c2)", "var(--c3)", "var(--c4)", "var(--c5)"];
+const czk = new Intl.NumberFormat("cs-CZ", {
+  style: "currency",
+  currency: "CZK",
+  maximumFractionDigits: 0
+});
+const colors = [
+  "var(--c1)",
+  "var(--c2)",
+  "var(--c3)",
+  "var(--c4)",
+  "var(--c5)"
+];
 const newSet = new Set(announcements.map((a) => a.company));
 const $ = (s) => document.querySelector(s);
-const esc = (s) => s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const esc = (s) => s.replace(/[&<>"']/g, (c) => ({
+  "&": "&amp;",
+  "<": "&lt;",
+  ">": "&gt;",
+  '"': "&quot;",
+  "'": "&#39;"
+}[c]));
 
 const burger = $("#burger");
 const mobileNav = $("#mobileNav");
+
 burger.addEventListener("click", () => {
   const open = mobileNav.classList.toggle("open");
   burger.setAttribute("aria-expanded", open);
   burger.textContent = open ? "✕" : "☰";
 });
+
 mobileNav.querySelectorAll("a").forEach((a) =>
   a.addEventListener("click", () => {
     mobileNav.classList.remove("open");
@@ -63,19 +103,46 @@ mobileNav.querySelectorAll("a").forEach((a) =>
   const segColors = [...colors, "var(--cash)"];
   let off = 0;
   let svg = `<circle cx="90" cy="90" r="${r}" fill="none" stroke="var(--soft)" stroke-width="18"/>`;
+
   segs.forEach((v, i) => {
     const len = (v / 100) * c;
     svg += `<circle cx="90" cy="90" r="${r}" fill="none" stroke="${segColors[i]}" stroke-width="18" stroke-dasharray="${len} ${c - len}" stroke-dashoffset="${-off}"/>`;
     off += len;
   });
+
   $("#donut").innerHTML = svg;
   $("#total").textContent = invested.toFixed(2) + " %";
-  const legend = [...top, { name: `Ostatní (${portfolio.length - 4} firem)`, share: rest }, { name: "Hotovost (neinvestováno)", share: cash, cash: true }];
+
+  const legend = [
+    ...top,
+    {
+      name: `Ostatní (${portfolio.length - 4} firem)`,
+      share: rest
+    },
+    {
+      name: "Hotovost (neinvestováno)",
+      share: cash,
+      cash: true
+    }
+  ];
+
   $("#legend").innerHTML = legend.map((p, i) => `
-    <li${p.cash ? ' class="cash"' : ""}><span class="sw" style="background:${segColors[i]}"></span><span class="nm">${esc(p.name)}</span><span class="num muted">${p.share.toFixed(2)} %</span></li>`).join("");
+    <li${p.cash ? ' class="cash"' : ""}>
+      <span class="sw" style="background:${segColors[i]}"></span>
+      <span class="nm">${esc(p.name)}</span>
+      <span class="num muted">${p.share.toFixed(2)} %</span>
+    </li>
+  `).join("");
 })();
 
-const state = { q: "", sort: "share", eco: false, new: false, exclusive: false };
+const state = {
+  q: "",
+  sort: "share",
+  eco: false,
+  new: false,
+  exclusive: false
+};
+
 const maxShare = Math.max(...portfolio.map((p) => p.share));
 
 function renderTable() {
@@ -83,27 +150,68 @@ function renderTable() {
     (!state.q || p.name.toLowerCase().includes(state.q.toLowerCase())) &&
     (!state.eco || p.eco) &&
     (!state.exclusive || p.exclusive) &&
-    (!state.new || newSet.has(p.name)));
-  if (state.sort === "name") list.sort((a, b) => a.name.localeCompare(b.name, "cs"));
-  if (state.sort === "share") list.sort((a, b) => b.share - a.share);
-  if (state.sort === "count") list.sort((a, b) => b.count - a.count);
+    (!state.new || newSet.has(p.name))
+  );
+
+  if (state.sort === "name") {
+    list.sort((a, b) => a.name.localeCompare(b.name, "cs"));
+  }
+
+  if (state.sort === "share") {
+    list.sort((a, b) => b.share - a.share);
+  }
+
+  if (state.sort === "count") {
+    list.sort((a, b) => b.count - a.count);
+  }
 
   $("#rows").innerHTML = list.map((p) => `
     <tr>
-      <td><span class="co">${esc(p.name)}</span>${p.exclusive ? '<span class="tag excl" title="Do této firmy lze investovat pouze přes akcie SAIC">Exkluzivně přes SAIC</span>' : ""}${p.eco ? '<span class="tag eco">Eco</span>' : ""}${newSet.has(p.name) ? '<span class="tag new">Nové</span>' : ""}</td>
+      <td>
+        <span class="co">${esc(p.name)}</span>
+        ${p.exclusive ? '<span class="tag excl" title="Do této firmy lze investovat pouze přes akcie SAIC">Exkluzivně přes SAIC</span>' : ""}
+        ${p.eco ? '<span class="tag eco">Eco</span>' : ""}
+        ${newSet.has(p.name) ? '<span class="tag new">Nové</span>' : ""}
+      </td>
       <td class="r num">${fmt.format(p.count)}</td>
-      <td><div class="bar-cell"><div class="bar"><span style="width:${(p.share / maxShare) * 100}%"></span></div><span class="pct num">${p.share.toFixed(2)} %</span></div></td>
-    </tr>`).join("");
+      <td>
+        <div class="bar-cell">
+          <div class="bar">
+            <span style="width:${(p.share / maxShare) * 100}%"></span>
+          </div>
+          <span class="pct num">${p.share.toFixed(2)} %</span>
+        </div>
+      </td>
+    </tr>
+  `).join("");
+
   $("#empty").hidden = list.length > 0;
 }
-$("#search").addEventListener("input", (e) => { state.q = e.target.value; renderTable(); });
+
+$("#search").addEventListener("input", (e) => {
+  state.q = e.target.value;
+  renderTable();
+});
+
 const dd = $("#sort");
 const ddBtn = dd.querySelector(".dd-btn");
-const setOpen = (o) => { dd.classList.toggle("open", o); ddBtn.setAttribute("aria-expanded", o); };
-ddBtn.addEventListener("click", (e) => { e.stopPropagation(); setOpen(!dd.classList.contains("open")); });
+
+const setOpen = (o) => {
+  dd.classList.toggle("open", o);
+  ddBtn.setAttribute("aria-expanded", o);
+};
+
+ddBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  setOpen(!dd.classList.contains("open"));
+});
+
 dd.querySelectorAll("li").forEach((li) =>
   li.addEventListener("click", () => {
-    dd.querySelectorAll("li").forEach((x) => x.removeAttribute("aria-selected"));
+    dd.querySelectorAll("li").forEach((x) =>
+      x.removeAttribute("aria-selected")
+    );
+
     li.setAttribute("aria-selected", "true");
     dd.querySelector(".dd-label").textContent = li.textContent;
     state.sort = li.dataset.value;
@@ -111,8 +219,13 @@ dd.querySelectorAll("li").forEach((li) =>
     renderTable();
   })
 );
+
 document.addEventListener("click", () => setOpen(false));
-document.addEventListener("keydown", (e) => { if (e.key === "Escape") setOpen(false); });
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") setOpen(false);
+});
+
 document.querySelectorAll(".chip").forEach((b) =>
   b.addEventListener("click", () => {
     const k = b.dataset.filter;
@@ -121,35 +234,57 @@ document.querySelectorAll(".chip").forEach((b) =>
     renderTable();
   })
 );
+
 renderTable();
 
 $("#ann-list").innerHTML = announcements.map((a) => {
   const d = new Date(a.datetime);
+
   return `
     <li>
-      <div class="date">${d.toLocaleDateString("cs-CZ")}<br>${d.toLocaleTimeString("cs-CZ", { hour: "2-digit", minute: "2-digit" })}</div>
+      <div class="date">
+        ${d.toLocaleDateString("cs-CZ")}<br>
+        ${d.toLocaleTimeString("cs-CZ", {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit"
+        })}
+      </div>
       <div>
         <div class="eyebrow">${esc(a.label)}</div>
         <div class="company">${esc(a.company)}</div>
-        <p class="meta">${a.qty} ks od ${esc(a.counterparty)} · <span class="num">${czk.format(a.unitPrice)}</span> / ks · celkem <strong>${czk.format(a.qty * a.unitPrice)}</strong></p>
+        <p class="meta">
+          ${a.description
+            ? esc(a.description)
+            : `${a.qty} ks od ${esc(a.counterparty)} · <span class="num">${czk.format(a.unitPrice)}</span> / ks · celkem <strong>${czk.format(a.qty * a.unitPrice)}</strong>`
+          }
+        </p>
       </div>
     </li>`;
 }).join("");
 
 $("#faq-list").innerHTML = faq.map(([q, a], i) => `
   <div class="faq-item">
-    <button class="faq-q" aria-expanded="false" aria-controls="faq-a-${i}">${esc(q)}<span class="faq-icon">+</span></button>
-    <div class="faq-a" id="faq-a-${i}" role="region"><div><p>${esc(a)}</p></div></div>
-  </div>`).join("");
+    <button class="faq-q" aria-expanded="false" aria-controls="faq-a-${i}">
+      ${esc(q)}<span class="faq-icon">+</span>
+    </button>
+    <div class="faq-a" id="faq-a-${i}" role="region">
+      <div><p>${esc(a)}</p></div>
+    </div>
+  </div>
+`).join("");
 
 document.querySelectorAll(".faq-item").forEach((item) => {
   const btn = item.querySelector(".faq-q");
+
   btn.addEventListener("click", () => {
     const open = !item.classList.contains("open");
+
     document.querySelectorAll(".faq-item.open").forEach((o) => {
       o.classList.remove("open");
       o.querySelector(".faq-q").setAttribute("aria-expanded", "false");
     });
+
     if (open) {
       item.classList.add("open");
       btn.setAttribute("aria-expanded", "true");
@@ -161,25 +296,44 @@ document.querySelectorAll(".faq-item").forEach((item) => {
   const PER = 45;
   const num = document.getElementById("calcShares");
   const range = document.getElementById("calcRange");
+
   if (!num || !range) return;
-  const kc = new Intl.NumberFormat("cs-CZ", { maximumFractionDigits: 0 });
-  const set = (id, v) => { document.getElementById(id).textContent = kc.format(v) + " Kč"; };
+
+  const kc = new Intl.NumberFormat("cs-CZ", {
+    maximumFractionDigits: 0
+  });
+
+  const set = (id, v) => {
+    document.getElementById(id).textContent = kc.format(v) + " Kč";
+  };
+
   const update = (v, from) => {
     v = Math.max(0, Math.min(10000, Math.floor(Number(v) || 0)));
+
     if (from !== "num") num.value = v;
-    if (from !== "range") range.value = Math.min(v, Number(range.max));
-    range.style.setProperty("--p", (Math.min(v, Number(range.max)) / Number(range.max)) * 100 + "%");
+    if (from !== "range") {
+      range.value = Math.min(v, Number(range.max));
+    }
+
+    range.style.setProperty(
+      "--p",
+      (Math.min(v, Number(range.max)) / Number(range.max)) * 100 + "%"
+    );
+
     const w = v * PER;
     set("calcWeek", w);
     set("calcMonth", w * 52 / 12);
     set("calcYear", w * 52);
   };
+
   num.addEventListener("input", () => update(num.value, "num"));
   num.addEventListener("blur", () => update(num.value));
   range.addEventListener("input", () => update(range.value, "range"));
+
   document.querySelectorAll(".calc-quick [data-v]").forEach((b) =>
     b.addEventListener("click", () => update(b.dataset.v))
   );
+
   update(num.value);
 })();
 
@@ -187,44 +341,72 @@ document.querySelectorAll(".faq-item").forEach((item) => {
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const els = document.querySelectorAll(".section .section-grid > *, .hero > *");
   const counters = document.querySelectorAll(".count");
+
   const run = (el) => {
     if (el.dataset.done) return;
     el.dataset.done = "1";
+
     const text = el.textContent;
     const m = text.match(/\d[\d\s\u00a0]*(,\d+)?/);
+
     if (!m || reduce) return;
+
     const raw = m[0].trim();
     const dec = m[1] ? m[1].length - 1 : 0;
-    const target = parseFloat(raw.replace(/[\s\u00a0]/g, "").replace(",", "."));
-    const nf = new Intl.NumberFormat("cs-CZ", { minimumFractionDigits: dec, maximumFractionDigits: dec });
+    const target = parseFloat(
+      raw.replace(/[\s\u00a0]/g, "").replace(",", ".")
+    );
+
+    const nf = new Intl.NumberFormat("cs-CZ", {
+      minimumFractionDigits: dec,
+      maximumFractionDigits: dec
+    });
+
     const before = text.slice(0, m.index);
     const after = text.slice(m.index + m[0].trimEnd().length);
     const dur = 1400;
     const t0 = performance.now();
+
     const step = (t) => {
       const k = Math.min(1, (t - t0) / dur);
       const e = 1 - Math.pow(1 - k, 3);
+
       el.textContent = before + nf.format(target * e) + after;
-      if (k < 1) requestAnimationFrame(step);
-      else el.textContent = text;
+
+      if (k < 1) {
+        requestAnimationFrame(step);
+      } else {
+        el.textContent = text;
+      }
     };
+
     requestAnimationFrame(step);
   };
+
   if (reduce || !("IntersectionObserver" in window)) {
     counters.forEach((c) => (c.dataset.done = "1"));
     return;
   }
+
   document.documentElement.classList.add("js-motion");
   els.forEach((el) => el.classList.add("reveal"));
+
   const io = new IntersectionObserver((entries) => {
     entries.forEach((en) => {
       if (!en.isIntersecting) return;
+
       en.target.classList.add("in");
       en.target.querySelectorAll(".count").forEach(run);
+
       if (en.target.classList.contains("count")) run(en.target);
+
       io.unobserve(en.target);
     });
-  }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+  }, {
+    threshold: 0.12,
+    rootMargin: "0px 0px -40px 0px"
+  });
+
   els.forEach((el) => io.observe(el));
   counters.forEach((c) => io.observe(c));
 })();
