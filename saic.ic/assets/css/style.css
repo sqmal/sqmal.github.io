@@ -355,3 +355,4 @@ blockquote{background:var(--accent-soft);color:#1e3a8a}
 :root{--cash:#22c55e}
 .legend li.cash{grid-column:1/-1;margin-top:6px;padding-top:12px;border-top:1px dashed var(--border);font-weight:500}
 .legend li.cash .num{color:var(--green)}
+.mail { border-bottom: 1px solid #ddd; }

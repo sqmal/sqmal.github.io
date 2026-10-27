@@ -28,6 +28,7 @@ const faq = [
   ["Vyplácí SAIC dividendy?", "Výplata dividend se řídí §12–§14.1 novely č. 252/2025."],
   ["Kde uvidím, co SAIC kupuje?", "Každý větší nákup najdete v sekci Oznámení. Obchody nad 1 mil. Kč zveřejňujeme nejpozději do 3 dnů, obchody nad 5 mil. Kč hodinu předem."],
   ["Je investice do SAIC riziková?", "Ano, jako každá investice. Hodnota akcií může klesnout i stoupnout podle toho, jak se daří firmám v portfoliu. Investujte jen peníze, které si můžete dovolit."],
+  ["Kam mám napsat s dotazem?", "S jakýmkoli dotazem ohledně SAIC, nákupu akcií nebo portfolia se obracejte na akcionari@saic.ic. Ozveme se co nejdřív."],
 ];
 
 const fmt = new Intl.NumberFormat("cs-CZ");
