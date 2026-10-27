@@ -11,8 +11,8 @@ const portfolio = [
   { name: "Ammu-Nation", count: 31, share: 0.31, eco: false },
   { name: "Calton Escapade", count: 27, share: 0.27, eco: false },
   { name: "Redwood Cigarettes", count: 25, share: 0.25, eco: false },
-  { name: "Canny Bus Group", count: 25, share: 0.25, eco: false },
-  { name: "Pay 'n' Spray", count: 15, share: 0.15, eco: false },
+  { name: "Canny Bus Group", count: 25, share: 0.25, eco: true },
+  { name: "Pay 'n' Spray", count: 15, share: 0.15, eco: true },
   { name: "SanGas", count: 6, share: 0.06, eco: false },
 ];
 
