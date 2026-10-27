@@ -19,19 +19,19 @@ const portfolio = [
 const announcements = [
   {
     datetime: "2026-10-27T22:30:06",
-    label: "Strategická investice",
+    label: "Obchod nad 1 mil. Kč - Strategická investice",
     company: "West Andreas Invest",
     description: "SAIC realizovalo strategickou investici ve výši 2 000 000 Kč do společnosti West Andreas Invest výměnou za exkluzivní akcie. V souvislosti s transakcí byla bankou dodatečně stržena daň z příjmů právnických osob ve výši 400 000 Kč. Celkový odliv finančních prostředků činil 2 400 000 Kč."
   },
   {
     datetime: "2026-10-27T23:55:00",
-    label: "Změna odměňování vedení",
+    label: "Pravidelný náklad - Změna odměňování vedení",
     company: "Alison Reyes",
     description: "Jednatelka společnosti Alison Reyes se s účinností od 27. 10. 2026 dobrovolně vzdává pravidelné měsíční odměny ve výši 5 000 Kč za správu a vedení SAIC. Alison Reyes nevlastní žádné akcie společnosti SAIC a ve své funkci bude nadále pokračovat bez nároku na finanční odměnu, výhradně v zájmu společnosti a jejích akcionářů."
   },
   {
     datetime: "2025-11-23T04:40:00",
-    label: "Záměr nákupu",
+    label: "Obchod nad 1 mil. Kč - Záměr nákupu",
     company: "SanGas",
     counterparty: "SanGas",
     qty: 5,
@@ -39,15 +39,15 @@ const announcements = [
   },
   {
     datetime: "2025-10-21T02:02:00",
-    label: "Záměr nákupu",
+    label: "Obchod nad 1 mil. Kč - Záměr nákupu",
     company: "Pay 'n' Spray",
     counterparty: "Sphere Corporation",
     qty: 5,
     unitPrice: 399000
   },
   {
-    datetime: "2025-04-20T12:00:00",
-    label: "Odměňování vedení společnosti",
+    datetime: "2025-04-21T00:00:00",
+    label: "Pravidelný náklad - Odměňování vedení společnosti",
     company: "Alison Reyes",
     description: "S účinností od 20. 4. 2025 byla jednatelce společnosti Alison Reyes stanovena pravidelná měsíční odměna ve výši 5 000 Kč za výkon funkce, správu investičního portfolia, administrativní činnost a zajišťování běžného provozu společnosti SAIC."
   }
