@@ -18,16 +18,16 @@ const portfolio = [
 
 const announcements = [
   {
-    datetime: "2026-10-27T22:30:06",
-    label: "Obchod nad 1 mil. Kč - Strategická investice",
-    company: "West Andreas Invest",
-    description: "SAIC realizovalo strategickou investici ve výši 2 000 000 Kč do společnosti West Andreas Invest výměnou za exkluzivní akcie. V souvislosti s transakcí byla bankou dodatečně stržena daň z příjmů právnických osob ve výši 400 000 Kč. Celkový odliv finančních prostředků činil 2 400 000 Kč."
-  },
-  {
     datetime: "2026-10-27T23:55:00",
     label: "Pravidelný náklad - Změna odměňování vedení",
     company: "Alison Reyes",
     description: "Jednatelka společnosti Alison Reyes se s účinností od 27. 10. 2026 dobrovolně vzdává pravidelné měsíční odměny ve výši 5 000 Kč za správu a vedení SAIC. Alison Reyes nevlastní žádné akcie společnosti SAIC a ve své funkci bude nadále pokračovat bez nároku na finanční odměnu, výhradně v zájmu společnosti a jejích akcionářů."
+  },
+  {
+    datetime: "2026-10-27T22:30:06",
+    label: "Obchod nad 1 mil. Kč - Strategická investice",
+    company: "West Andreas Invest",
+    description: "SAIC realizovalo strategickou investici ve výši 2 000 000 Kč do společnosti West Andreas Invest výměnou za exkluzivní akcie. V souvislosti s transakcí byla bankou dodatečně stržena daň z příjmů právnických osob ve výši 400 000 Kč. Celkový odliv finančních prostředků činil 2 400 000 Kč."
   },
   {
     datetime: "2025-11-23T04:40:00",
