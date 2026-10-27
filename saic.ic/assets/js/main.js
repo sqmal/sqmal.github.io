@@ -3,16 +3,16 @@ const KPIS = { cash: 2500000, debt: 0, own: 7856 };
 const portfolio = [
   { name: "Tactical Transport Logistics a.s.", count: 2500, share: 25.0, eco: true, exclusive: true },
   { name: "Premium Cars", count: 2498, share: 24.98, eco: true, exclusive: true },
-  { name: "Nice Buns", count: 120, share: 1.2, eco: false },
+  { name: "Nice Buns", count: 116, share: 1.16, eco: false },
   { name: "Sprunk", count: 104, share: 1.04, eco: false },
+  { name: "West Andreas Invest", count: 100, share: 1.00, eco: true },
   { name: "Piece of Peace", count: 91, share: 0.91, eco: false },
-  { name: "Calton Escapade", count: 75, share: 0.75, eco: false },
   { name: "Ammu-Nation", count: 31, share: 0.31, eco: false },
-  { name: "Redwood Cigarettes", count: 27, share: 0.27, eco: false },
+  { name: "Calton Escapade", count: 27, share: 0.27, eco: false },
+  { name: "Redwood Cigarettes", count: 25, share: 0.25, eco: false },
   { name: "Canny Bus Group", count: 25, share: 0.25, eco: false },
   { name: "Pay 'n' Spray", count: 15, share: 0.15, eco: false },
   { name: "SanGas", count: 6, share: 0.06, eco: false },
-  { name: "West Andreas Invest", count: 5, share: 0.05, eco: false },
 ];
 
 const announcements = [
